@@ -4,21 +4,22 @@ import (
 	"context"
 
 	"github.com/elum2b/platform/internal/config"
-	"github.com/elum2b/platform/internal/global"
-	service "github.com/elum2b/services/promo"
+	"github.com/elum2b/platform/internal/services"
+
+	"github.com/elum2b/services/promo"
 )
 
 func Service() func(context.Context) error {
 
 	return func(ctx context.Context) error {
 
-		global.Promo = service.New(service.DatabaseParams{
+		services.Promo = promo.New(promo.DatabaseParams{
 			Host:     config.PromoPostgresHost,
 			Port:     config.PromoPostgresPort,
 			User:     config.PromoPostgresUser,
 			Password: config.PromoPostgresPassword,
 			Database: config.PromoPostgresDatabase,
-			Options: service.Options{
+			Options: promo.Options{
 				MaxConnections: config.PromoMaxConnections,
 				QueryTimeout:   config.PromoQueryTimeout,
 				CacheL1Delay:   config.PromoCacheL1Delay,
@@ -29,11 +30,11 @@ func Service() func(context.Context) error {
 			},
 		})
 
-		if err := global.Promo.OnCallback(ctx, handler); err != nil {
+		if err := services.Promo.OnCallback(ctx, handler); err != nil {
 			return err
 		}
 
-		return global.Promo.Run(ctx)
+		return services.Promo.Run(ctx)
 
 	}
 

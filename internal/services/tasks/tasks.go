@@ -4,8 +4,9 @@ import (
 	"context"
 
 	"github.com/elum2b/platform/internal/config"
-	"github.com/elum2b/platform/internal/global"
-	service "github.com/elum2b/services/tasks"
+	"github.com/elum2b/platform/internal/services"
+
+	"github.com/elum2b/services/tasks"
 	taskruntime "github.com/elum2b/services/tasks/runtime"
 )
 
@@ -13,13 +14,13 @@ func Service() func(context.Context) error {
 
 	return func(ctx context.Context) error {
 
-		global.Tasks = service.New(service.DatabaseParams{
+		services.Tasks = tasks.New(tasks.DatabaseParams{
 			Host:     config.TasksPostgresHost,
 			Port:     config.TasksPostgresPort,
 			User:     config.TasksPostgresUser,
 			Password: config.TasksPostgresPassword,
 			Database: config.TasksPostgresDatabase,
-			Options: service.Options{
+			Options: tasks.Options{
 				MaxConnections: config.TasksMaxConnections,
 				QueryTimeout:   config.TasksQueryTimeout,
 				CacheL1Delay:   config.TasksCacheL1Delay,
@@ -42,11 +43,11 @@ func Service() func(context.Context) error {
 			},
 		})
 
-		if err := global.Tasks.OnCallback(ctx, handler); err != nil {
+		if err := services.Tasks.OnCallback(ctx, handler); err != nil {
 			return err
 		}
 
-		return global.Tasks.Run(ctx)
+		return services.Tasks.Run(ctx)
 
 	}
 

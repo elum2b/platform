@@ -1,4 +1,4 @@
-package global
+package services
 
 import (
 	"github.com/elum2b/services/calendar"

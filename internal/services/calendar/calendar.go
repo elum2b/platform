@@ -4,21 +4,22 @@ import (
 	"context"
 
 	"github.com/elum2b/platform/internal/config"
-	"github.com/elum2b/platform/internal/global"
-	service "github.com/elum2b/services/calendar"
+	"github.com/elum2b/platform/internal/services"
+
+	"github.com/elum2b/services/calendar"
 )
 
 func Service() func(context.Context) error {
 
 	return func(ctx context.Context) error {
 
-		global.Calendar = service.New(service.DatabaseParams{
+		services.Calendar = calendar.New(calendar.DatabaseParams{
 			Host:     config.CalendarPostgresHost,
 			Port:     config.CalendarPostgresPort,
 			User:     config.CalendarPostgresUser,
 			Password: config.CalendarPostgresPassword,
 			Database: config.CalendarPostgresDatabase,
-			Options: service.Options{
+			Options: calendar.Options{
 				MaxConnections: config.CalendarMaxConnections,
 				QueryTimeout:   config.CalendarQueryTimeout,
 				CacheL1Delay:   config.CalendarCacheL1Delay,
@@ -29,11 +30,11 @@ func Service() func(context.Context) error {
 			},
 		})
 
-		if err := global.Calendar.OnCallback(ctx, handler); err != nil {
+		if err := services.Calendar.OnCallback(ctx, handler); err != nil {
 			return err
 		}
 
-		return global.Calendar.Run(ctx)
+		return services.Calendar.Run(ctx)
 
 	}
 

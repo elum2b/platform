@@ -4,21 +4,22 @@ import (
 	"context"
 
 	"github.com/elum2b/platform/internal/config"
-	"github.com/elum2b/platform/internal/global"
-	service "github.com/elum2b/services/payment"
+	"github.com/elum2b/platform/internal/services"
+
+	"github.com/elum2b/services/payment"
 )
 
 func Service() func(context.Context) error {
 
 	return func(ctx context.Context) error {
 
-		global.Payment = service.New(service.DatabaseParams{
+		services.Payment = payment.New(payment.DatabaseParams{
 			Host:     config.PaymentPostgresHost,
 			Port:     config.PaymentPostgresPort,
 			User:     config.PaymentPostgresUser,
 			Password: config.PaymentPostgresPassword,
 			Database: config.PaymentPostgresDatabase,
-			Options: service.Options{
+			Options: payment.Options{
 				MaxConnections: config.PaymentMaxConnections,
 				QueryTimeout:   config.PaymentQueryTimeout,
 				CacheL1Delay:   config.PaymentCacheL1Delay,
@@ -45,11 +46,11 @@ func Service() func(context.Context) error {
 			},
 		})
 
-		if err := global.Payment.OnCallback(ctx, handler); err != nil {
+		if err := services.Payment.OnCallback(ctx, handler); err != nil {
 			return err
 		}
 
-		return global.Payment.Run(ctx)
+		return services.Payment.Run(ctx)
 
 	}
 
