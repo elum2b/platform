@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/.",
+      "output": "${workspaceFolder}/deploy/volumes/app/backend",
+      "envFile": "${workspaceFolder}/deploy/volumes/app/dev.env",
+    }
+  ]
+}
