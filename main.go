@@ -6,6 +6,7 @@ import (
 
 	"github.com/elum-utils/supervisor"
 
+	"github.com/elum2b/platform/internal/api"
 	"github.com/elum2b/platform/internal/services/calendar"
 	"github.com/elum2b/platform/internal/services/control"
 	"github.com/elum2b/platform/internal/services/cpa"
@@ -43,6 +44,11 @@ func main() {
 			ShutdownTimeout: time.Minute,
 		},
 	)
+
+	// Register HTTP service inside the supervisor.
+	// The service will be automatically started,
+	// monitored and restarted if it crashes.
+	s.Add("api", api.Service())
 
 	// Register the control service.
 	// It manages accounts, workspaces, access control,
