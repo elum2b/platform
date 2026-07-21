@@ -3,6 +3,7 @@ package config
 import "github.com/elum-utils/env"
 
 var (
+	
 	// ServicesMaxConnections contains the default service connection limit.
 	// Env: SERVICES_MAX_CONNECTIONS.
 	ServicesMaxConnections = env.GetEnvInt("SERVICES_MAX_CONNECTIONS", 0)
@@ -30,4 +31,5 @@ var (
 	// ServicesCacheTTLCheck contains the default cache expiry check interval.
 	// Env: SERVICES_CACHE_TTL_CHECK.
 	ServicesCacheTTLCheck = env.GetEnvDuration("SERVICES_CACHE_TTL_CHECK", 0)
+
 )
