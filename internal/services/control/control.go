@@ -3,16 +3,14 @@ package control
 import (
 	"context"
 
+	"github.com/elum2b/services/control"
+
 	"github.com/elum2b/platform/internal/config"
 	"github.com/elum2b/platform/internal/services"
-
-	"github.com/elum2b/services/control"
 )
 
 func Service() func(context.Context) error {
-
 	return func(ctx context.Context) error {
-
 		services.Control = control.New(control.DatabaseParams{
 			Host:     config.ControlPostgresHost,
 			Port:     config.ControlPostgresPort,
@@ -32,7 +30,5 @@ func Service() func(context.Context) error {
 		})
 
 		return services.Control.Run(ctx)
-
 	}
-
 }

@@ -198,3 +198,5 @@ migrations/*.down.sql
 !LICENSE
 !CHANGELOG.md
 !CONTRIBUTING.md
+
+platform

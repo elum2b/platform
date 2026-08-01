@@ -3,16 +3,14 @@ package cpa
 import (
 	"context"
 
+	"github.com/elum2b/services/cpa"
+
 	"github.com/elum2b/platform/internal/config"
 	"github.com/elum2b/platform/internal/services"
-
-	"github.com/elum2b/services/cpa"
 )
 
 func Service() func(context.Context) error {
-
 	return func(ctx context.Context) error {
-
 		services.CPA = cpa.New(cpa.DatabaseParams{
 			Host:     config.CPAPostgresHost,
 			Port:     config.CPAPostgresPort,
@@ -35,7 +33,5 @@ func Service() func(context.Context) error {
 		}
 
 		return services.CPA.Run(ctx)
-
 	}
-
 }

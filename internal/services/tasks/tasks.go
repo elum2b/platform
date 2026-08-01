@@ -3,17 +3,15 @@ package tasks
 import (
 	"context"
 
-	"github.com/elum2b/platform/internal/config"
-	"github.com/elum2b/platform/internal/services"
-
 	"github.com/elum2b/services/tasks"
 	taskruntime "github.com/elum2b/services/tasks/runtime"
+
+	"github.com/elum2b/platform/internal/config"
+	"github.com/elum2b/platform/internal/services"
 )
 
 func Service() func(context.Context) error {
-
 	return func(ctx context.Context) error {
-
 		services.Tasks = tasks.New(tasks.DatabaseParams{
 			Host:     config.TasksPostgresHost,
 			Port:     config.TasksPostgresPort,
@@ -48,7 +46,5 @@ func Service() func(context.Context) error {
 		}
 
 		return services.Tasks.Run(ctx)
-
 	}
-
 }

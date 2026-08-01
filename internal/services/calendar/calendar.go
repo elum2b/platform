@@ -3,16 +3,14 @@ package calendar
 import (
 	"context"
 
+	"github.com/elum2b/services/calendar"
+
 	"github.com/elum2b/platform/internal/config"
 	"github.com/elum2b/platform/internal/services"
-
-	"github.com/elum2b/services/calendar"
 )
 
 func Service() func(context.Context) error {
-
 	return func(ctx context.Context) error {
-
 		services.Calendar = calendar.New(calendar.DatabaseParams{
 			Host:     config.CalendarPostgresHost,
 			Port:     config.CalendarPostgresPort,
@@ -35,7 +33,5 @@ func Service() func(context.Context) error {
 		}
 
 		return services.Calendar.Run(ctx)
-
 	}
-
 }

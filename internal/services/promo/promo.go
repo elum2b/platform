@@ -3,16 +3,14 @@ package promo
 import (
 	"context"
 
+	"github.com/elum2b/services/promo"
+
 	"github.com/elum2b/platform/internal/config"
 	"github.com/elum2b/platform/internal/services"
-
-	"github.com/elum2b/services/promo"
 )
 
 func Service() func(context.Context) error {
-
 	return func(ctx context.Context) error {
-
 		services.Promo = promo.New(promo.DatabaseParams{
 			Host:     config.PromoPostgresHost,
 			Port:     config.PromoPostgresPort,
@@ -35,7 +33,5 @@ func Service() func(context.Context) error {
 		}
 
 		return services.Promo.Run(ctx)
-
 	}
-
 }

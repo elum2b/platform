@@ -3,7 +3,7 @@ package config
 import "github.com/elum-utils/env"
 
 var (
-	
+
 	// PostgresHost contains the default PostgreSQL host.
 	// Env: POSTGRES_HOST.
 	PostgresHost = env.GetEnvString("POSTGRES_HOST", "localhost")
@@ -23,5 +23,4 @@ var (
 	// PostgresDatabase contains the default PostgreSQL database name.
 	// Env: POSTGRES_DATABASE.
 	PostgresDatabase = env.GetEnvString("POSTGRES_DATABASE", "")
-
 )

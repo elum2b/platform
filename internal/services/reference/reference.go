@@ -3,16 +3,14 @@ package reference
 import (
 	"context"
 
+	"github.com/elum2b/services/reference"
+
 	"github.com/elum2b/platform/internal/config"
 	"github.com/elum2b/platform/internal/services"
-
-	"github.com/elum2b/services/reference"
 )
 
 func Service() func(context.Context) error {
-
 	return func(ctx context.Context) error {
-
 		services.Reference = reference.New(reference.DatabaseParams{
 			Host:     config.ReferencePostgresHost,
 			Port:     config.ReferencePostgresPort,
@@ -31,7 +29,5 @@ func Service() func(context.Context) error {
 		})
 
 		return services.Reference.Run(ctx)
-
 	}
-
 }

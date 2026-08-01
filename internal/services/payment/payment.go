@@ -3,16 +3,14 @@ package payment
 import (
 	"context"
 
+	"github.com/elum2b/services/payment"
+
 	"github.com/elum2b/platform/internal/config"
 	"github.com/elum2b/platform/internal/services"
-
-	"github.com/elum2b/services/payment"
 )
 
 func Service() func(context.Context) error {
-
 	return func(ctx context.Context) error {
-
 		services.Payment = payment.New(payment.DatabaseParams{
 			Host:     config.PaymentPostgresHost,
 			Port:     config.PaymentPostgresPort,
@@ -51,7 +49,5 @@ func Service() func(context.Context) error {
 		}
 
 		return services.Payment.Run(ctx)
-
 	}
-
 }

@@ -44,6 +44,64 @@ ENV CONTROL_POSTGRES_HOST= \
     CONTROL_CACHE_TTL_CHECK=0s \
     CONTROL_SECRET_ENCRYPTION_KEY=
 
+# Control authentication session and secure cookie settings.
+# Secure and HttpOnly are always enabled by the application.
+ENV CONTROL_AUTH_SESSION_DURATION=48h \
+    CONTROL_AUTH_COOKIE_NAME=elum_session \
+    CONTROL_AUTH_COOKIE_DOMAIN= \
+    CONTROL_AUTH_COOKIE_SAME_SITE=Strict \
+    CONTROL_AUTH_TWO_FACTOR_COOKIE_NAME=elum_two_factor \
+    CONTROL_AUTH_TWO_FACTOR_DURATION=15m \
+    CONTROL_AUTH_OAUTH_TIMEOUT=15s
+
+# VK ID OAuth credentials and optional endpoint overrides.
+# Empty endpoint values use defaults provided by the Control auth adapter.
+ENV CONTROL_AUTH_VK_CLIENT_ID= \
+    CONTROL_AUTH_VK_CLIENT_SECRET= \
+    CONTROL_AUTH_VK_TOKEN_URL= \
+    CONTROL_AUTH_VK_USER_INFO_URL=
+
+# GitHub OAuth credentials and optional endpoint overrides.
+# Empty endpoint values use defaults provided by the Control auth adapter.
+ENV CONTROL_AUTH_GITHUB_CLIENT_ID= \
+    CONTROL_AUTH_GITHUB_CLIENT_SECRET= \
+    CONTROL_AUTH_GITHUB_TOKEN_URL= \
+    CONTROL_AUTH_GITHUB_USER_INFO_URL=
+
+# GitLab OAuth credentials and optional endpoint overrides.
+# Empty endpoint values use defaults provided by the Control auth adapter.
+ENV CONTROL_AUTH_GITLAB_CLIENT_ID= \
+    CONTROL_AUTH_GITLAB_CLIENT_SECRET= \
+    CONTROL_AUTH_GITLAB_TOKEN_URL= \
+    CONTROL_AUTH_GITLAB_USER_INFO_URL=
+
+# Google OAuth credentials and optional endpoint overrides.
+# Empty endpoint values use defaults provided by the Control auth adapter.
+ENV CONTROL_AUTH_GOOGLE_CLIENT_ID= \
+    CONTROL_AUTH_GOOGLE_CLIENT_SECRET= \
+    CONTROL_AUTH_GOOGLE_TOKEN_URL= \
+    CONTROL_AUTH_GOOGLE_USER_INFO_URL=
+
+# Yandex OAuth credentials and optional endpoint overrides.
+# Empty endpoint values use defaults provided by the Control auth adapter.
+ENV CONTROL_AUTH_YANDEX_CLIENT_ID= \
+    CONTROL_AUTH_YANDEX_CLIENT_SECRET= \
+    CONTROL_AUTH_YANDEX_TOKEN_URL= \
+    CONTROL_AUTH_YANDEX_USER_INFO_URL=
+
+# Telegram WebApp authentication settings.
+# Init data older than the configured maximum age is rejected.
+ENV CONTROL_AUTH_TELEGRAM_BOT_TOKEN= \
+    CONTROL_AUTH_TELEGRAM_MAX_AGE=5m
+
+# TON Connect proof verification settings.
+# Payload secret and expected proof domain are required for TON authentication.
+ENV CONTROL_AUTH_TON_PAYLOAD_SECRET= \
+    CONTROL_AUTH_TON_DOMAIN= \
+    CONTROL_AUTH_TON_NETWORK= \
+    CONTROL_AUTH_TON_ALLOW_NATIVE_DOMAIN=false \
+    CONTROL_AUTH_TON_MAX_AGE=5m
+
 # Calendar service PostgreSQL and cache settings.
 # CALENDAR_* overrides global POSTGRES_* and SERVICES_* settings.
 ENV CALENDAR_POSTGRES_HOST= \
