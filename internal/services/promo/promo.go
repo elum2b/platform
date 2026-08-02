@@ -11,7 +11,11 @@ import (
 
 func Service() func(context.Context) error {
 	return func(ctx context.Context) error {
-		services.Promo = promo.New(promo.DatabaseParams{
+		if err := services.Promo.OnCallback(ctx, handler); err != nil {
+			return err
+		}
+
+		return services.Promo.Run(ctx, promo.DatabaseParams{
 			Host:     config.PromoPostgresHost,
 			Port:     config.PromoPostgresPort,
 			User:     config.PromoPostgresUser,
@@ -27,11 +31,5 @@ func Service() func(context.Context) error {
 				CacheTTLCheck:  config.PromoCacheTTLCheck,
 			},
 		})
-
-		if err := services.Promo.OnCallback(ctx, handler); err != nil {
-			return err
-		}
-
-		return services.Promo.Run(ctx)
 	}
 }

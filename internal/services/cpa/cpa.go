@@ -11,7 +11,11 @@ import (
 
 func Service() func(context.Context) error {
 	return func(ctx context.Context) error {
-		services.CPA = cpa.New(cpa.DatabaseParams{
+		if err := services.CPA.OnCallback(ctx, handler); err != nil {
+			return err
+		}
+
+		return services.CPA.Run(ctx, cpa.DatabaseParams{
 			Host:     config.CPAPostgresHost,
 			Port:     config.CPAPostgresPort,
 			User:     config.CPAPostgresUser,
@@ -27,11 +31,5 @@ func Service() func(context.Context) error {
 				CacheTTLCheck:  config.CPACacheTTLCheck,
 			},
 		})
-
-		if err := services.CPA.OnCallback(ctx, handler); err != nil {
-			return err
-		}
-
-		return services.CPA.Run(ctx)
 	}
 }

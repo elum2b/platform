@@ -15,7 +15,9 @@
 
 ## HTTP authentication
 
-- Fiber controllers are under `internal/api/internal_api`.
+- HTTP methods are under `internal/api/methods` and are registered through the
+  universal adapter. HTTP routing, decoding and response envelopes belong in
+  `internal/utils/adapter/http`.
 - HTTP is reserved for authentication: provider login, two-factor completion,
   session check and TON challenge. Account logout and other authenticated work
   are socket methods.
@@ -24,33 +26,51 @@
 - Provider-specific identity resolution belongs in `internal/utils/auth`, not
   in a controller.
 
+## MCP API
+
+- The MCP Streamable HTTP endpoint is `/mcp`. Routing, authentication, tool
+  registration and protocol integration belong in
+  `internal/utils/adapter/mcp`.
+- Use the official `github.com/modelcontextprotocol/go-sdk/mcp` SDK. Do not
+  implement MCP JSON-RPC framing manually.
+- MCP authentication accepts `Authorization: Bearer mcp_...` and the
+  `mcpToken` query parameter. Validate it through
+  `services.Control.Internal.ValidateMCPToken` for every tool call.
+  MCP tokens are not browser sessions and must never be read from cookies.
+- Keep the transport stateless so revocation, account blocking and role changes
+  take effect on the next MCP request. A tool must use its validated principal
+  and the existing global/workspace access checks before calling a service.
+
 ## Socket API
 
-- All non-authentication API methods use ETP WebSocket controllers under
-  `internal/api/socket_api/controllers`.
-- Register all control events only in
-  `internal/api/socket_api/controllers/control/control.go`. `socket.go` calls
-  only `control.Register(ws)`.
-- Register a controller with this shape:
+- All non-authentication API methods are declared under `internal/api/methods`.
+  ETP bootstrap, session authentication, system callbacks, decoding and
+  responses belong in `internal/utils/adapter/socket`.
+- Register transport-neutral methods through `internal/api/methods.Register`.
+  A method declares its transports with `adapter.HTTP`, `adapter.WS` and
+  `adapter.MCP`.
+- Declare a method with this shape:
 
   ```go
-  func Method(event string, socket etp.Router) {
-      socket.On(event, func(ctx *etp.Context) error {
-          // decode, call services, respond
-      })
+  var Method = adapter.Method[Request, Response]{
+      Key:         "service.section.method",
+      Description: "Explain what the method does and when to call it.",
+      Transports:  adapter.WS | adapter.MCP,
+      Handler: func(ctx *adapter.Context, data Request) (Response, error) {
+          // call services and return a transport-neutral response
+      },
   }
   ```
 
-- Controllers are thin: decode via `internal/utils/socket`, call
-  `internal/services`, map a response, then respond via the same utility.
-  Return service errors unchanged.
-- One file contains one handler. Keep request and response types in that same
-  file; never create a shared `models.go` for a controller section.
-- Use nested packages for controller domains, for example
+- Methods are thin: validate transport input through the adapter, call
+  `internal/services`, map a response and return service errors unchanged.
+- One file contains one method. Keep request and response types in that same
+  file; never create a shared `models.go` for a method section.
+- Use nested packages for method domains, for example
   `account/identity/bind.go` or `workspace/role/permission/replace.go`.
-- Add `middleware.GlobalAccess` or `middleware.WorkspaceAccess` using the exact
-  service method key when the operation requires permission. Control handlers
-  inherit `Authenticated` and `ControlReady` from `control.Register`.
+- Add `adapter.GlobalAccess` or `adapter.WorkspaceAccess` using the exact
+  service method key when the operation requires permission. WebSocket and MCP
+  authentication are applied by their transport adapters.
 
 ## Style
 

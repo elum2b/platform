@@ -4,13 +4,17 @@ import (
 	"context"
 	"fmt"
 
+	etp "github.com/elum-utils/go-etp"
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/recover"
 
-	internal "github.com/elum2b/platform/internal/api/internal_api"
-	socket "github.com/elum2b/platform/internal/api/socket_api"
+	"github.com/elum2b/platform/internal/api/methods"
 	"github.com/elum2b/platform/internal/config"
+	adapter "github.com/elum2b/platform/internal/utils/adapter"
+	httputils "github.com/elum2b/platform/internal/utils/adapter/http"
+	mcputils "github.com/elum2b/platform/internal/utils/adapter/mcp"
+	socketutils "github.com/elum2b/platform/internal/utils/adapter/socket"
 )
 
 func Service() func(ctx context.Context) error {
@@ -27,14 +31,20 @@ func Service() func(ctx context.Context) error {
 		// and prevent the whole service from crashing.
 		app.Use(recover.New())
 
-		// Register WebSocket routes and handlers.
-		socket.Init(app)
+		// Register WebSocket methods.
+		socketutils.Init(app, func(router etp.Router) {
+			methods.Register(adapter.Registry{Socket: router})
+		})
 
-		// // Register public/external API routes.
-		// external.Init(app)
+		// Register MCP methods.
+		mcputils.Init(app, func(router mcputils.Router) {
+			methods.Register(adapter.Registry{MCP: router})
+		})
 
-		// Register private/internal API routes.
-		internal.Init(app)
+		// Register private/internal HTTP methods.
+		httputils.Init(app, func(router fiber.Router) {
+			methods.Register(adapter.Registry{HTTP: router})
+		})
 
 		// Start HTTP server and bind it to configured host and port.
 		// GracefulContext allows the supervisor to stop the server

@@ -11,11 +11,11 @@ import (
 )
 
 var (
-	Calendar  *calendar.Calendar
-	Control   *control.Control
-	CPA       *cpa.CPA
-	Payment   *payment.Payment
-	Promo     *promo.Promo
-	Reference *reference.Reference
-	Tasks     *tasks.Tasks
+	Calendar  = calendar.New()
+	Control   = control.New()
+	CPA       = cpa.New()
+	Payment   = payment.New()
+	Promo     = promo.New()
+	Reference = reference.New()
+	Tasks     = tasks.New()
 )

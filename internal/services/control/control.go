@@ -11,7 +11,7 @@ import (
 
 func Service() func(context.Context) error {
 	return func(ctx context.Context) error {
-		services.Control = control.New(control.DatabaseParams{
+		return services.Control.Run(ctx, control.DatabaseParams{
 			Host:     config.ControlPostgresHost,
 			Port:     config.ControlPostgresPort,
 			User:     config.ControlPostgresUser,
@@ -28,7 +28,5 @@ func Service() func(context.Context) error {
 				SecretEncryptionKey: []byte(config.ControlSecretEncryptionKey),
 			},
 		})
-
-		return services.Control.Run(ctx)
 	}
 }

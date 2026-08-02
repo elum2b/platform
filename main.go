@@ -17,7 +17,6 @@ import (
 )
 
 func main() {
-
 	// Create the root service supervisor.
 	// The supervisor manages lifecycle, restarts,
 	// graceful shutdown and fault isolation for services.
@@ -88,5 +87,4 @@ func main() {
 	// Start supervisor event loop and block
 	// until shutdown or fatal failure occurs.
 	s.Run()
-
 }

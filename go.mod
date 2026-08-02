@@ -7,8 +7,10 @@ require (
 	github.com/elum-utils/go-etp v0.0.6
 	github.com/elum-utils/go-etp/adapters/fiber v0.0.0-20260721051115-a66e506774e9
 	github.com/elum-utils/supervisor v0.0.2
-	github.com/elum2b/services v0.0.41
+	github.com/elum2b/services v0.0.46
 	github.com/go-playground/validator/v10 v10.30.1
+	github.com/google/jsonschema-go v0.4.2
+	github.com/modelcontextprotocol/go-sdk v1.4.0
 )
 
 require (
@@ -25,10 +27,14 @@ require (
 	github.com/mattn/go-isatty v0.0.22 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
 	github.com/savsgio/gotils v0.0.0-20240303185622-093b76447511 // indirect
+	github.com/segmentio/asm v1.1.3 // indirect
+	github.com/segmentio/encoding v0.5.3 // indirect
 	github.com/tinylib/msgp v1.6.4 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.72.0 // indirect
+	github.com/yosida95/uritemplate/v3 v3.0.2 // indirect
 	golang.org/x/crypto v0.53.0 // indirect
+	golang.org/x/oauth2 v0.34.0 // indirect
 	golang.org/x/sys v0.46.0 // indirect
 )
 

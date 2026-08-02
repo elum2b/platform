@@ -11,7 +11,7 @@ import (
 
 func Service() func(context.Context) error {
 	return func(ctx context.Context) error {
-		services.Reference = reference.New(reference.DatabaseParams{
+		return services.Reference.Run(ctx, reference.DatabaseParams{
 			Host:     config.ReferencePostgresHost,
 			Port:     config.ReferencePostgresPort,
 			User:     config.ReferencePostgresUser,
@@ -27,7 +27,5 @@ func Service() func(context.Context) error {
 				CacheTTLCheck:  config.ReferenceCacheTTLCheck,
 			},
 		})
-
-		return services.Reference.Run(ctx)
 	}
 }

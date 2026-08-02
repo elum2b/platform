@@ -12,7 +12,11 @@ import (
 
 func Service() func(context.Context) error {
 	return func(ctx context.Context) error {
-		services.Tasks = tasks.New(tasks.DatabaseParams{
+		if err := services.Tasks.OnCallback(ctx, handler); err != nil {
+			return err
+		}
+
+		return services.Tasks.Run(ctx, tasks.DatabaseParams{
 			Host:     config.TasksPostgresHost,
 			Port:     config.TasksPostgresPort,
 			User:     config.TasksPostgresUser,
@@ -40,11 +44,5 @@ func Service() func(context.Context) error {
 				},
 			},
 		})
-
-		if err := services.Tasks.OnCallback(ctx, handler); err != nil {
-			return err
-		}
-
-		return services.Tasks.Run(ctx)
 	}
 }

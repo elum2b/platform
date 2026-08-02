@@ -11,7 +11,11 @@ import (
 
 func Service() func(context.Context) error {
 	return func(ctx context.Context) error {
-		services.Calendar = calendar.New(calendar.DatabaseParams{
+		if err := services.Calendar.OnCallback(ctx, handler); err != nil {
+			return err
+		}
+
+		return services.Calendar.Run(ctx, calendar.DatabaseParams{
 			Host:     config.CalendarPostgresHost,
 			Port:     config.CalendarPostgresPort,
 			User:     config.CalendarPostgresUser,
@@ -27,11 +31,5 @@ func Service() func(context.Context) error {
 				CacheTTLCheck:  config.CalendarCacheTTLCheck,
 			},
 		})
-
-		if err := services.Calendar.OnCallback(ctx, handler); err != nil {
-			return err
-		}
-
-		return services.Calendar.Run(ctx)
 	}
 }

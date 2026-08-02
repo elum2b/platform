@@ -11,7 +11,11 @@ import (
 
 func Service() func(context.Context) error {
 	return func(ctx context.Context) error {
-		services.Payment = payment.New(payment.DatabaseParams{
+		if err := services.Payment.OnCallback(ctx, handler); err != nil {
+			return err
+		}
+
+		return services.Payment.Run(ctx, payment.DatabaseParams{
 			Host:     config.PaymentPostgresHost,
 			Port:     config.PaymentPostgresPort,
 			User:     config.PaymentPostgresUser,
@@ -43,11 +47,5 @@ func Service() func(context.Context) error {
 				TONWalletSyncInterval: config.PaymentTONWalletSyncInterval,
 			},
 		})
-
-		if err := services.Payment.OnCallback(ctx, handler); err != nil {
-			return err
-		}
-
-		return services.Payment.Run(ctx)
 	}
 }
