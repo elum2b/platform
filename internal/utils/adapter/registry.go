@@ -20,8 +20,54 @@ type Registry struct {
 	MCP    mcputils.Router
 }
 
+// Registrar can register methods through a registry or middleware group.
+type Registrar interface {
+	registration() (Registry, []Middleware)
+}
+
+// Group applies common middleware to a set of methods.
+type Group struct {
+	registry   Registry
+	middleware []Middleware
+}
+
+// Group creates a middleware group for the registry.
+func (registry Registry) Group(middleware ...Middleware) *Group {
+	return &Group{
+		registry:   registry,
+		middleware: append([]Middleware(nil), middleware...),
+	}
+}
+
+// Use appends middleware to the group.
+func (group *Group) Use(middleware ...Middleware) {
+	group.middleware = append(group.middleware, middleware...)
+}
+
+// Group creates a child group that inherits the current middleware.
+func (group *Group) Group(middleware ...Middleware) *Group {
+	inherited := append([]Middleware(nil), group.middleware...)
+
+	return &Group{
+		registry:   group.registry,
+		middleware: append(inherited, middleware...),
+	}
+}
+
+func (registry Registry) registration() (Registry, []Middleware) {
+	return registry, nil
+}
+
+func (group *Group) registration() (Registry, []Middleware) {
+	return group.registry, append([]Middleware(nil), group.middleware...)
+}
+
 // Register exposes a method through every enabled transport in the registry.
-func (method Method[In, Out]) Register(registry Registry) {
+func (method Method[In, Out]) Register(registrar Registrar) {
+	registry, middleware := registrar.registration()
+
+	method.Middleware = append(middleware, method.Middleware...)
+
 	if method.Transports&HTTP != 0 && registry.HTTP != nil {
 		method.registerHTTP(registry.HTTP)
 	}

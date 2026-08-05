@@ -4,6 +4,7 @@ import (
 	"context"
 
 	etp "github.com/elum-utils/go-etp"
+	serviceapi "github.com/elum2b/services"
 	"github.com/elum2b/services/control/service/internalapi"
 	serviceerrors "github.com/elum2b/services/errors"
 	"github.com/go-playground/validator/v10"
@@ -26,6 +27,7 @@ const (
 type Context struct {
 	Context   context.Context
 	AccountID string
+	Identity  *serviceapi.Identity
 	Transport Transport
 	Data      any
 	HTTP      fiber.Ctx
@@ -57,6 +59,40 @@ func (method Method[In, Out]) call(ctx *Context, data In) (Out, error) {
 	}
 
 	return method.Handler(ctx, data)
+}
+
+// AccountRequired requires an authenticated platform account.
+func AccountRequired(ctx *Context) error {
+	if ctx.AccountID == "" {
+		return serviceerrors.ErrUnauthorized
+	}
+
+	return nil
+}
+
+// ApplicationUser authenticates a VKMA or TMA application user.
+func ApplicationUser(ctx *Context) error {
+	data := new(applicationUserRequest)
+	if !Decode(ctx.Data, data) {
+		return serviceerrors.ErrInvalidFields
+	}
+
+	identity, err := services.Control.Internal.AuthenticateApplicationUser(
+		ctx.Context,
+		internalapi.AuthenticateApplicationUserRequest{
+			WorkspaceID: data.WorkspaceID,
+			AppID:       data.AppID,
+			PlatformID:  data.PlatformID,
+			Launch:      data.Params,
+		},
+	)
+	if err != nil {
+		return err
+	}
+
+	ctx.Identity = &identity
+
+	return nil
 }
 
 // WorkspaceAccess requires the account to access a workspace method.
@@ -119,6 +155,13 @@ func GlobalAccess(method string) Middleware {
 
 type workspaceAccessRequest struct {
 	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
+}
+
+type applicationUserRequest struct {
+	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
+	AppID       int64  `json:"app_id"       validate:"required,min=1"`
+	PlatformID  int64  `json:"platform_id"  validate:"required,min=1"`
+	Params      string `json:"params"       validate:"required"`
 }
 
 var validate = validator.New()

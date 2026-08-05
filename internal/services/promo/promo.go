@@ -21,6 +21,7 @@ func Service() func(context.Context) error {
 			User:     config.PromoPostgresUser,
 			Password: config.PromoPostgresPassword,
 			Database: config.PromoPostgresDatabase,
+			SSLMode:  "disable",
 			Options: promo.Options{
 				MaxConnections: config.PromoMaxConnections,
 				QueryTimeout:   config.PromoQueryTimeout,

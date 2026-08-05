@@ -21,6 +21,7 @@ func Service() func(context.Context) error {
 			User:     config.PaymentPostgresUser,
 			Password: config.PaymentPostgresPassword,
 			Database: config.PaymentPostgresDatabase,
+			SSLMode:  "disable",
 			Options: payment.Options{
 				MaxConnections: config.PaymentMaxConnections,
 				QueryTimeout:   config.PaymentQueryTimeout,

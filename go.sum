@@ -17,6 +17,8 @@ github.com/elum-utils/supervisor v0.0.2 h1:IISKSttpW7R8pQVIBYjadhjBiYjX7h/XonjM2
 github.com/elum-utils/supervisor v0.0.2/go.mod h1:oOdgx9z+F9SEaXDMY+vvkxWq2sFidY9J2J1ocltEZc4=
 github.com/elum2b/services v0.0.46 h1:s21K4gjKURWYjXFAP6J1c9Bgp/8MIxzPvtPBqY+3LSs=
 github.com/elum2b/services v0.0.46/go.mod h1:rNyCNi3OBOqzp9gDADLR9GzhcDRgAKpvD1K4JfwqOfc=
+github.com/elum2b/services v0.0.47 h1:vKFr3Axli4e+d95150PHonOWkUGA1TZKkdSrcQ2Xa5U=
+github.com/elum2b/services v0.0.47/go.mod h1:rNyCNi3OBOqzp9gDADLR9GzhcDRgAKpvD1K4JfwqOfc=
 github.com/fasthttp/websocket v1.5.8 h1:k5DpirKkftIF/w1R8ZzjSgARJrs54Je9YJK37DL/Ah8=
 github.com/fasthttp/websocket v1.5.8/go.mod h1:d08g8WaT6nnyvg9uMm8K9zMYyDjfKyj3170AtPRuVU0=
 github.com/fxamacker/cbor/v2 v2.9.2 h1:X4Ksno9+x3cz0TZv69ec1hxP/+tymuR8PXQJyDwfh78=

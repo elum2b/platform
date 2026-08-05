@@ -21,6 +21,7 @@ func Service() func(context.Context) error {
 			User:     config.CalendarPostgresUser,
 			Password: config.CalendarPostgresPassword,
 			Database: config.CalendarPostgresDatabase,
+			SSLMode:  "disable",
 			Options: calendar.Options{
 				MaxConnections: config.CalendarMaxConnections,
 				QueryTimeout:   config.CalendarQueryTimeout,

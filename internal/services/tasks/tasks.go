@@ -22,6 +22,7 @@ func Service() func(context.Context) error {
 			User:     config.TasksPostgresUser,
 			Password: config.TasksPostgresPassword,
 			Database: config.TasksPostgresDatabase,
+			SSLMode:  "disable",
 			Options: tasks.Options{
 				MaxConnections: config.TasksMaxConnections,
 				QueryTimeout:   config.TasksQueryTimeout,

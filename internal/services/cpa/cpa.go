@@ -21,6 +21,7 @@ func Service() func(context.Context) error {
 			User:     config.CPAPostgresUser,
 			Password: config.CPAPostgresPassword,
 			Database: config.CPAPostgresDatabase,
+			SSLMode:  "disable",
 			Options: cpa.Options{
 				MaxConnections: config.CPAMaxConnections,
 				QueryTimeout:   config.CPAQueryTimeout,

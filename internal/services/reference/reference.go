@@ -17,6 +17,7 @@ func Service() func(context.Context) error {
 			User:     config.ReferencePostgresUser,
 			Password: config.ReferencePostgresPassword,
 			Database: config.ReferencePostgresDatabase,
+			SSLMode:  "disable",
 			Options: reference.Options{
 				MaxConnections: config.ReferenceMaxConnections,
 				QueryTimeout:   config.ReferenceQueryTimeout,
