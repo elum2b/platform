@@ -33,7 +33,6 @@ jobs:
           version: latest
           install-mode: binary
           verify: true
-          run: false
 
       - name: Format code
         run: golangci-lint fmt ./...
