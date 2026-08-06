@@ -23,6 +23,13 @@ func registerMethods(router mcputils.Router) {
 	methods.Register(adapter.Registry{MCP: router})
 }
 
+func testRequest(
+	app *fiber.App,
+	request *http.Request,
+) (*http.Response, error) {
+	return app.Test(request, fiber.TestConfig{Timeout: 10 * time.Second})
+}
+
 func TestRegisterCompilesAllTools(t *testing.T) {
 	server := mcpserver.NewServer(
 		&mcpserver.Implementation{Name: "test", Version: "test"},
@@ -39,7 +46,7 @@ func TestInitAcceptsRequestsBeforeServicesStart(t *testing.T) {
 
 	mcputils.Init(app, registerMethods)
 
-	response, err := app.Test(httptest.NewRequestWithContext(
+	response, err := testRequest(app, httptest.NewRequestWithContext(
 		context.Background(),
 		http.MethodPost,
 		"/mcp",
@@ -75,10 +82,7 @@ func TestToolsListIncludesAccessDiscovery(t *testing.T) {
 	request.Header.Set("Accept", "application/json, text/event-stream")
 	request.Header.Set("MCP-Protocol-Version", "2025-06-18")
 
-	response, err := app.Test(
-		request,
-		fiber.TestConfig{Timeout: 10 * time.Second},
-	)
+	response, err := testRequest(app, request)
 	if err != nil {
 		t.Fatalf("request tools/list: %v", err)
 	}
@@ -127,7 +131,7 @@ func TestToolErrorUsesStructuredContent(t *testing.T) {
 	request.Header.Set("Accept", "application/json, text/event-stream")
 	request.Header.Set("MCP-Protocol-Version", "2025-06-18")
 
-	response, err := app.Test(request)
+	response, err := testRequest(app, request)
 	if err != nil {
 		t.Fatalf("request tools/call: %v", err)
 	}
