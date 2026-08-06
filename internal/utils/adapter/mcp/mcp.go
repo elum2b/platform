@@ -9,6 +9,8 @@ import (
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/adaptor"
 	mcpserver "github.com/modelcontextprotocol/go-sdk/mcp"
+
+	versionutils "github.com/elum2b/platform/internal/utils/version"
 )
 
 type principalContextKey struct{}
@@ -20,13 +22,7 @@ type RegisterFunc func(Router)
 func Init(app fiber.Router, register RegisterFunc) {
 	app.All(
 		"/mcp",
-		adaptor.HTTPHandler(HTTPHandler(func(router Router) {
-			group := router.Group()
-
-			_ = group.Use("*", Authenticated)
-
-			register(group)
-		})),
+		adaptor.HTTPHandler(HTTPHandler(register)),
 	)
 }
 
@@ -36,7 +32,11 @@ func HTTPHandler(register RegisterFunc) http.Handler {
 		func(*http.Request) *mcpserver.Server {
 			server := server()
 			router := NewRouter(server)
-			register(router)
+			group := router.Group()
+
+			_ = group.Use("*", Authenticated)
+
+			register(group)
 			router.Compile()
 
 			return server
@@ -83,7 +83,7 @@ func server() *mcpserver.Server {
 	return mcpserver.NewServer(
 		&mcpserver.Implementation{
 			Name:    "elum2b-platform",
-			Version: "0.1.0",
+			Version: versionutils.Current(),
 		},
 		nil,
 	)
