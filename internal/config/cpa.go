@@ -6,15 +6,24 @@ var (
 
 	// CPAPostgresHost contains CPA PostgreSQL host.
 	// Fallback: **POSTGRES_HOST**.
-	CPAPostgresHost = env.GetEnvString("CPA_POSTGRES_HOST", PostgresHost)
+	CPAPostgresHost = env.GetEnvString(
+		"CPA_POSTGRES_HOST",
+		PostgresHost,
+	)
 
 	// CPAPostgresPort contains CPA PostgreSQL port.
 	// Fallback: **POSTGRES_PORT**.
-	CPAPostgresPort = env.GetEnvInt("CPA_POSTGRES_PORT", PostgresPort)
+	CPAPostgresPort = env.GetEnvInt(
+		"CPA_POSTGRES_PORT",
+		PostgresPort,
+	)
 
 	// CPAPostgresUser contains CPA PostgreSQL user.
 	// Fallback: **POSTGRES_USER**.
-	CPAPostgresUser = env.GetEnvString("CPA_POSTGRES_USER", PostgresUser)
+	CPAPostgresUser = env.GetEnvString(
+		"CPA_POSTGRES_USER",
+		PostgresUser,
+	)
 
 	// CPAPostgresPassword contains CPA PostgreSQL password.
 	// Fallback: **POSTGRES_PASSWORD**.
@@ -60,11 +69,17 @@ var (
 
 	// CPACacheEnabled contains CPA cache state.
 	// Fallback: **SERVICES_CACHE_ENABLED**.
-	CPACacheEnabled = env.GetEnvBool("CPA_CACHE_ENABLED", ServicesCacheEnabled)
+	CPACacheEnabled = env.GetEnvBool(
+		"CPA_CACHE_ENABLED",
+		ServicesCacheEnabled,
+	)
 
 	// CPACacheSize contains CPA in-memory cache size.
 	// Fallback: **SERVICES_CACHE_SIZE**.
-	CPACacheSize = env.GetEnvInt("CPA_CACHE_SIZE", ServicesCacheSize)
+	CPACacheSize = env.GetEnvInt(
+		"CPA_CACHE_SIZE",
+		ServicesCacheSize,
+	)
 
 	// CPACacheTTLCheck contains CPA cache expiry check interval.
 	// Fallback: **SERVICES_CACHE_TTL_CHECK**.

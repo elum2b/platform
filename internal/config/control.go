@@ -16,7 +16,10 @@ var (
 
 	// ControlPostgresPort contains Control PostgreSQL port.
 	// Fallback: **POSTGRES_PORT**.
-	ControlPostgresPort = env.GetEnvInt("CONTROL_POSTGRES_PORT", PostgresPort)
+	ControlPostgresPort = env.GetEnvInt(
+		"CONTROL_POSTGRES_PORT",
+		PostgresPort,
+	)
 
 	// ControlPostgresUser contains Control PostgreSQL user.
 	// Fallback: **POSTGRES_USER**.
@@ -76,7 +79,10 @@ var (
 
 	// ControlCacheSize contains Control in-memory cache size.
 	// Fallback: **SERVICES_CACHE_SIZE**.
-	ControlCacheSize = env.GetEnvInt("CONTROL_CACHE_SIZE", ServicesCacheSize)
+	ControlCacheSize = env.GetEnvInt(
+		"CONTROL_CACHE_SIZE",
+		ServicesCacheSize,
+	)
 
 	// ControlCacheTTLCheck contains Control cache expiry check interval.
 	// Fallback: **SERVICES_CACHE_TTL_CHECK**.
@@ -108,7 +114,10 @@ var (
 
 	// ControlAuthCookieDomain contains the optional Control authentication cookie domain.
 	// Env: CONTROL_AUTH_COOKIE_DOMAIN.
-	ControlAuthCookieDomain = env.GetEnvString("CONTROL_AUTH_COOKIE_DOMAIN", "")
+	ControlAuthCookieDomain = env.GetEnvString(
+		"CONTROL_AUTH_COOKIE_DOMAIN",
+		"",
+	)
 
 	// ControlAuthCookieSameSite contains the Control authentication cookie SameSite policy.
 	// Env: CONTROL_AUTH_COOKIE_SAME_SITE.
@@ -140,7 +149,10 @@ var (
 
 	// ControlAuthVKClientID contains the VK ID OAuth client ID.
 	// Env: CONTROL_AUTH_VK_CLIENT_ID.
-	ControlAuthVKClientID = env.GetEnvString("CONTROL_AUTH_VK_CLIENT_ID", "")
+	ControlAuthVKClientID = env.GetEnvString(
+		"CONTROL_AUTH_VK_CLIENT_ID",
+		"",
+	)
 
 	// ControlAuthVKClientSecret contains the VK ID OAuth client secret.
 	// Env: CONTROL_AUTH_VK_CLIENT_SECRET.
@@ -151,7 +163,10 @@ var (
 
 	// ControlAuthVKTokenURL contains the optional VK ID OAuth token endpoint.
 	// Env: CONTROL_AUTH_VK_TOKEN_URL.
-	ControlAuthVKTokenURL = env.GetEnvString("CONTROL_AUTH_VK_TOKEN_URL", "")
+	ControlAuthVKTokenURL = env.GetEnvString(
+		"CONTROL_AUTH_VK_TOKEN_URL",
+		"",
+	)
 
 	// ControlAuthVKUserInfoURL contains the optional VK ID profile endpoint.
 	// Env: CONTROL_AUTH_VK_USER_INFO_URL.
@@ -295,11 +310,17 @@ var (
 
 	// ControlAuthTONDomain contains the expected TON Connect proof domain.
 	// Env: CONTROL_AUTH_TON_DOMAIN.
-	ControlAuthTONDomain = env.GetEnvString("CONTROL_AUTH_TON_DOMAIN", "")
+	ControlAuthTONDomain = env.GetEnvString(
+		"CONTROL_AUTH_TON_DOMAIN",
+		"",
+	)
 
 	// ControlAuthTONNetwork contains the optional expected TON network.
 	// Env: CONTROL_AUTH_TON_NETWORK.
-	ControlAuthTONNetwork = env.GetEnvString("CONTROL_AUTH_TON_NETWORK", "")
+	ControlAuthTONNetwork = env.GetEnvString(
+		"CONTROL_AUTH_TON_NETWORK",
+		"",
+	)
 
 	// ControlAuthTONAllowNativeDomain contains the TON native-domain allowance.
 	// Env: CONTROL_AUTH_TON_ALLOW_NATIVE_DOMAIN.

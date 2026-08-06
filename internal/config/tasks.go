@@ -6,15 +6,21 @@ var (
 
 	// TasksPostgresHost contains Tasks PostgreSQL host.
 	// Fallback: **POSTGRES_HOST**.
-	TasksPostgresHost = env.GetEnvString("TASKS_POSTGRES_HOST", PostgresHost)
+	TasksPostgresHost = env.GetEnvString(
+		"TASKS_POSTGRES_HOST", PostgresHost,
+	)
 
 	// TasksPostgresPort contains Tasks PostgreSQL port.
 	// Fallback: **POSTGRES_PORT**.
-	TasksPostgresPort = env.GetEnvInt("TASKS_POSTGRES_PORT", PostgresPort)
+	TasksPostgresPort = env.GetEnvInt(
+		"TASKS_POSTGRES_PORT", PostgresPort,
+	)
 
 	// TasksPostgresUser contains Tasks PostgreSQL user.
 	// Fallback: **POSTGRES_USER**.
-	TasksPostgresUser = env.GetEnvString("TASKS_POSTGRES_USER", PostgresUser)
+	TasksPostgresUser = env.GetEnvString(
+		"TASKS_POSTGRES_USER", PostgresUser,
+	)
 
 	// TasksPostgresPassword contains Tasks PostgreSQL password.
 	// Fallback: **POSTGRES_PASSWORD**.
@@ -67,7 +73,9 @@ var (
 
 	// TasksCacheSize contains Tasks in-memory cache size.
 	// Fallback: **SERVICES_CACHE_SIZE**.
-	TasksCacheSize = env.GetEnvInt("TASKS_CACHE_SIZE", ServicesCacheSize)
+	TasksCacheSize = env.GetEnvInt(
+		"TASKS_CACHE_SIZE", ServicesCacheSize,
+	)
 
 	// TasksCacheTTLCheck contains Tasks cache expiry check interval.
 	// Fallback: **SERVICES_CACHE_TTL_CHECK**.
@@ -85,7 +93,9 @@ var (
 
 	// TasksRuntimeEnabled contains Lua runtime state.
 	// Env: TASKS_RUNTIME_ENABLED.
-	TasksRuntimeEnabled = env.GetEnvBool("TASKS_RUNTIME_ENABLED", false)
+	TasksRuntimeEnabled = env.GetEnvBool(
+		"TASKS_RUNTIME_ENABLED", false,
+	)
 
 	// TasksRuntimeScriptCacheTTL contains Lua script cache lifetime.
 	// Env: TASKS_RUNTIME_SCRIPT_CACHE_TTL.
@@ -96,11 +106,15 @@ var (
 
 	// TasksRuntimeTimeout contains Lua execution timeout.
 	// Env: TASKS_RUNTIME_TIMEOUT.
-	TasksRuntimeTimeout = env.GetEnvDuration("TASKS_RUNTIME_TIMEOUT", 0)
+	TasksRuntimeTimeout = env.GetEnvDuration(
+		"TASKS_RUNTIME_TIMEOUT", 0,
+	)
 
 	// TasksRuntimeMaxMemory contains Lua runtime memory limit in bytes.
 	// Env: TASKS_RUNTIME_MAX_MEMORY.
-	TasksRuntimeMaxMemory = env.GetEnvInt("TASKS_RUNTIME_MAX_MEMORY", 0)
+	TasksRuntimeMaxMemory = env.GetEnvInt(
+		"TASKS_RUNTIME_MAX_MEMORY", 0,
+	)
 
 	// TasksRuntimeMaxHTTPRequests contains Lua HTTP request limit.
 	// Env: TASKS_RUNTIME_MAX_HTTP_REQUESTS.
@@ -112,7 +126,9 @@ var (
 	// TasksRuntimeMaxResponseBytes contains Lua HTTP response limit in bytes.
 	// Env: TASKS_RUNTIME_MAX_RESPONSE_BYTES.
 	TasksRuntimeMaxResponseBytes = int64(
-		env.GetEnvInt("TASKS_RUNTIME_MAX_RESPONSE_BYTES", 0),
+		env.GetEnvInt(
+			"TASKS_RUNTIME_MAX_RESPONSE_BYTES", 0,
+		),
 	)
 
 	// TasksRuntimeJSONBoundary contains Lua JSON boundary state.

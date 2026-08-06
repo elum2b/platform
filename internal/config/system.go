@@ -6,9 +6,15 @@ var (
 
 	// Host contains the server host.
 	// Env: HOST.
-	Host = env.GetEnvString("HOST", "0.0.0.0")
+	Host = env.GetEnvString(
+		"HOST",
+		"0.0.0.0",
+	)
 
 	// Port contains the server port.
 	// Env: PORT.
-	Port = env.GetEnvInt("PORT", 18300)
+	Port = env.GetEnvInt(
+		"PORT",
+		18300,
+	)
 )

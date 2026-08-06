@@ -13,7 +13,10 @@ var (
 
 	// PaymentPostgresPort contains Payment PostgreSQL port.
 	// Fallback: **POSTGRES_PORT**.
-	PaymentPostgresPort = env.GetEnvInt("PAYMENT_POSTGRES_PORT", PostgresPort)
+	PaymentPostgresPort = env.GetEnvInt(
+		"PAYMENT_POSTGRES_PORT", 
+		PostgresPort,
+	)
 
 	// PaymentPostgresUser contains Payment PostgreSQL user.
 	// Fallback: **POSTGRES_USER**.
@@ -73,7 +76,10 @@ var (
 
 	// PaymentCacheSize contains Payment in-memory cache size.
 	// Fallback: **SERVICES_CACHE_SIZE**.
-	PaymentCacheSize = env.GetEnvInt("PAYMENT_CACHE_SIZE", ServicesCacheSize)
+	PaymentCacheSize = env.GetEnvInt(
+		"PAYMENT_CACHE_SIZE", 
+		ServicesCacheSize,
+	)
 
 	// PaymentCacheTTLCheck contains Payment cache expiry check interval.
 	// Fallback: **SERVICES_CACHE_TTL_CHECK**.

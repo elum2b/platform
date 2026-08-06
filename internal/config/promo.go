@@ -6,15 +6,24 @@ var (
 
 	// PromoPostgresHost contains Promo PostgreSQL host.
 	// Fallback: **POSTGRES_HOST**.
-	PromoPostgresHost = env.GetEnvString("PROMO_POSTGRES_HOST", PostgresHost)
+	PromoPostgresHost = env.GetEnvString(
+		"PROMO_POSTGRES_HOST",
+		PostgresHost,
+	)
 
 	// PromoPostgresPort contains Promo PostgreSQL port.
 	// Fallback: **POSTGRES_PORT**.
-	PromoPostgresPort = env.GetEnvInt("PROMO_POSTGRES_PORT", PostgresPort)
+	PromoPostgresPort = env.GetEnvInt(
+		"PROMO_POSTGRES_PORT",
+		PostgresPort,
+	)
 
 	// PromoPostgresUser contains Promo PostgreSQL user.
 	// Fallback: **POSTGRES_USER**.
-	PromoPostgresUser = env.GetEnvString("PROMO_POSTGRES_USER", PostgresUser)
+	PromoPostgresUser = env.GetEnvString(
+		"PROMO_POSTGRES_USER",
+		PostgresUser,
+	)
 
 	// PromoPostgresPassword contains Promo PostgreSQL password.
 	// Fallback: **POSTGRES_PASSWORD**.
@@ -67,7 +76,10 @@ var (
 
 	// PromoCacheSize contains Promo in-memory cache size.
 	// Fallback: **SERVICES_CACHE_SIZE**.
-	PromoCacheSize = env.GetEnvInt("PROMO_CACHE_SIZE", ServicesCacheSize)
+	PromoCacheSize = env.GetEnvInt(
+		"PROMO_CACHE_SIZE",
+		ServicesCacheSize,
+	)
 
 	// PromoCacheTTLCheck contains Promo cache expiry check interval.
 	// Fallback: **SERVICES_CACHE_TTL_CHECK**.

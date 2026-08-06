@@ -73,7 +73,10 @@ var (
 
 	// CalendarCacheSize contains Calendar in-memory cache size.
 	// Fallback: **SERVICES_CACHE_SIZE**.
-	CalendarCacheSize = env.GetEnvInt("CALENDAR_CACHE_SIZE", ServicesCacheSize)
+	CalendarCacheSize = env.GetEnvInt(
+		"CALENDAR_CACHE_SIZE",
+		ServicesCacheSize,
+	)
 
 	// CalendarCacheTTLCheck contains Calendar cache expiry check interval.
 	// Fallback: **SERVICES_CACHE_TTL_CHECK**.
