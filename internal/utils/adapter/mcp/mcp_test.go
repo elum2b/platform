@@ -75,7 +75,10 @@ func TestToolsListIncludesAccessDiscovery(t *testing.T) {
 	request.Header.Set("Accept", "application/json, text/event-stream")
 	request.Header.Set("MCP-Protocol-Version", "2025-06-18")
 
-	response, err := app.Test(request, fiber.TestConfig{Timeout: 10 * time.Second})
+	response, err := app.Test(
+		request,
+		fiber.TestConfig{Timeout: 10 * time.Second},
+	)
 	if err != nil {
 		t.Fatalf("request tools/list: %v", err)
 	}
