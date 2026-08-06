@@ -7,7 +7,7 @@ require (
 	github.com/elum-utils/go-etp v0.0.6
 	github.com/elum-utils/go-etp/adapters/fiber v0.0.0-20260721051115-a66e506774e9
 	github.com/elum-utils/supervisor v0.0.2
-	github.com/elum2b/services v0.0.47
+	github.com/elum2b/services v0.0.48
 	github.com/go-playground/validator/v10 v10.30.1
 	github.com/google/jsonschema-go v0.4.2
 	github.com/modelcontextprotocol/go-sdk v1.4.0
