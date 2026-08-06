@@ -174,11 +174,6 @@ migrations/*.down.sql
 *.ipr
 *.iws
 
-# Deployment-specific files
-.dockerignore
-.docker/
-.docker-compose.override.yml
-
 # These files should be tracked by git
 !prod.env
 !deploy/.env
