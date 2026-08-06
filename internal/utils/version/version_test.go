@@ -69,6 +69,7 @@ func versionClient(
 		switch request.URL.Path {
 		case "/token":
 			requests.Add(1)
+
 			body = `{"token":"token"}`
 		case "/v2/elum2b/platform/manifests/latest":
 			body = `{"config":{"digest":"sha256:config"}}`
