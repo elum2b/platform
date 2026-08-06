@@ -12,18 +12,18 @@ import (
 
 type SaveRequest struct {
 	ID                  uint64          `json:"id,omitempty"`
-	WorkspaceID         string          `json:"workspace_id"                    validate:"required,uuid"`
-	Key                 string          `json:"key"                             validate:"required,max=255"`
-	GroupKey            string          `json:"group_key"                       validate:"required,max=255"`
+	WorkspaceID         string          `json:"workspace_id"                   validate:"required,uuid"`
+	Key                 string          `json:"key"                            validate:"required,max=255"`
+	GroupKey            string          `json:"group_key"                      validate:"required,max=255"`
 	SequenceKey         *string         `json:"sequence_key,omitempty"`
 	SequencePosition    *uint32         `json:"sequence_position,omitempty"`
-	TaskKind            string          `json:"task_kind"                       validate:"required"`
-	ActionKey           string          `json:"action_key"                      validate:"required"`
-	ActionKind          string          `json:"action_kind"                     validate:"required"`
-	ClaimMode           string          `json:"claim_mode"                      validate:"required"`
-	StartMode           string          `json:"start_mode"                      validate:"required"`
+	TaskKind            string          `json:"task_kind"                      validate:"required"`
+	ActionKey           string          `json:"action_key"                     validate:"required"`
+	ActionKind          string          `json:"action_kind"                    validate:"required"`
+	ClaimMode           string          `json:"claim_mode"                     validate:"required"`
+	StartMode           string          `json:"start_mode"                     validate:"required"`
 	TargetCount         uint64          `json:"target_count"`
-	ResetUnit           string          `json:"reset_unit"                      validate:"required"`
+	ResetUnit           string          `json:"reset_unit"                     validate:"required"`
 	ResetEvery          uint32          `json:"reset_every"`
 	Position            int32           `json:"position"`
 	Payload             json.RawMessage `json:"payload,omitempty"`

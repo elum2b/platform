@@ -8,10 +8,10 @@ import (
 )
 
 type UpdateStatusRequest struct {
-	WorkspaceID            string  `json:"workspace_id"              validate:"required,uuid"`
-	ProviderCode           string  `json:"provider_code"             validate:"required,max=255"`
-	ProviderSubscriptionID string  `json:"provider_subscription_id"  validate:"required,max=255"`
-	Status                 string  `json:"status"                    validate:"required"`
+	WorkspaceID            string  `json:"workspace_id"             validate:"required,uuid"`
+	ProviderCode           string  `json:"provider_code"            validate:"required,max=255"`
+	ProviderSubscriptionID string  `json:"provider_subscription_id" validate:"required,max=255"`
+	Status                 string  `json:"status"                   validate:"required"`
 	CancelReason           *string `json:"cancel_reason,omitempty"`
 	EndedAt                *int64  `json:"ended_at,omitempty"`
 }
@@ -43,6 +43,7 @@ var UpdateStatus = adapter.Method[UpdateStatusRequest, UpdateStatusResponse]{
 				CancelReason:           d.CancelReason,
 				EndedAt:                int64ToTime(d.EndedAt),
 			})
+
 		return UpdateStatusResponse{Affected: a}, err
 	},
 }

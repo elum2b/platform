@@ -8,11 +8,11 @@ import (
 )
 
 type GetRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	AppID       int64  `json:"app_id"       validate:"required,min=1"`
-	PlatformID  int64  `json:"platform_id"  validate:"required,min=1"`
-	Params      string `json:"params"       validate:"required"`
-	Ref         string `json:"ref"          validate:"required,max=255"`
+	WorkspaceID string `json:"workspace_id"     validate:"required,uuid"`
+	AppID       int64  `json:"app_id"           validate:"required,min=1"`
+	PlatformID  int64  `json:"platform_id"      validate:"required,min=1"`
+	Params      string `json:"params"           validate:"required"`
+	Ref         string `json:"ref"              validate:"required,max=255"`
 	Locale      string `json:"locale,omitempty"`
 }
 

@@ -10,16 +10,16 @@ import (
 )
 
 type UpsertRequest struct {
-	WorkspaceID         string     `json:"workspace_id"                   validate:"required,uuid"`
-	ID                  string     `json:"id"                             validate:"required,max=255"`
-	Type                string     `json:"type"                           validate:"required"`
-	Mode                string     `json:"mode"                           validate:"required"`
-	IntervalType        string     `json:"interval_type"                  validate:"required"`
-	IntervalUnit        string     `json:"interval_unit"                  validate:"required"`
+	WorkspaceID         string     `json:"workspace_id"          validate:"required,uuid"`
+	ID                  string     `json:"id"                    validate:"required,max=255"`
+	Type                string     `json:"type"                  validate:"required"`
+	Mode                string     `json:"mode"                  validate:"required"`
+	IntervalType        string     `json:"interval_type"         validate:"required"`
+	IntervalUnit        string     `json:"interval_unit"         validate:"required"`
 	IntervalCount       uint32     `json:"interval_count"`
 	ResetAfterIntervals uint32     `json:"reset_after_intervals"`
-	EndBehavior         string     `json:"end_behavior"                   validate:"required"`
-	Timezone            string     `json:"timezone"                       validate:"required"`
+	EndBehavior         string     `json:"end_behavior"          validate:"required"`
+	Timezone            string     `json:"timezone"              validate:"required"`
 	HideFutureRewards   bool       `json:"hide_future_rewards"`
 	IsActive            bool       `json:"is_active"`
 	StartAt             *time.Time `json:"start_at,omitempty"`

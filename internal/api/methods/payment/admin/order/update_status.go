@@ -30,6 +30,7 @@ var UpdateStatus = adapter.Method[UpdateStatusRequest, UpdateStatusResponse]{
 	Handler: func(ctx *adapter.Context, d UpdateStatusRequest) (UpdateStatusResponse, error) {
 		a, err := services.Payment.Admin.UpdateOrderStatus(
 			ctx.Context, d.WorkspaceID, d.ID, d.Status)
+
 		return UpdateStatusResponse{Affected: a}, err
 	},
 }

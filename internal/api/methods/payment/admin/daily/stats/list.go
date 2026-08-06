@@ -39,6 +39,7 @@ var List = adapter.Method[ListRequest, ListResponse]{
 		if err != nil {
 			return ListResponse{}, err
 		}
+
 		return ListResponse{Stats: v}, nil
 	},
 }

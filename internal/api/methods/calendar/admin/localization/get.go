@@ -32,6 +32,7 @@ var Get = adapter.Method[GetRequest, GetResponse]{
 	Handler: func(ctx *adapter.Context, d GetRequest) (GetResponse, error) {
 		v, err := services.Calendar.Admin.GetLocalization(
 			ctx.Context, d.WorkspaceID, d.CalendarID, d.Locale)
+
 		return GetResponse{Localization: v}, err
 	},
 }

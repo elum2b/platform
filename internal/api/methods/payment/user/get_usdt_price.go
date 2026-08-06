@@ -39,6 +39,7 @@ var GetUSDTPrice = adapter.Method[GetUSDTPriceRequest, GetUSDTPriceResponse]{
 		if err != nil {
 			return GetUSDTPriceResponse{}, err
 		}
+
 		return GetUSDTPriceResponse{Price: *v}, nil
 	},
 }

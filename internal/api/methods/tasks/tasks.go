@@ -22,7 +22,6 @@ import (
 
 // Register registers all Tasks API methods.
 func Register(registry adapter.Registry) {
-
 	admin := registry.Group(adapter.AccountRequired)
 
 	ttask.Save.Register(admin)
@@ -77,5 +76,4 @@ func Register(registry adapter.Registry) {
 	tuser.PartnerList.Register(user)
 	tuser.PartnerCheck.Register(user)
 	tuser.PartnerStart.Register(user)
-
 }

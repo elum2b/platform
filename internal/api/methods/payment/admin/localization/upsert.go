@@ -8,10 +8,10 @@ import (
 )
 
 type UpsertRequest struct {
-	WorkspaceID     string `json:"workspace_id"      validate:"required,uuid"`
-	Locale          string `json:"locale"            validate:"required,max=255"`
-	LocalizationKey string `json:"localization_key"  validate:"required,max=255"`
-	Value           string `json:"value"             validate:"required"`
+	WorkspaceID     string `json:"workspace_id"     validate:"required,uuid"`
+	Locale          string `json:"locale"           validate:"required,max=255"`
+	LocalizationKey string `json:"localization_key" validate:"required,max=255"`
+	Value           string `json:"value"            validate:"required"`
 }
 
 var (

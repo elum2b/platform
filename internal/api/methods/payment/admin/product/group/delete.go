@@ -29,6 +29,7 @@ var Delete = adapter.Method[DeleteRequest, DeleteResponse]{
 	Handler: func(ctx *adapter.Context, d DeleteRequest) (DeleteResponse, error) {
 		a, err := services.Payment.Admin.DeleteProductGroup(
 			ctx.Context, d.WorkspaceID, d.Code)
+
 		return DeleteResponse{Affected: a}, err
 	},
 }

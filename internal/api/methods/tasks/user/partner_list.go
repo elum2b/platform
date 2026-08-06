@@ -8,15 +8,15 @@ import (
 )
 
 type PartnerListRequest struct {
-	WorkspaceID string            `json:"workspace_id"     validate:"required,uuid"`
-	AppID       int64             `json:"app_id"           validate:"required,min=1"`
-	PlatformID  int64             `json:"platform_id"      validate:"required,min=1"`
-	Params      string            `json:"params"           validate:"required"`
-	Provider    string            `json:"provider"         validate:"required"`
-	GroupKey    string            `json:"group_key"        validate:"required,max=255"`
-	Platform    string            `json:"platform"         validate:"required"`
+	WorkspaceID string            `json:"workspace_id"        validate:"required,uuid"`
+	AppID       int64             `json:"app_id"              validate:"required,min=1"`
+	PlatformID  int64             `json:"platform_id"         validate:"required,min=1"`
+	Params      string            `json:"params"              validate:"required"`
+	Provider    string            `json:"provider"            validate:"required"`
+	GroupKey    string            `json:"group_key"           validate:"required,max=255"`
+	Platform    string            `json:"platform"            validate:"required"`
 	Locale      string            `json:"locale,omitempty"`
-	Limit       int32             `json:"limit,omitempty"  validate:"omitempty,min=1,max=100"`
+	Limit       int32             `json:"limit,omitempty"     validate:"omitempty,min=1,max=100"`
 	Variables   map[string]string `json:"variables,omitempty"`
 }
 

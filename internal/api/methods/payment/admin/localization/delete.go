@@ -30,6 +30,7 @@ var Delete = adapter.Method[DeleteRequest, DeleteResponse]{
 	Handler: func(ctx *adapter.Context, d DeleteRequest) (DeleteResponse, error) {
 		a, err := services.Payment.Admin.DeleteLocalization(
 			ctx.Context, d.WorkspaceID, d.Locale, d.Key)
+
 		return DeleteResponse{Affected: a}, err
 	},
 }

@@ -8,10 +8,10 @@ import (
 )
 
 type AttachProductItemRequest struct {
-	WorkspaceID  string  `json:"workspace_id"   validate:"required,uuid"`
-	ProductID    string  `json:"product_id"     validate:"required,max=255"`
-	ItemID       string  `json:"item_id"        validate:"required,max=255"`
-	RewardType   string  `json:"reward_type"    validate:"required"`
+	WorkspaceID  string  `json:"workspace_id"            validate:"required,uuid"`
+	ProductID    string  `json:"product_id"              validate:"required,max=255"`
+	ItemID       string  `json:"item_id"                 validate:"required,max=255"`
+	RewardType   string  `json:"reward_type"             validate:"required"`
 	Quantity     int64   `json:"quantity"`
 	Scale        uint16  `json:"scale"`
 	DurationUnit *string `json:"duration_unit,omitempty"`
@@ -28,7 +28,9 @@ var AttachProductItem = adapter.Method[AttachProductItemRequest, struct{}]{
 	Key:         attachProductItemKey,
 	Description: attachProductItemDescription,
 	Transports:  adapter.WS | adapter.MCP,
-	Middleware:  []adapter.Middleware{adapter.WorkspaceAccess(attachProductItemKey)},
+	Middleware: []adapter.Middleware{
+		adapter.WorkspaceAccess(attachProductItemKey),
+	},
 	Handler: func(ctx *adapter.Context, d AttachProductItemRequest) (struct{}, error) {
 		return struct{}{}, services.Payment.Admin.AttachProductItem(
 			ctx.Context,

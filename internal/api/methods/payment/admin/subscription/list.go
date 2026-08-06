@@ -45,11 +45,15 @@ var List = adapter.Method[ListRequest, ListResponse]{
 				ProductID:      d.ProductID,
 				ProviderCode:   d.ProviderCode,
 				Status:         d.Status,
-				Page:           padm.PageParams{Limit: d.Limit, Offset: d.Offset},
+				Page: padm.PageParams{
+					Limit:  d.Limit,
+					Offset: d.Offset,
+				},
 			})
 		if err != nil {
 			return ListResponse{}, err
 		}
+
 		return ListResponse{Subscriptions: v}, nil
 	},
 }

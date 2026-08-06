@@ -31,6 +31,7 @@ var Get = adapter.Method[GetRequest, GetResponse]{
 	Handler: func(ctx *adapter.Context, d GetRequest) (GetResponse, error) {
 		v, err := services.Payment.Admin.GetPrice(
 			ctx.Context, d.WorkspaceID, d.ID)
+
 		return GetResponse{Price: v}, err
 	},
 }

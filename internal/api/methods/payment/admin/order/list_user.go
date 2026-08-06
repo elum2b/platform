@@ -2,7 +2,6 @@ package order
 
 import (
 	elum2b "github.com/elum2b/services"
-
 	padm "github.com/elum2b/services/payment/service/admin"
 
 	"github.com/elum2b/platform/internal/services"
@@ -50,6 +49,7 @@ var ListUser = adapter.Method[ListUserRequest, ListUserResponse]{
 		if err != nil {
 			return ListUserResponse{}, err
 		}
+
 		return ListUserResponse{Orders: v}, nil
 	},
 }

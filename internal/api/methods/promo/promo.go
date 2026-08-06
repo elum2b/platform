@@ -15,7 +15,6 @@ import (
 
 // Register registers all Promo API methods.
 func Register(registry adapter.Registry) {
-
 	admin := registry.Group(adapter.AccountRequired)
 
 	promopromo.Upsert.Register(admin)
@@ -48,5 +47,4 @@ func Register(registry adapter.Registry) {
 	user := registry.Group(adapter.ApplicationUser)
 
 	promoapply.Method.Register(user)
-
 }

@@ -41,6 +41,7 @@ var Upsert = adapter.Method[UpsertRequest, UpsertResponse]{
 				SourceKey:    d.SourceKey,
 				CursorValue:  d.CursorValue,
 			})
+
 		return UpsertResponse{Affected: a}, err
 	},
 }

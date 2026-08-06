@@ -31,6 +31,7 @@ var Get = adapter.Method[GetRequest, GetResponse]{
 	Handler: func(ctx *adapter.Context, d GetRequest) (GetResponse, error) {
 		v, err := services.Payment.Admin.GetProductGroup(
 			ctx.Context, d.WorkspaceID, d.Code)
+
 		return GetResponse{Group: v}, err
 	},
 }

@@ -30,7 +30,6 @@ import (
 
 // Register registers all Control API methods.
 func Register(registry adapter.Registry) {
-
 	controlauth.Check.Register(registry)
 	controlauth.VKID.Register(registry)
 	controlauth.Telegram.Register(registry)
@@ -104,5 +103,4 @@ func Register(registry adapter.Registry) {
 	globallimit.List.Register(account)
 	globallimit.Resolve.Register(account)
 	globalaudit.List.Register(account)
-
 }

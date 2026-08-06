@@ -10,11 +10,11 @@ import (
 )
 
 type PartnerStartRequest struct {
-	WorkspaceID string            `json:"workspace_id"     validate:"required,uuid"`
-	AppID       int64             `json:"app_id"           validate:"required,min=1"`
-	PlatformID  int64             `json:"platform_id"      validate:"required,min=1"`
-	Params      string            `json:"params"           validate:"required"`
-	IssueRef    string            `json:"issue_ref"        validate:"required"`
+	WorkspaceID string            `json:"workspace_id"        validate:"required,uuid"`
+	AppID       int64             `json:"app_id"              validate:"required,min=1"`
+	PlatformID  int64             `json:"platform_id"         validate:"required,min=1"`
+	Params      string            `json:"params"              validate:"required"`
+	IssueRef    string            `json:"issue_ref"           validate:"required"`
 	Variables   map[string]string `json:"variables,omitempty"`
 	Now         time.Time         `json:"now,omitempty"`
 }

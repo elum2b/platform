@@ -27,7 +27,9 @@ var SaveProductGroup = adapter.Method[SaveProductGroupRequest, struct{}]{
 	Key:         saveProductGroupKey,
 	Description: saveProductGroupDescription,
 	Transports:  adapter.WS | adapter.MCP,
-	Middleware:  []adapter.Middleware{adapter.WorkspaceAccess(saveProductGroupKey)},
+	Middleware: []adapter.Middleware{
+		adapter.WorkspaceAccess(saveProductGroupKey),
+	},
 	Handler: func(ctx *adapter.Context, d SaveProductGroupRequest) (struct{}, error) {
 		return struct{}{}, services.Payment.Admin.SaveProductGroup(
 			ctx.Context,

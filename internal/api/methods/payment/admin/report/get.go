@@ -10,7 +10,7 @@ import (
 )
 
 type GetRequest struct {
-	WorkspaceID    string `json:"workspace_id"     validate:"required,uuid"`
+	WorkspaceID    string `json:"workspace_id"               validate:"required,uuid"`
 	AppID          int64  `json:"app_id,omitempty"`
 	PlatformID     int64  `json:"platform_id,omitempty"`
 	PlatformUserID string `json:"platform_user_id,omitempty"`
@@ -24,8 +24,8 @@ type GetRequest struct {
 	MaxAmountMinor uint64 `json:"max_amount_minor,omitempty"`
 	Sort           string `json:"sort,omitempty"`
 	Direction      string `json:"direction,omitempty"`
-	Limit          int32  `json:"limit,omitempty"      validate:"omitempty,min=1,max=100"`
-	Offset         int32  `json:"offset,omitempty"     validate:"min=0"`
+	Limit          int32  `json:"limit,omitempty"            validate:"omitempty,min=1,max=100"`
+	Offset         int32  `json:"offset,omitempty"           validate:"min=0"`
 }
 
 type GetResponse struct {
@@ -62,8 +62,12 @@ var Get = adapter.Method[GetRequest, GetResponse]{
 				MaxAmountMinor: d.MaxAmountMinor,
 				Sort:           padm.PaymentSortField(d.Sort),
 				Direction:      padm.SortDirection(d.Direction),
-				Page:           padm.PageParams{Limit: d.Limit, Offset: d.Offset},
+				Page: padm.PageParams{
+					Limit:  d.Limit,
+					Offset: d.Offset,
+				},
 			})
+
 		return GetResponse{Report: v}, err
 	},
 }
@@ -72,6 +76,8 @@ func int64ToTimePtr(ts *int64) *time.Time {
 	if ts == nil {
 		return nil
 	}
+
 	t := time.Unix(*ts, 0)
+
 	return &t
 }

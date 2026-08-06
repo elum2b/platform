@@ -35,11 +35,15 @@ var List = adapter.Method[ListRequest, ListResponse]{
 			padm.FulfillmentItemListParams{
 				WorkspaceID:   d.WorkspaceID,
 				FulfillmentID: d.FulfillmentID,
-				Page:          padm.PageParams{Limit: d.Limit, Offset: d.Offset},
+				Page: padm.PageParams{
+					Limit:  d.Limit,
+					Offset: d.Offset,
+				},
 			})
 		if err != nil {
 			return ListResponse{}, err
 		}
+
 		return ListResponse{Items: v}, nil
 	},
 }

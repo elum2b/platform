@@ -8,11 +8,11 @@ import (
 )
 
 type ListRequest struct {
-	WorkspaceID      string `json:"workspace_id"           validate:"required,uuid"`
+	WorkspaceID      string `json:"workspace_id"                validate:"required,uuid"`
 	ProviderCode     string `json:"provider_code,omitempty"`
 	ProcessingStatus string `json:"processing_status,omitempty"`
-	Limit            int32  `json:"limit,omitempty"        validate:"omitempty,min=1,max=100"`
-	Offset           int32  `json:"offset,omitempty"       validate:"min=0"`
+	Limit            int32  `json:"limit,omitempty"             validate:"omitempty,min=1,max=100"`
+	Offset           int32  `json:"offset,omitempty"            validate:"min=0"`
 }
 
 type ListResponse struct {
@@ -37,11 +37,15 @@ var List = adapter.Method[ListRequest, ListResponse]{
 				WorkspaceID:      d.WorkspaceID,
 				ProviderCode:     d.ProviderCode,
 				ProcessingStatus: d.ProcessingStatus,
-				Page:             padm.PageParams{Limit: d.Limit, Offset: d.Offset},
+				Page: padm.PageParams{
+					Limit:  d.Limit,
+					Offset: d.Offset,
+				},
 			})
 		if err != nil {
 			return ListResponse{}, err
 		}
+
 		return ListResponse{Events: v}, nil
 	},
 }

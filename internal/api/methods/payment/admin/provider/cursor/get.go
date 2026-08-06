@@ -33,6 +33,7 @@ var Get = adapter.Method[GetRequest, GetResponse]{
 	Handler: func(ctx *adapter.Context, d GetRequest) (GetResponse, error) {
 		v, err := services.Payment.Admin.GetProviderCursor(
 			ctx.Context, d.WorkspaceID, d.ProviderCode, d.Network, d.SourceKey)
+
 		return GetResponse{Cursor: v}, err
 	},
 }

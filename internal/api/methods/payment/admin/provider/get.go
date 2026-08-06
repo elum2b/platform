@@ -30,6 +30,7 @@ var Get = adapter.Method[GetRequest, GetResponse]{
 	Handler: func(ctx *adapter.Context, d GetRequest) (GetResponse, error) {
 		v, err := services.Payment.Admin.GetProvider(
 			ctx.Context, d.Code)
+
 		return GetResponse{Provider: v}, err
 	},
 }

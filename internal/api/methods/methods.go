@@ -13,7 +13,6 @@ import (
 
 // Register registers all platform API methods.
 func Register(registry adapter.Registry) {
-
 	control.Register(registry)
 	cpa.Register(registry)
 	promo.Register(registry)
@@ -21,5 +20,4 @@ func Register(registry adapter.Registry) {
 	calendar.Register(registry)
 	reference.Register(registry)
 	tasks.Register(registry)
-
 }

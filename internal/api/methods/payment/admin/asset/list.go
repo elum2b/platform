@@ -28,6 +28,7 @@ var List = adapter.Method[struct{}, ListResponse]{
 		if err != nil {
 			return ListResponse{}, err
 		}
+
 		return ListResponse{Assets: v}, nil
 	},
 }

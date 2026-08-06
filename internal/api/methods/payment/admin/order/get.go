@@ -35,6 +35,7 @@ var Get = adapter.Method[GetRequest, GetResponse]{
 				WorkspaceID: d.WorkspaceID,
 				ID:          d.ID,
 			})
+
 		return GetResponse{Order: v}, err
 	},
 }

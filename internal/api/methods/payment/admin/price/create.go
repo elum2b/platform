@@ -10,10 +10,10 @@ import (
 )
 
 type CreateRequest struct {
-	WorkspaceID         string     `json:"workspace_id"           validate:"required,uuid"`
-	ProductID           string     `json:"product_id"             validate:"required,max=255"`
-	AssetCode           string     `json:"asset_code"             validate:"required,max=255"`
-	ListAmountMinor     uint64     `json:"list_amount_minor"      validate:"required,min=0"`
+	WorkspaceID         string     `json:"workspace_id"                    validate:"required,uuid"`
+	ProductID           string     `json:"product_id"                      validate:"required,max=255"`
+	AssetCode           string     `json:"asset_code"                      validate:"required,max=255"`
+	ListAmountMinor     uint64     `json:"list_amount_minor"               validate:"required,min=0"`
 	DiscountAmountMinor uint64     `json:"discount_amount_minor,omitempty"`
 	IsPromotion         bool       `json:"is_promotion"`
 	StartsAt            *time.Time `json:"starts_at,omitempty"`
@@ -49,6 +49,7 @@ var Create = adapter.Method[CreateRequest, CreateResponse]{
 				StartsAt:            d.StartsAt,
 				EndsAt:              d.EndsAt,
 			})
+
 		return CreateResponse{ID: id}, err
 	},
 }

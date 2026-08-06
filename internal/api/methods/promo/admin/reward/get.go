@@ -32,6 +32,7 @@ var Get = adapter.Method[GetRequest, GetResponse]{
 	Handler: func(ctx *adapter.Context, d GetRequest) (GetResponse, error) {
 		v, err := services.Promo.Admin.GetReward(
 			ctx.Context, d.WorkspaceID, d.PromoID, d.Key)
+
 		return GetResponse{Reward: v}, err
 	},
 }

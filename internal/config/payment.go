@@ -14,7 +14,7 @@ var (
 	// PaymentPostgresPort contains Payment PostgreSQL port.
 	// Fallback: **POSTGRES_PORT**.
 	PaymentPostgresPort = env.GetEnvInt(
-		"PAYMENT_POSTGRES_PORT", 
+		"PAYMENT_POSTGRES_PORT",
 		PostgresPort,
 	)
 
@@ -77,7 +77,7 @@ var (
 	// PaymentCacheSize contains Payment in-memory cache size.
 	// Fallback: **SERVICES_CACHE_SIZE**.
 	PaymentCacheSize = env.GetEnvInt(
-		"PAYMENT_CACHE_SIZE", 
+		"PAYMENT_CACHE_SIZE",
 		ServicesCacheSize,
 	)
 

@@ -12,7 +12,6 @@ import (
 
 // Register registers all Reference API methods.
 func Register(registry adapter.Registry) {
-
 	admin := registry.Group(adapter.AccountRequired)
 
 	refitem.Create.Register(admin)
@@ -36,5 +35,4 @@ func Register(registry adapter.Registry) {
 	refuser.Get.Register(user)
 	refuser.Resolve.Register(user)
 	refuser.List.Register(user)
-
 }

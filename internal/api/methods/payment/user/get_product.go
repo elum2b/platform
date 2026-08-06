@@ -8,11 +8,11 @@ import (
 )
 
 type GetProductRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	AppID       int64  `json:"app_id"       validate:"required,min=1"`
-	PlatformID  int64  `json:"platform_id"  validate:"required,min=1"`
-	Params      string `json:"params"       validate:"required"`
-	ProductID   string `json:"product_id"   validate:"required,max=255"`
+	WorkspaceID string `json:"workspace_id"         validate:"required,uuid"`
+	AppID       int64  `json:"app_id"               validate:"required,min=1"`
+	PlatformID  int64  `json:"platform_id"          validate:"required,min=1"`
+	Params      string `json:"params"               validate:"required"`
+	ProductID   string `json:"product_id"           validate:"required,max=255"`
 	AssetCode   string `json:"asset_code,omitempty"`
 	Locale      string `json:"locale,omitempty"`
 }
@@ -44,6 +44,7 @@ var GetProduct = adapter.Method[GetProductRequest, GetProductResponse]{
 		if err != nil {
 			return GetProductResponse{}, err
 		}
+
 		return GetProductResponse{Product: *v}, nil
 	},
 }

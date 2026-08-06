@@ -41,11 +41,15 @@ var List = adapter.Method[ListRequest, ListResponse]{
 				ProductID:      d.ProductID,
 				PlatformID:     d.PlatformID,
 				PlatformUserID: d.PlatformUserID,
-				Page:           padm.PageParams{Limit: d.Limit, Offset: d.Offset},
+				Page: padm.PageParams{
+					Limit:  d.Limit,
+					Offset: d.Offset,
+				},
 			})
 		if err != nil {
 			return ListResponse{}, err
 		}
+
 		return ListResponse{Counters: v}, nil
 	},
 }

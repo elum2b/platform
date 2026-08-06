@@ -30,10 +30,19 @@ var GetByExternalID = adapter.Method[GetByExternalIDRequest, GetByExternalIDResp
 	Key:         getByExternalIDKey,
 	Description: getByExternalIDDescription,
 	Transports:  adapter.WS | adapter.MCP,
-	Middleware:  []adapter.Middleware{adapter.WorkspaceAccess(getByExternalIDKey)},
+	Middleware: []adapter.Middleware{
+		adapter.WorkspaceAccess(getByExternalIDKey),
+	},
 	Handler: func(ctx *adapter.Context, d GetByExternalIDRequest) (GetByExternalIDResponse, error) {
 		v, err := services.Payment.Admin.GetProviderTransactionByExternalID(
-			ctx.Context, d.WorkspaceID, d.ProviderCode, d.Network, d.SourceKey, d.ExternalTransactionID)
+			ctx.Context,
+			d.WorkspaceID,
+			d.ProviderCode,
+			d.Network,
+			d.SourceKey,
+			d.ExternalTransactionID,
+		)
+
 		return GetByExternalIDResponse{Transaction: v}, err
 	},
 }

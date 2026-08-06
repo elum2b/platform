@@ -16,7 +16,6 @@ import (
 
 // Register registers all Calendar API methods.
 func Register(registry adapter.Registry) {
-
 	admin := registry.Group(adapter.AccountRequired)
 
 	calcalendar.Upsert.Register(admin)
@@ -56,5 +55,4 @@ func Register(registry adapter.Registry) {
 	caluser.GetProgress.Register(user)
 	caluser.Next.Register(user)
 	caluser.Record.Register(user)
-
 }

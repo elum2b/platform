@@ -38,6 +38,7 @@ var Overview = adapter.Method[OverviewRequest, OverviewResponse]{
 		if err != nil {
 			return OverviewResponse{}, err
 		}
+
 		return OverviewResponse{Overview: v}, nil
 	},
 }

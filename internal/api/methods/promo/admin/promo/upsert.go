@@ -11,10 +11,10 @@ import (
 )
 
 type UpsertRequest struct {
-	WorkspaceID    string          `json:"workspace_id"              validate:"required,uuid"`
+	WorkspaceID    string          `json:"workspace_id"       validate:"required,uuid"`
 	ID             uint64          `json:"id,omitempty"`
-	Code           string          `json:"code"                      validate:"required"`
-	Payload        json.RawMessage `json:"payload"                   validate:"required"`
+	Code           string          `json:"code"               validate:"required"`
+	Payload        json.RawMessage `json:"payload"            validate:"required"`
 	Target         json.RawMessage `json:"target,omitempty"`
 	MaxActivations uint64          `json:"max_activations"`
 	IsActive       bool            `json:"is_active"`

@@ -31,7 +31,9 @@ var ExecuteRefund = adapter.Method[ExecuteRefundRequest, ExecuteRefundResponse]{
 	Key:         executeRefundKey,
 	Description: executeRefundDescription,
 	Transports:  adapter.WS | adapter.MCP,
-	Middleware:  []adapter.Middleware{adapter.WorkspaceAccess(executeRefundKey)},
+	Middleware: []adapter.Middleware{
+		adapter.WorkspaceAccess(executeRefundKey),
+	},
 	Handler: func(ctx *adapter.Context, d ExecuteRefundRequest) (ExecuteRefundResponse, error) {
 		v, err := services.Payment.Admin.ExecuteRefund(
 			ctx.Context,
@@ -46,6 +48,7 @@ var ExecuteRefund = adapter.Method[ExecuteRefundRequest, ExecuteRefundResponse]{
 		if err != nil {
 			return ExecuteRefundResponse{}, err
 		}
+
 		return ExecuteRefundResponse{Refund: *v}, nil
 	},
 }

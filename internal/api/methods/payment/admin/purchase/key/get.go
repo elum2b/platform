@@ -31,6 +31,7 @@ var Get = adapter.Method[GetRequest, GetResponse]{
 	Handler: func(ctx *adapter.Context, d GetRequest) (GetResponse, error) {
 		v, err := services.Payment.Admin.GetPurchaseKey(
 			ctx.Context, d.WorkspaceID, d.ID)
+
 		return GetResponse{Key: v}, err
 	},
 }

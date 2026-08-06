@@ -10,10 +10,10 @@ import (
 )
 
 type ListActiveRequest struct {
-	WorkspaceID string    `json:"workspace_id"     validate:"required,uuid"`
-	AppID       int64     `json:"app_id"           validate:"required,min=1"`
-	PlatformID  int64     `json:"platform_id"      validate:"required,min=1"`
-	Params      string    `json:"params"           validate:"required"`
+	WorkspaceID string    `json:"workspace_id"        validate:"required,uuid"`
+	AppID       int64     `json:"app_id"              validate:"required,min=1"`
+	PlatformID  int64     `json:"platform_id"         validate:"required,min=1"`
+	Params      string    `json:"params"              validate:"required"`
 	Locale      string    `json:"locale,omitempty"`
 	GroupKey    string    `json:"group_key,omitempty"`
 	Now         time.Time `json:"now,omitempty"`

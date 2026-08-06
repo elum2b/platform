@@ -28,6 +28,7 @@ var Delete = adapter.Method[DeleteRequest, DeleteResponse]{
 	Handler: func(ctx *adapter.Context, d DeleteRequest) (DeleteResponse, error) {
 		a, err := services.Payment.Admin.DeleteTONWallet(
 			ctx.Context, d.WorkspaceID)
+
 		return DeleteResponse{Affected: a}, err
 	},
 }

@@ -8,9 +8,9 @@ import (
 )
 
 type UpdateStatusRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	ID          uint64 `json:"id"           validate:"required,min=1"`
-	Status      string `json:"status"       validate:"required"`
+	WorkspaceID string `json:"workspace_id"      validate:"required,uuid"`
+	ID          uint64 `json:"id"                validate:"required,min=1"`
+	Status      string `json:"status"            validate:"required"`
 	Message     string `json:"message,omitempty"`
 }
 
@@ -39,6 +39,7 @@ var UpdateStatus = adapter.Method[UpdateStatusRequest, UpdateStatusResponse]{
 				Status:      d.Status,
 				Message:     d.Message,
 			})
+
 		return UpdateStatusResponse{Affected: a}, err
 	},
 }

@@ -10,8 +10,8 @@ import (
 type ListRequest struct {
 	AssetCode          string `json:"asset_code,omitempty"`
 	ReferenceAssetCode string `json:"reference_asset_code,omitempty"`
-	Limit              int32  `json:"limit,omitempty"            validate:"omitempty,min=1,max=100"`
-	Offset             int32  `json:"offset,omitempty"           validate:"min=0"`
+	Limit              int32  `json:"limit,omitempty"                validate:"omitempty,min=1,max=100"`
+	Offset             int32  `json:"offset,omitempty"               validate:"min=0"`
 }
 
 type ListResponse struct {
@@ -35,11 +35,15 @@ var List = adapter.Method[ListRequest, ListResponse]{
 			padm.AssetRateListParams{
 				AssetCode:          d.AssetCode,
 				ReferenceAssetCode: d.ReferenceAssetCode,
-				Page:               padm.PageParams{Limit: d.Limit, Offset: d.Offset},
+				Page: padm.PageParams{
+					Limit:  d.Limit,
+					Offset: d.Offset,
+				},
 			})
 		if err != nil {
 			return ListResponse{}, err
 		}
+
 		return ListResponse{Rates: v}, nil
 	},
 }

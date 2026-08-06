@@ -27,7 +27,9 @@ var GetByPublicID = adapter.Method[GetByPublicIDRequest, GetByPublicIDResponse]{
 	Key:         getByPublicIDKey,
 	Description: getByPublicIDDescription,
 	Transports:  adapter.WS | adapter.MCP,
-	Middleware:  []adapter.Middleware{adapter.WorkspaceAccess(getByPublicIDKey)},
+	Middleware: []adapter.Middleware{
+		adapter.WorkspaceAccess(getByPublicIDKey),
+	},
 	Handler: func(ctx *adapter.Context, d GetByPublicIDRequest) (GetByPublicIDResponse, error) {
 		v, err := services.Payment.Admin.GetOrderByPublicID(
 			ctx.Context,
@@ -35,6 +37,7 @@ var GetByPublicID = adapter.Method[GetByPublicIDRequest, GetByPublicIDResponse]{
 				WorkspaceID: d.WorkspaceID,
 				PublicID:    d.PublicID,
 			})
+
 		return GetByPublicIDResponse{Order: v}, err
 	},
 }

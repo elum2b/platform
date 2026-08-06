@@ -8,11 +8,11 @@ import (
 )
 
 type GetProductByKeyRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	AppID       int64  `json:"app_id"       validate:"required,min=1"`
-	PlatformID  int64  `json:"platform_id"  validate:"required,min=1"`
-	Params      string `json:"params"       validate:"required"`
-	Key         string `json:"key"          validate:"required,max=255"`
+	WorkspaceID string `json:"workspace_id"         validate:"required,uuid"`
+	AppID       int64  `json:"app_id"               validate:"required,min=1"`
+	PlatformID  int64  `json:"platform_id"          validate:"required,min=1"`
+	Params      string `json:"params"               validate:"required"`
+	Key         string `json:"key"                  validate:"required,max=255"`
 	AssetCode   string `json:"asset_code,omitempty"`
 	Locale      string `json:"locale,omitempty"`
 }
@@ -43,6 +43,7 @@ var GetProductByKey = adapter.Method[GetProductByKeyRequest, GetProductByKeyResp
 		if err != nil {
 			return GetProductByKeyResponse{}, err
 		}
+
 		return GetProductByKeyResponse{Product: *v}, nil
 	},
 }

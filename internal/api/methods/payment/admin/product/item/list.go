@@ -8,11 +8,11 @@ import (
 )
 
 type ListRequest struct {
-	WorkspaceID string `json:"workspace_id"     validate:"required,uuid"`
-	ProductID   string `json:"product_id"       validate:"required,max=255"`
+	WorkspaceID string `json:"workspace_id"      validate:"required,uuid"`
+	ProductID   string `json:"product_id"        validate:"required,max=255"`
 	ItemID      string `json:"item_id,omitempty"`
-	Limit       int32  `json:"limit,omitempty"  validate:"omitempty,min=1,max=100"`
-	Offset      int32  `json:"offset,omitempty" validate:"min=0"`
+	Limit       int32  `json:"limit,omitempty"   validate:"omitempty,min=1,max=100"`
+	Offset      int32  `json:"offset,omitempty"  validate:"min=0"`
 }
 
 type ListResponse struct {
@@ -42,6 +42,7 @@ var List = adapter.Method[ListRequest, ListResponse]{
 		if err != nil {
 			return ListResponse{}, err
 		}
+
 		return ListResponse{Items: v}, nil
 	},
 }

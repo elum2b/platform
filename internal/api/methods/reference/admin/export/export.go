@@ -10,7 +10,7 @@ import (
 )
 
 type Request struct {
-	WorkspaceID    string    `json:"workspace_id"              validate:"required,uuid"`
+	WorkspaceID    string    `json:"workspace_id"               validate:"required,uuid"`
 	Now            time.Time `json:"now,omitempty"`
 	OnlyNotDeleted bool      `json:"only_not_deleted,omitempty"`
 }

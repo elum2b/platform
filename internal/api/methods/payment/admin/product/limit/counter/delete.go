@@ -10,14 +10,14 @@ import (
 )
 
 type DeleteRequest struct {
-	WorkspaceID    string `json:"workspace_id"     validate:"required,uuid"`
-	AppID          int64  `json:"app_id"           validate:"required,min=1"`
-	PlatformID     int64  `json:"platform_id"      validate:"required,min=1"`
-	ProductID      string `json:"product_id"       validate:"required,max=255"`
-	CounterScope   string `json:"counter_scope"    validate:"required,oneof=global user"`
+	WorkspaceID    string `json:"workspace_id"               validate:"required,uuid"`
+	AppID          int64  `json:"app_id"                     validate:"required,min=1"`
+	PlatformID     int64  `json:"platform_id"                validate:"required,min=1"`
+	ProductID      string `json:"product_id"                 validate:"required,max=255"`
+	CounterScope   string `json:"counter_scope"              validate:"required,oneof=global user"`
 	PlatformUserID string `json:"platform_user_id,omitempty"`
-	WindowStart    int64  `json:"window_start"     validate:"required,min=0"`
-	WindowEnd      int64  `json:"window_end"       validate:"required,min=0"`
+	WindowStart    int64  `json:"window_start"               validate:"required,min=0"`
+	WindowEnd      int64  `json:"window_end"                 validate:"required,min=0"`
 }
 
 type DeleteResponse struct {
@@ -49,6 +49,7 @@ var Delete = adapter.Method[DeleteRequest, DeleteResponse]{
 				WindowStart:    time.Unix(d.WindowStart, 0),
 				WindowEnd:      time.Unix(d.WindowEnd, 0),
 			})
+
 		return DeleteResponse{Affected: a}, err
 	},
 }

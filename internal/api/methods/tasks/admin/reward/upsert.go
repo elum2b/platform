@@ -8,14 +8,14 @@ import (
 )
 
 type UpsertRequest struct {
-	WorkspaceID string  `json:"workspace_id" validate:"required,uuid"`
-	TaskID      uint64  `json:"task_id"      validate:"required,min=1"`
-	Key         string  `json:"key"          validate:"required,max=255"`
-	Type        string  `json:"type"         validate:"required,max=255"`
+	WorkspaceID string  `json:"workspace_id"   validate:"required,uuid"`
+	TaskID      uint64  `json:"task_id"        validate:"required,min=1"`
+	Key         string  `json:"key"            validate:"required,max=255"`
+	Type        string  `json:"type"           validate:"required,max=255"`
 	Quantity    int64   `json:"quantity"`
 	Scale       uint16  `json:"scale"`
 	Unit        *string `json:"unit,omitempty"`
-	Position    int32   `json:"position"     validate:"required,min=1"`
+	Position    int32   `json:"position"       validate:"required,min=1"`
 }
 
 var (

@@ -8,15 +8,15 @@ import (
 )
 
 type CreateRequest struct {
-	WorkspaceID string  `json:"workspace_id" validate:"required,uuid"`
-	CalendarID  string  `json:"calendar_id"  validate:"required,max=255"`
-	StepID      uint64  `json:"step_id"      validate:"required,min=1"`
-	Key         string  `json:"key"          validate:"required,max=255"`
-	Type        string  `json:"type"         validate:"required,max=255"`
+	WorkspaceID string  `json:"workspace_id"   validate:"required,uuid"`
+	CalendarID  string  `json:"calendar_id"    validate:"required,max=255"`
+	StepID      uint64  `json:"step_id"        validate:"required,min=1"`
+	Key         string  `json:"key"            validate:"required,max=255"`
+	Type        string  `json:"type"           validate:"required,max=255"`
 	Quantity    int64   `json:"quantity"`
 	Scale       uint16  `json:"scale"`
 	Unit        *string `json:"unit,omitempty"`
-	Position    uint32  `json:"position"     validate:"required,min=1"`
+	Position    uint32  `json:"position"       validate:"required,min=1"`
 }
 
 type CreateResponse struct {

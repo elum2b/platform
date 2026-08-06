@@ -8,9 +8,9 @@ import (
 )
 
 type GetRequest struct {
-	WorkspaceID string `json:"workspace_id"     validate:"required,uuid"`
-	Locale      string `json:"locale"           validate:"required,max=255"`
-	Key         string `json:"key"              validate:"required,max=255"`
+	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
+	Locale      string `json:"locale"       validate:"required,max=255"`
+	Key         string `json:"key"          validate:"required,max=255"`
 }
 
 type GetResponse struct {
@@ -32,6 +32,7 @@ var Get = adapter.Method[GetRequest, GetResponse]{
 	Handler: func(ctx *adapter.Context, d GetRequest) (GetResponse, error) {
 		v, err := services.Payment.Admin.GetLocalization(
 			ctx.Context, d.WorkspaceID, d.Locale, d.Key)
+
 		return GetResponse{Localization: v}, err
 	},
 }

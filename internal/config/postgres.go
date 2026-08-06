@@ -38,5 +38,4 @@ var (
 		"POSTGRES_DATABASE",
 		"",
 	)
-	
 )

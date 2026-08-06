@@ -10,12 +10,12 @@ import (
 )
 
 type CreateAttemptRequest struct {
-	WorkspaceID            string     `json:"workspace_id"               validate:"required,uuid"`
-	AppID                  int64      `json:"app_id"                     validate:"required,min=1"`
-	PlatformID             int64      `json:"platform_id"                validate:"required,min=1"`
-	Params                 string     `json:"params"                     validate:"required"`
-	OrderID                uint64     `json:"order_id"                   validate:"required,min=1"`
-	ProviderCode           string     `json:"provider_code"              validate:"required,max=255"`
+	WorkspaceID            string     `json:"workspace_id"                       validate:"required,uuid"`
+	AppID                  int64      `json:"app_id"                             validate:"required,min=1"`
+	PlatformID             int64      `json:"platform_id"                        validate:"required,min=1"`
+	Params                 string     `json:"params"                             validate:"required"`
+	OrderID                uint64     `json:"order_id"                           validate:"required,min=1"`
+	ProviderCode           string     `json:"provider_code"                      validate:"required,max=255"`
 	ProviderPaymentID      *string    `json:"provider_payment_id,omitempty"`
 	ProviderInvoiceID      *string    `json:"provider_invoice_id,omitempty"`
 	ProviderChargeID       *string    `json:"provider_charge_id,omitempty"`
@@ -60,6 +60,7 @@ var CreateAttempt = adapter.Method[CreateAttemptRequest, CreateAttemptResponse]{
 		if err != nil {
 			return CreateAttemptResponse{}, err
 		}
+
 		return CreateAttemptResponse{Attempt: *v}, nil
 	},
 }

@@ -8,16 +8,16 @@ import (
 )
 
 type SaveRequest struct {
-	WorkspaceID  string  `json:"workspace_id"  validate:"required,uuid"`
-	Provider     string  `json:"provider"      validate:"required"`
-	GroupKey     string  `json:"group_key"     validate:"required,max=255"`
-	ExternalType string  `json:"external_type" validate:"required"`
-	Key          string  `json:"key"           validate:"required,max=255"`
-	Type         string  `json:"type"          validate:"required,max=255"`
+	WorkspaceID  string  `json:"workspace_id"   validate:"required,uuid"`
+	Provider     string  `json:"provider"       validate:"required"`
+	GroupKey     string  `json:"group_key"      validate:"required,max=255"`
+	ExternalType string  `json:"external_type"  validate:"required"`
+	Key          string  `json:"key"            validate:"required,max=255"`
+	Type         string  `json:"type"           validate:"required,max=255"`
 	Quantity     int64   `json:"quantity"`
 	Scale        uint16  `json:"scale"`
 	Unit         *string `json:"unit,omitempty"`
-	Position     int32   `json:"position"      validate:"required,min=1"`
+	Position     int32   `json:"position"       validate:"required,min=1"`
 	IsEnabled    bool    `json:"is_enabled"`
 }
 

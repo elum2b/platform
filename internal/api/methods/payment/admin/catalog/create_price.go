@@ -10,10 +10,10 @@ import (
 )
 
 type CreateCatalogPriceRequest struct {
-	WorkspaceID         string     `json:"workspace_id"            validate:"required,uuid"`
-	ProductID           string     `json:"product_id"              validate:"required,max=255"`
-	AssetCode           string     `json:"asset_code"              validate:"required,max=255"`
-	ListAmountMinor     uint64     `json:"list_amount_minor"       validate:"required,min=0"`
+	WorkspaceID         string     `json:"workspace_id"                    validate:"required,uuid"`
+	ProductID           string     `json:"product_id"                      validate:"required,max=255"`
+	AssetCode           string     `json:"asset_code"                      validate:"required,max=255"`
+	ListAmountMinor     uint64     `json:"list_amount_minor"               validate:"required,min=0"`
 	DiscountAmountMinor uint64     `json:"discount_amount_minor,omitempty"`
 	StartsAt            *time.Time `json:"starts_at,omitempty"`
 	EndsAt              *time.Time `json:"ends_at,omitempty"`
@@ -47,6 +47,7 @@ var CreatePrice = adapter.Method[CreateCatalogPriceRequest, CreateCatalogPriceRe
 				StartsAt:            d.StartsAt,
 				EndsAt:              d.EndsAt,
 			})
+
 		return CreateCatalogPriceResponse{ID: id}, err
 	},
 }

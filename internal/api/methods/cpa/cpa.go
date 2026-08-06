@@ -19,7 +19,6 @@ import (
 
 // Register registers all CPA API methods.
 func Register(registry adapter.Registry) {
-
 	admin := registry.Group(adapter.AccountRequired)
 
 	cpaoffer.Upsert.Register(admin)
@@ -59,5 +58,4 @@ func Register(registry adapter.Registry) {
 	useroffer.List.Register(user)
 	usercode.Get.Register(user)
 	userstatus.Get.Register(user)
-
 }

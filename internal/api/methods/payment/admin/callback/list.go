@@ -10,12 +10,12 @@ import (
 )
 
 type ListRequest struct {
-	WorkspaceID   string `json:"workspace_id"           validate:"required,uuid"`
+	WorkspaceID   string `json:"workspace_id"             validate:"required,uuid"`
 	SourceService string `json:"source_service,omitempty"`
 	EventType     string `json:"event_type,omitempty"`
 	Status        string `json:"status,omitempty"`
-	Limit         int32  `json:"limit,omitempty"        validate:"omitempty,min=1,max=100"`
-	Offset        int32  `json:"offset,omitempty"       validate:"min=0"`
+	Limit         int32  `json:"limit,omitempty"          validate:"omitempty,min=1,max=100"`
+	Offset        int32  `json:"offset,omitempty"         validate:"min=0"`
 }
 
 type ListEvent struct {
@@ -64,7 +64,10 @@ var List = adapter.Method[ListRequest, ListResponse]{
 				SourceService: data.SourceService,
 				EventType:     data.EventType,
 				Status:        data.Status,
-				Page:          padm.PageParams{Limit: data.Limit, Offset: data.Offset},
+				Page: padm.PageParams{
+					Limit:  data.Limit,
+					Offset: data.Offset,
+				},
 			},
 		)
 		if err != nil {

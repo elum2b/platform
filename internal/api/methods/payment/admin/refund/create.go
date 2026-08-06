@@ -8,13 +8,13 @@ import (
 )
 
 type CreateRequest struct {
-	WorkspaceID      string  `json:"workspace_id"         validate:"required,uuid"`
-	OrderID          uint64  `json:"order_id"             validate:"required,min=1"`
-	AttemptID        uint64  `json:"attempt_id"           validate:"required,min=1"`
-	ProviderCode     string  `json:"provider_code"        validate:"required,max=255"`
+	WorkspaceID      string  `json:"workspace_id"                 validate:"required,uuid"`
+	OrderID          uint64  `json:"order_id"                     validate:"required,min=1"`
+	AttemptID        uint64  `json:"attempt_id"                   validate:"required,min=1"`
+	ProviderCode     string  `json:"provider_code"                validate:"required,max=255"`
 	ProviderRefundID *string `json:"provider_refund_id,omitempty"`
-	AmountMinor      uint64  `json:"amount_minor"         validate:"required,min=0"`
-	AssetCode        string  `json:"asset_code"           validate:"required,max=255"`
+	AmountMinor      uint64  `json:"amount_minor"                 validate:"required,min=0"`
+	AssetCode        string  `json:"asset_code"                   validate:"required,max=255"`
 	Status           string  `json:"status,omitempty"`
 	Reason           *string `json:"reason,omitempty"`
 }
@@ -49,6 +49,7 @@ var Create = adapter.Method[CreateRequest, CreateResponse]{
 				Status:           d.Status,
 				Reason:           d.Reason,
 			})
+
 		return CreateResponse{ID: id}, err
 	},
 }

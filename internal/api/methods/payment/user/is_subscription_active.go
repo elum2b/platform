@@ -8,12 +8,12 @@ import (
 )
 
 type IsSubscriptionActiveRequest struct {
-	WorkspaceID  string `json:"workspace_id"   validate:"required,uuid"`
-	AppID        int64  `json:"app_id"         validate:"required,min=1"`
-	PlatformID   int64  `json:"platform_id"    validate:"required,min=1"`
-	Params       string `json:"params"         validate:"required"`
-	ProductID    string `json:"product_id"     validate:"required,max=255"`
-	ProviderCode string `json:"provider_code"  validate:"required,max=255"`
+	WorkspaceID  string `json:"workspace_id"  validate:"required,uuid"`
+	AppID        int64  `json:"app_id"        validate:"required,min=1"`
+	PlatformID   int64  `json:"platform_id"   validate:"required,min=1"`
+	Params       string `json:"params"        validate:"required"`
+	ProductID    string `json:"product_id"    validate:"required,max=255"`
+	ProviderCode string `json:"provider_code" validate:"required,max=255"`
 }
 
 type IsSubscriptionActiveResponse struct {
@@ -39,6 +39,7 @@ var IsSubscriptionActive = adapter.Method[IsSubscriptionActiveRequest, IsSubscri
 				ProviderCode: d.ProviderCode,
 			},
 		)
+
 		return IsSubscriptionActiveResponse{Active: active}, err
 	},
 }

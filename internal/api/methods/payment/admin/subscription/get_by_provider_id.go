@@ -8,8 +8,8 @@ import (
 )
 
 type GetByProviderIDRequest struct {
-	WorkspaceID            string `json:"workspace_id"            validate:"required,uuid"`
-	ProviderCode           string `json:"provider_code"           validate:"required,max=255"`
+	WorkspaceID            string `json:"workspace_id"             validate:"required,uuid"`
+	ProviderCode           string `json:"provider_code"            validate:"required,max=255"`
 	ProviderSubscriptionID string `json:"provider_subscription_id" validate:"required,max=255"`
 }
 
@@ -28,7 +28,9 @@ var GetByProviderID = adapter.Method[GetByProviderIDRequest, GetByProviderIDResp
 	Key:         getByProviderIDKey,
 	Description: getByProviderIDDescription,
 	Transports:  adapter.WS | adapter.MCP,
-	Middleware:  []adapter.Middleware{adapter.WorkspaceAccess(getByProviderIDKey)},
+	Middleware: []adapter.Middleware{
+		adapter.WorkspaceAccess(getByProviderIDKey),
+	},
 	Handler: func(ctx *adapter.Context, d GetByProviderIDRequest) (GetByProviderIDResponse, error) {
 		v, err := services.Payment.Admin.GetSubscriptionByProviderID(
 			ctx.Context,
@@ -37,6 +39,7 @@ var GetByProviderID = adapter.Method[GetByProviderIDRequest, GetByProviderIDResp
 				ProviderCode:           d.ProviderCode,
 				ProviderSubscriptionID: d.ProviderSubscriptionID,
 			})
+
 		return GetByProviderIDResponse{Subscription: v}, err
 	},
 }

@@ -11,18 +11,18 @@ import (
 )
 
 type SaveProductRequest struct {
-	WorkspaceID          string     `json:"workspace_id"              validate:"required,uuid"`
+	WorkspaceID          string     `json:"workspace_id"                     validate:"required,uuid"`
 	ID                   string     `json:"id,omitempty"`
 	GroupCode            *string    `json:"group_code,omitempty"`
-	TitleKey             string     `json:"title_key"                 validate:"required,max=255"`
+	TitleKey             string     `json:"title_key"                        validate:"required,max=255"`
 	DescriptionKey       *string    `json:"description_key,omitempty"`
-	Target               string     `json:"target"                    validate:"required"`
+	Target               string     `json:"target"                           validate:"required"`
 	ImageURL             *string    `json:"image_url,omitempty"`
 	LinkURL              *string    `json:"link_url,omitempty"`
 	SizeLabel            *string    `json:"size_label,omitempty"`
 	PeriodSeconds        *int64     `json:"period_seconds,omitempty"`
 	TrialDurationSeconds *int64     `json:"trial_duration_seconds,omitempty"`
-	QuantityMode         string     `json:"quantity_mode"             validate:"required"`
+	QuantityMode         string     `json:"quantity_mode"                    validate:"required"`
 	Position             int32      `json:"position"`
 	GlobalLimit          int32      `json:"global_limit"`
 	GlobalInterval       string     `json:"global_interval"`

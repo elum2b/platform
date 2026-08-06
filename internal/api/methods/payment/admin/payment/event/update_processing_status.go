@@ -8,9 +8,9 @@ import (
 )
 
 type UpdateProcessingStatusRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	ID          uint64 `json:"id"           validate:"required,min=1"`
-	Status      string `json:"status"       validate:"required"`
+	WorkspaceID string `json:"workspace_id"      validate:"required,uuid"`
+	ID          uint64 `json:"id"                validate:"required,min=1"`
+	Status      string `json:"status"            validate:"required"`
 	Message     string `json:"message,omitempty"`
 }
 
@@ -25,7 +25,9 @@ var UpdateProcessingStatus = adapter.Method[UpdateProcessingStatusRequest, struc
 	Key:         updateProcessingStatusKey,
 	Description: updateProcessingStatusDescription,
 	Transports:  adapter.WS | adapter.MCP,
-	Middleware:  []adapter.Middleware{adapter.WorkspaceAccess(updateProcessingStatusKey)},
+	Middleware: []adapter.Middleware{
+		adapter.WorkspaceAccess(updateProcessingStatusKey),
+	},
 	Handler: func(ctx *adapter.Context, d UpdateProcessingStatusRequest) (struct{}, error) {
 		return struct{}{}, services.Payment.Admin.UpdatePaymentEventProcessingStatus(
 			ctx.Context,
@@ -34,6 +36,7 @@ var UpdateProcessingStatus = adapter.Method[UpdateProcessingStatusRequest, struc
 				ID:          d.ID,
 				Status:      d.Status,
 				Message:     d.Message,
-			})
+			},
+		)
 	},
 }

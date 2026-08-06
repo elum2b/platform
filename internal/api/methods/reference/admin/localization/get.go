@@ -32,6 +32,7 @@ var Get = adapter.Method[GetRequest, GetResponse]{
 	Handler: func(ctx *adapter.Context, d GetRequest) (GetResponse, error) {
 		v, err := services.Reference.Admin.GetLocalization(
 			ctx.Context, d.WorkspaceID, d.ItemKey, d.Locale)
+
 		return GetResponse{Localization: v}, err
 	},
 }

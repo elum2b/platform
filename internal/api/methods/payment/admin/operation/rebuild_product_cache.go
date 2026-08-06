@@ -20,7 +20,9 @@ var RebuildProductCache = adapter.Method[RebuildProductCacheRequest, struct{}]{
 	Key:         rebuildProductCacheKey,
 	Description: rebuildProductCacheDescription,
 	Transports:  adapter.WS | adapter.MCP,
-	Middleware:  []adapter.Middleware{adapter.WorkspaceAccess(rebuildProductCacheKey)},
+	Middleware: []adapter.Middleware{
+		adapter.WorkspaceAccess(rebuildProductCacheKey),
+	},
 	Handler: func(ctx *adapter.Context, d RebuildProductCacheRequest) (struct{}, error) {
 		return struct{}{}, services.Payment.Admin.RebuildProductCache(
 			ctx.Context, d.WorkspaceID)

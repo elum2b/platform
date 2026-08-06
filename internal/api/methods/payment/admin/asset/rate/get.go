@@ -31,6 +31,7 @@ var Get = adapter.Method[GetRequest, GetResponse]{
 	Handler: func(ctx *adapter.Context, d GetRequest) (GetResponse, error) {
 		v, err := services.Payment.Admin.GetAssetRate(
 			ctx.Context, d.AssetCode, d.ReferenceAssetCode)
+
 		return GetResponse{Rate: v}, err
 	},
 }

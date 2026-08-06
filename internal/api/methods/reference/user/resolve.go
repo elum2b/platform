@@ -8,11 +8,11 @@ import (
 )
 
 type ResolveRequest struct {
-	WorkspaceID string   `json:"workspace_id" validate:"required,uuid"`
-	AppID       int64    `json:"app_id"       validate:"required,min=1"`
-	PlatformID  int64    `json:"platform_id"  validate:"required,min=1"`
-	Params      string   `json:"params"       validate:"required"`
-	Keys        []string `json:"keys"         validate:"required,min=1,max=1000"`
+	WorkspaceID string   `json:"workspace_id"     validate:"required,uuid"`
+	AppID       int64    `json:"app_id"           validate:"required,min=1"`
+	PlatformID  int64    `json:"platform_id"      validate:"required,min=1"`
+	Params      string   `json:"params"           validate:"required"`
+	Keys        []string `json:"keys"             validate:"required,min=1,max=1000"`
 	Locale      string   `json:"locale,omitempty"`
 }
 

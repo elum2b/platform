@@ -10,10 +10,10 @@ import (
 )
 
 type SaveRequest struct {
-	WorkspaceID   string          `json:"workspace_id"        validate:"required,uuid"`
-	Provider      string          `json:"provider"            validate:"required"`
-	GroupKey      string          `json:"group_key"           validate:"required,max=255"`
-	Platform      string          `json:"platform"            validate:"required"`
+	WorkspaceID   string          `json:"workspace_id"             validate:"required,uuid"`
+	Provider      string          `json:"provider"                 validate:"required"`
+	GroupKey      string          `json:"group_key"                validate:"required,max=255"`
+	Platform      string          `json:"platform"                 validate:"required"`
 	IsEnabled     bool            `json:"is_enabled"`
 	Secret        *string         `json:"secret,omitempty"`
 	WebhookSecret *string         `json:"webhook_secret,omitempty"`

@@ -35,7 +35,6 @@ import (
 
 // Register registers all Payment API methods.
 func Register(registry adapter.Registry) {
-
 	admin := registry.Group(adapter.AccountRequired)
 
 	payproductgroup.Upsert.Register(admin)
@@ -140,5 +139,4 @@ func Register(registry adapter.Registry) {
 	payuser.CreateOrderByKey.Register(user)
 	payuser.CreateAttempt.Register(user)
 	payuser.IsSubscriptionActive.Register(user)
-
 }

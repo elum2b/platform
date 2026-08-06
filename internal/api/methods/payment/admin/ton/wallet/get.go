@@ -30,6 +30,7 @@ var Get = adapter.Method[GetRequest, GetResponse]{
 	Handler: func(ctx *adapter.Context, d GetRequest) (GetResponse, error) {
 		v, err := services.Payment.Admin.GetTONWallet(
 			ctx.Context, d.WorkspaceID)
+
 		return GetResponse{Wallet: v}, err
 	},
 }

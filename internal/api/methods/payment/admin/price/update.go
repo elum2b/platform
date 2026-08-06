@@ -10,8 +10,8 @@ import (
 )
 
 type UpdateRequest struct {
-	ID                  uint64     `json:"id"                        validate:"required,min=1"`
-	WorkspaceID         string     `json:"workspace_id"              validate:"required,uuid"`
+	ID                  uint64     `json:"id"                              validate:"required,min=1"`
+	WorkspaceID         string     `json:"workspace_id"                    validate:"required,uuid"`
 	AssetCode           string     `json:"asset_code,omitempty"`
 	ListAmountMinor     uint64     `json:"list_amount_minor,omitempty"`
 	DiscountAmountMinor uint64     `json:"discount_amount_minor,omitempty"`
@@ -49,6 +49,7 @@ var Update = adapter.Method[UpdateRequest, UpdateResponse]{
 				StartsAt:            d.StartsAt,
 				EndsAt:              d.EndsAt,
 			})
+
 		return UpdateResponse{Affected: a}, err
 	},
 }
