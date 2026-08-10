@@ -3,20 +3,20 @@ module github.com/elum2b/platform
 go 1.26.5
 
 require (
+	github.com/andybalholm/brotli v1.2.2
 	github.com/elum-utils/env v1.0.2
 	github.com/elum-utils/go-etp v0.0.6
 	github.com/elum-utils/go-etp/adapters/fiber v0.0.0-20260721051115-a66e506774e9
 	github.com/elum-utils/supervisor v0.0.2
-	github.com/elum2b/services v0.0.48
+	github.com/elum2b/services v0.0.49
+	github.com/gabriel-vasile/mimetype v1.4.12
 	github.com/go-playground/validator/v10 v10.30.1
 	github.com/google/jsonschema-go v0.4.2
 	github.com/modelcontextprotocol/go-sdk v1.4.0
 )
 
 require (
-	github.com/andybalholm/brotli v1.2.2 // indirect
 	github.com/fasthttp/websocket v1.5.8 // indirect
-	github.com/gabriel-vasile/mimetype v1.4.12 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/gofiber/schema v1.8.0 // indirect

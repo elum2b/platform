@@ -15,6 +15,8 @@ import (
 	httputils "github.com/elum2b/platform/internal/utils/adapter/http"
 	mcputils "github.com/elum2b/platform/internal/utils/adapter/mcp"
 	socketutils "github.com/elum2b/platform/internal/utils/adapter/socket"
+	staticutils "github.com/elum2b/platform/internal/utils/static"
+	"github.com/elum2b/platform/static"
 )
 
 func Service() func(ctx context.Context) error {
@@ -30,6 +32,17 @@ func Service() func(ctx context.Context) error {
 		// Recover from panics inside HTTP handlers
 		// and prevent the whole service from crashing.
 		app.Use(recover.New())
+
+		// Load the dashboard bundle into memory and serve it at a fixed path.
+		// Every file is embedded into the executable and pre-compressed at startup.
+		dashboard, err := staticutils.New(static.Files)
+		if err != nil {
+			return fmt.Errorf("initialize static files: %w", err)
+		}
+
+		if err := dashboard.Register(app, "/dashboard"); err != nil {
+			return fmt.Errorf("register static files: %w", err)
+		}
 
 		// Register WebSocket methods.
 		socketutils.Init(app, func(router etp.Router) {

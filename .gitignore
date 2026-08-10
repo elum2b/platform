@@ -127,7 +127,6 @@ vendor/
 /doc/
 /docs/api/
 /swagger/
-/dashboard/
 /app/
 
 # Auto-generated protocol files
