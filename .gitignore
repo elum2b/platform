@@ -192,5 +192,6 @@ migrations/*.down.sql
 !LICENSE
 !CHANGELOG.md
 !CONTRIBUTING.md
+!static/files/*.html
 
 platform
