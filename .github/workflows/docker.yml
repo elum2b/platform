@@ -58,6 +58,12 @@ jobs:
       - name: Build application
         run: go build ./...
 
+      - name: Generate API schema
+        run: go generate ./schema
+
+      - name: Check API schema
+        run: git diff --exit-code -- schema/schema.json
+
       - name: Check git diff
         run: git diff --check
 
@@ -113,6 +119,48 @@ jobs:
             echo "$tags"
             echo EOF
           } >> "$GITHUB_OUTPUT"
+
+      - name: Resolve dashboard release
+        id: dashboard
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          prerelease="${{ github.event.release.prerelease || contains(inputs.tag, '-') }}"
+          if [ "$prerelease" = "true" ]; then
+            version="$(gh api "repos/elum2b/dashboard/releases?per_page=100" --jq '[.[] | select(.prerelease and (.draft | not))][0].tag_name')"
+          else
+            version="$(gh api repos/elum2b/dashboard/releases/latest --jq '.tag_name')"
+          fi
+
+          if [ -z "$version" ]; then
+            echo "The dashboard repository has no matching release." >&2
+            exit 1
+          fi
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Check out dashboard
+        uses: actions/checkout@v4
+        with:
+          repository: elum2b/dashboard
+          ref: ${{ steps.dashboard.outputs.version }}
+          path: dashboard
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: dashboard/package-lock.json
+
+      - name: Build dashboard
+        working-directory: dashboard
+        run: npm ci && npm run build
+
+      - name: Embed dashboard
+        run: |
+          rm -rf static/files
+          mkdir static/files
+          cp -R dashboard/dist/. static/files/
 
       - name: Build and push image
         uses: docker/build-push-action@v6

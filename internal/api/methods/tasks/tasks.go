@@ -65,7 +65,6 @@ func Register(registry adapter.Registry) {
 	tstatsdaily.Refresh.Register(admin)
 	texport.Manifest.Register(admin)
 	texport.Method.Register(admin)
-	timport.Preview.Register(admin)
 	timport.Method.Register(admin)
 
 	user := registry.Group(adapter.ApplicationUser)

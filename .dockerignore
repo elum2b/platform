@@ -13,6 +13,7 @@ tmp/
 dist/
 bin/
 coverage.out
+dashboard/
 
 README.md
 LICENSE

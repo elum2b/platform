@@ -2,6 +2,7 @@ package adapter
 
 import (
 	"context"
+	"reflect"
 
 	etp "github.com/elum-utils/go-etp"
 	serviceerrors "github.com/elum2b/services/errors"
@@ -15,9 +16,25 @@ import (
 
 // Registry contains the API transports available while registering methods.
 type Registry struct {
-	HTTP   fiber.Router
-	Socket etp.Router
-	MCP    mcputils.Router
+	HTTP    fiber.Router
+	Socket  etp.Router
+	MCP     mcputils.Router
+	Catalog Catalog
+}
+
+// Catalog receives method type information while methods are registered.
+type Catalog interface {
+	Add(MethodInfo)
+}
+
+// MethodInfo contains the type information for one API method.
+type MethodInfo struct {
+	Key         string
+	Description string
+	Transports  Transport
+	HTTPMethod  string
+	Input       reflect.Type
+	Output      reflect.Type
 }
 
 // Registrar can register methods through a registry or middleware group.
@@ -67,6 +84,16 @@ func (method Method[In, Out]) Register(registrar Registrar) {
 	registry, middleware := registrar.registration()
 
 	method.Middleware = append(middleware, method.Middleware...)
+	if registry.Catalog != nil {
+		registry.Catalog.Add(MethodInfo{
+			Key:         method.Key,
+			Description: method.Description,
+			Transports:  method.Transports,
+			HTTPMethod:  method.Method,
+			Input:       reflect.TypeFor[In](),
+			Output:      reflect.TypeFor[Out](),
+		})
+	}
 
 	if method.Transports&HTTP != 0 && registry.HTTP != nil {
 		method.registerHTTP(registry.HTTP)

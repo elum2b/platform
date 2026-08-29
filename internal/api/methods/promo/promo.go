@@ -30,7 +30,6 @@ func Register(registry adapter.Registry) {
 	promoreward.List.Register(admin)
 	promoreward.Delete.Register(admin)
 	promoexport.Method.Register(admin)
-	promoimport.Preview.Register(admin)
 	promoimport.Method.Register(admin)
 	promostats.Get.Register(admin)
 	promostats.DailyList.Register(admin)

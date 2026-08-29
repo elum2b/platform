@@ -1,0 +1,152 @@
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    restart: unless-stopped
+    command:
+      - "--global.sendAnonymousUsage=false"
+      - "--api.dashboard=true"
+      - "--api.insecure=false"
+
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entryPoints.web.http.redirections.entrypoint.permanent=true"
+
+      - "--entryPoints.websecure.address=:443"
+      - "--entryPoints.websecure.http.tls=true"
+      - "--entryPoints.websecure.http.tls.certResolver=letsencrypt"
+
+      - "--entryPoints.traefik.address=:8080"
+
+      - "--certificatesResolvers.letsencrypt.acme.email=${TRAEFIK_ACME_EMAIL:-admin@example.com}"
+      - "--certificatesResolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesResolvers.letsencrypt.acme.httpChallenge.entryPoint=web"
+
+      - "--providers.docker=true"
+      - "--providers.docker.exposedByDefault=false"
+      - "--providers.docker.network=traefik"
+
+      - "--log.level=${TRAEFIK_LOG_LEVEL:-INFO}"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "${TRAEFIK_DASHBOARD_PORT:-8080}:8080"
+    networks:
+      - traefik
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik_data:/letsencrypt
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`${TRAEFIK_DASHBOARD_HOST:-traefik.localhost}`)"
+      - "traefik.http.routers.dashboard.service=api@internal"
+      - "traefik.http.routers.dashboard.entrypoints=traefik"
+      - "traefik.http.routers.dashboard.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=${TRAEFIK_DASHBOARD_AUTH:-admin:$$2y$$10$$w1k0YOPmv8QlK1HqXMBGp.DXt1GqQyVn1oMhQbKIEiQVFZSFhVXFu}"
+
+  postgres:
+    image: postgres:18-alpine
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-platform}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-platform}
+      POSTGRES_DB: ${POSTGRES_DATABASE:-platform}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-platform} -d ${POSTGRES_DATABASE:-platform}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  platform:
+    build:
+      context: .
+      args:
+        VERSION: ${PLATFORM_VERSION:-dev}
+    image: ghcr.io/elum2b/platform:latest
+    container_name: platform
+    restart: unless-stopped
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "18300"
+
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: ${POSTGRES_USER:-platform}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-platform}
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE:-platform}
+
+      CONTROL_POSTGRES_HOST: postgres
+      CONTROL_POSTGRES_PORT: "5432"
+      CONTROL_POSTGRES_USER: ${POSTGRES_USER:-platform}
+      CONTROL_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-platform}
+      CONTROL_POSTGRES_DATABASE: ${POSTGRES_DATABASE:-platform}
+      CONTROL_SECRET_ENCRYPTION_KEY: ${CONTROL_SECRET_ENCRYPTION_KEY:-}
+      CONTROL_AUTH_COOKIE_DOMAIN: ${PLATFORM_DOMAIN:-}
+
+      PAYMENT_POSTGRES_HOST: postgres
+      PAYMENT_POSTGRES_PORT: "5432"
+      PAYMENT_POSTGRES_USER: ${POSTGRES_USER:-platform}
+      PAYMENT_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-platform}
+      PAYMENT_POSTGRES_DATABASE: ${POSTGRES_DATABASE:-platform}
+
+      CALENDAR_POSTGRES_HOST: postgres
+      CALENDAR_POSTGRES_PORT: "5432"
+      CALENDAR_POSTGRES_USER: ${POSTGRES_USER:-platform}
+      CALENDAR_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-platform}
+      CALENDAR_POSTGRES_DATABASE: ${POSTGRES_DATABASE:-platform}
+
+      CPA_POSTGRES_HOST: postgres
+      CPA_POSTGRES_PORT: "5432"
+      CPA_POSTGRES_USER: ${POSTGRES_USER:-platform}
+      CPA_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-platform}
+      CPA_POSTGRES_DATABASE: ${POSTGRES_DATABASE:-platform}
+
+      PROMO_POSTGRES_HOST: postgres
+      PROMO_POSTGRES_PORT: "5432"
+      PROMO_POSTGRES_USER: ${POSTGRES_USER:-platform}
+      PROMO_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-platform}
+      PROMO_POSTGRES_DATABASE: ${POSTGRES_DATABASE:-platform}
+
+      REFERENCE_POSTGRES_HOST: postgres
+      REFERENCE_POSTGRES_PORT: "5432"
+      REFERENCE_POSTGRES_USER: ${POSTGRES_USER:-platform}
+      REFERENCE_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-platform}
+      REFERENCE_POSTGRES_DATABASE: ${POSTGRES_DATABASE:-platform}
+
+      TASKS_POSTGRES_HOST: postgres
+      TASKS_POSTGRES_PORT: "5432"
+      TASKS_POSTGRES_USER: ${POSTGRES_USER:-platform}
+      TASKS_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-platform}
+      TASKS_POSTGRES_DATABASE: ${POSTGRES_DATABASE:-platform}
+    networks:
+      - traefik
+      - internal
+    depends_on:
+      postgres:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+
+      - "traefik.http.routers.platform.rule=Host(`${PLATFORM_DOMAIN:-platform.localhost}`)"
+      - "traefik.http.routers.platform.entrypoints=websecure"
+      - "traefik.http.routers.platform.tls.certResolver=letsencrypt"
+
+      - "traefik.http.services.platform.loadbalancer.server.port=18300"
+
+networks:
+  traefik:
+    name: traefik
+  internal:
+    name: internal
+
+volumes:
+  postgres_data:
+    name: postgres_data
+  traefik_data:
+    name: traefik_data

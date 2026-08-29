@@ -7,6 +7,7 @@ import (
 
 	"github.com/elum2b/platform/internal/services"
 	adapter "github.com/elum2b/platform/internal/utils/adapter"
+	"github.com/elum2b/platform/internal/utils/archive"
 )
 
 type Request struct {
@@ -15,13 +16,13 @@ type Request struct {
 }
 
 type Response struct {
-	Package cpaadmin.ExportPackage `json:"package"`
+	Job cpaadmin.ArchiveJob `json:"job"`
 }
 
 var (
 	methodKey         = "cpa.export"
 	methodDescription = `
-Exports all CPA offers and their configuration from a workspace. Requires the
+Queues an archive export of all CPA offers and their configuration from a workspace. Requires the
 'cpa.export' permission in the target workspace.`
 )
 
@@ -32,12 +33,15 @@ var Method = adapter.Method[Request, Response]{
 	Transports:  adapter.WS | adapter.MCP,
 	Middleware:  []adapter.Middleware{adapter.WorkspaceAccess(methodKey)},
 	Handler: func(ctx *adapter.Context, data Request) (Response, error) {
-		value, err := services.CPA.Admin.Export(
+		value, err := services.CPA.Admin.QueueArchiveExport(
 			ctx.Context,
-			data.WorkspaceID,
-			cpaadmin.ExportRequest{Now: data.Now},
+			cpaadmin.QueueArchiveExportParams{
+				WorkspaceID:   data.WorkspaceID,
+				FileName:      archive.FileName("cpa"),
+				ExportRequest: cpaadmin.ExportRequest{Now: data.Now},
+			},
 		)
 
-		return Response{Package: value}, err
+		return Response{Job: value}, err
 	},
 }

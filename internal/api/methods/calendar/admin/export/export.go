@@ -7,6 +7,7 @@ import (
 
 	"github.com/elum2b/platform/internal/services"
 	adapter "github.com/elum2b/platform/internal/utils/adapter"
+	"github.com/elum2b/platform/internal/utils/archive"
 )
 
 type Request struct {
@@ -15,13 +16,13 @@ type Request struct {
 }
 
 type Response struct {
-	Package caladmin.ExportPackage `json:"package"`
+	Job caladmin.ArchiveJob `json:"job"`
 }
 
 var (
 	methodKey         = "calendar.export"
 	methodDescription = `
-Exports all calendars and their configuration from a workspace. Requires the
+Queues an archive export of all calendars and their configuration from a workspace. Requires the
 'calendar.export' permission in the target workspace.`
 )
 
@@ -34,12 +35,15 @@ var Method = adapter.Method[Request, Response]{
 		adapter.WorkspaceAccess(methodKey),
 	},
 	Handler: func(ctx *adapter.Context, data Request) (Response, error) {
-		value, err := services.Calendar.Admin.Export(
+		value, err := services.Calendar.Admin.QueueArchiveExport(
 			ctx.Context,
-			data.WorkspaceID,
-			caladmin.ExportRequest{Now: data.Now},
+			caladmin.QueueArchiveExportParams{
+				WorkspaceID:   data.WorkspaceID,
+				FileName:      archive.FileName("calendar"),
+				ExportRequest: caladmin.ExportRequest{Now: data.Now},
+			},
 		)
 
-		return Response{Package: value}, err
+		return Response{Job: value}, err
 	},
 }

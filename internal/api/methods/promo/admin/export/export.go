@@ -7,6 +7,7 @@ import (
 
 	"github.com/elum2b/platform/internal/services"
 	adapter "github.com/elum2b/platform/internal/utils/adapter"
+	"github.com/elum2b/platform/internal/utils/archive"
 )
 
 type Request struct {
@@ -15,13 +16,13 @@ type Request struct {
 }
 
 type Response struct {
-	Package promoadmin.ExportPackage `json:"package"`
+	Job promoadmin.ArchiveJob `json:"job"`
 }
 
 var (
 	methodKey         = "promo.export"
 	methodDescription = `
-Exports all promos and their configuration from a workspace. Requires the
+Queues an archive export of all promos and their configuration from a workspace. Requires the
 'promo.export' permission in the target workspace.`
 )
 
@@ -34,12 +35,15 @@ var Method = adapter.Method[Request, Response]{
 		adapter.WorkspaceAccess(methodKey),
 	},
 	Handler: func(ctx *adapter.Context, data Request) (Response, error) {
-		value, err := services.Promo.Admin.Export(
+		value, err := services.Promo.Admin.QueueArchiveExport(
 			ctx.Context,
-			data.WorkspaceID,
-			promoadmin.ExportRequest{Now: data.Now},
+			promoadmin.QueueArchiveExportParams{
+				WorkspaceID:   data.WorkspaceID,
+				FileName:      archive.FileName("promo"),
+				ExportRequest: promoadmin.ExportRequest{Now: data.Now},
+			},
 		)
 
-		return Response{Package: value}, err
+		return Response{Job: value}, err
 	},
 }

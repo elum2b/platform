@@ -1,26 +1,29 @@
 package importapi
 
 import (
+	"bytes"
+
 	promoadmin "github.com/elum2b/services/promo/service/admin"
 
 	"github.com/elum2b/platform/internal/services"
 	adapter "github.com/elum2b/platform/internal/utils/adapter"
+	"github.com/elum2b/platform/internal/utils/archive"
 )
 
 type Request struct {
-	WorkspaceID      string                   `json:"workspace_id"                validate:"required,uuid"`
-	Package          promoadmin.ExportPackage `json:"package"                     validate:"required"`
-	ConflictStrategy string                   `json:"conflict_strategy,omitempty" validate:"omitempty,oneof=fail_on_conflict skip_existing update_existing"`
+	WorkspaceID      string `json:"workspace_id"                validate:"required,uuid"`
+	Archive          []byte `json:"archive"                     validate:"required"`
+	ConflictStrategy string `json:"conflict_strategy,omitempty" validate:"omitempty,oneof=fail_on_conflict skip_existing update_existing"`
 }
 
 type Response struct {
-	Result promoadmin.ImportResult `json:"result"`
+	Job promoadmin.ArchiveJob `json:"job"`
 }
 
 var (
 	methodKey         = "promo.import"
 	methodDescription = `
-Imports promos and configuration into a workspace. Requires the 'promo.import'
+Queues an archive import of promos and configuration into a workspace. Requires the 'promo.import'
 permission in the target workspace.`
 )
 
@@ -33,15 +36,18 @@ var Method = adapter.Method[Request, Response]{
 		adapter.WorkspaceAccess(methodKey),
 	},
 	Handler: func(ctx *adapter.Context, data Request) (Response, error) {
-		value, err := services.Promo.Admin.Import(
+		value, err := services.Promo.Admin.QueueArchiveImport(
 			ctx.Context,
-			data.WorkspaceID,
-			promoadmin.ImportRequest{
-				Package:          data.Package,
-				ConflictStrategy: data.ConflictStrategy,
+			promoadmin.QueueArchiveImportParams{
+				WorkspaceID: data.WorkspaceID,
+				FileName:    archive.FileName("promo"),
+				ImportRequest: promoadmin.ImportRequest{
+					ConflictStrategy: data.ConflictStrategy,
+				},
+				Archive: bytes.NewReader(data.Archive),
 			},
 		)
 
-		return Response{Result: value}, err
+		return Response{Job: value}, err
 	},
 }

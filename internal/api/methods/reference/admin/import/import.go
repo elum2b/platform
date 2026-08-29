@@ -1,26 +1,30 @@
 package importapi
 
 import (
+	"bytes"
+
 	refadmin "github.com/elum2b/services/reference/service/admin"
 
 	"github.com/elum2b/platform/internal/services"
 	adapter "github.com/elum2b/platform/internal/utils/adapter"
+	"github.com/elum2b/platform/internal/utils/archive"
 )
 
 type Request struct {
-	WorkspaceID      string                 `json:"workspace_id"                validate:"required,uuid"`
-	Package          refadmin.ExportPackage `json:"package"                     validate:"required"`
-	ConflictStrategy string                 `json:"conflict_strategy,omitempty" validate:"omitempty,oneof=fail_on_conflict skip_existing update_existing"`
+	WorkspaceID      string `json:"workspace_id"                validate:"required,uuid"`
+	Archive          []byte `json:"archive"                     validate:"required"`
+	ConflictStrategy string `json:"conflict_strategy,omitempty" validate:"omitempty,oneof=fail_on_conflict skip_existing update_existing"`
+	IncludeMedia     bool   `json:"include_media,omitempty"`
 }
 
 type Response struct {
-	Result refadmin.ImportResult `json:"result"`
+	Job refadmin.ArchiveJob `json:"job"`
 }
 
 var (
 	methodKey         = "reference.import"
 	methodDescription = `
-Imports reference items and localizations into a workspace. Requires the
+Queues an archive import of reference items and localizations into a workspace. Requires the
 'reference.import' permission in the target workspace.`
 )
 
@@ -33,15 +37,17 @@ var Method = adapter.Method[Request, Response]{
 		adapter.WorkspaceAccess(methodKey),
 	},
 	Handler: func(ctx *adapter.Context, data Request) (Response, error) {
-		value, err := services.Reference.Admin.Import(
+		value, err := services.Reference.Admin.QueueArchiveImport(
 			ctx.Context,
-			data.WorkspaceID,
-			refadmin.ImportRequest{
-				Package:          data.Package,
+			refadmin.QueueArchiveImportParams{
+				WorkspaceID:      data.WorkspaceID,
+				FileName:         archive.FileName("reference"),
+				IncludeMedia:     data.IncludeMedia,
 				ConflictStrategy: data.ConflictStrategy,
+				Archive:          bytes.NewReader(data.Archive),
 			},
 		)
 
-		return Response{Result: value}, err
+		return Response{Job: value}, err
 	},
 }

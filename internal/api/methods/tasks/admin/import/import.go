@@ -1,26 +1,30 @@
 package importapi
 
 import (
+	"bytes"
+
 	tadmin "github.com/elum2b/services/tasks/service/admin"
 
 	"github.com/elum2b/platform/internal/services"
 	adapter "github.com/elum2b/platform/internal/utils/adapter"
+	"github.com/elum2b/platform/internal/utils/archive"
 )
 
 type Request struct {
-	WorkspaceID      string               `json:"workspace_id"                validate:"required,uuid"`
-	Package          tadmin.ExportPackage `json:"package"                     validate:"required"`
-	ConflictStrategy string               `json:"conflict_strategy,omitempty" validate:"omitempty,oneof=fail_on_conflict skip_existing update_existing"`
+	WorkspaceID      string            `json:"workspace_id"                validate:"required,uuid"`
+	Archive          []byte            `json:"archive"                     validate:"required"`
+	ConflictStrategy string            `json:"conflict_strategy,omitempty" validate:"omitempty,oneof=fail_on_conflict skip_existing update_existing"`
+	Secrets          map[string]string `json:"secrets,omitempty"`
 }
 
 type Response struct {
-	Result tadmin.ImportResult `json:"result"`
+	Job tadmin.ArchiveJob `json:"job"`
 }
 
 var (
 	methodKey         = "tasks.import"
 	methodDescription = `
-Imports tasks and configuration into a workspace. Requires the 'tasks.import'
+Queues an archive import of tasks and configuration into a workspace. Requires the 'tasks.import'
 permission in the target workspace.`
 )
 
@@ -33,15 +37,19 @@ var Method = adapter.Method[Request, Response]{
 		adapter.WorkspaceAccess(methodKey),
 	},
 	Handler: func(ctx *adapter.Context, data Request) (Response, error) {
-		value, err := services.Tasks.Admin.Import(
+		value, err := services.Tasks.Admin.QueueArchiveImport(
 			ctx.Context,
-			data.WorkspaceID,
-			tadmin.ImportRequest{
-				Package:          data.Package,
-				ConflictStrategy: data.ConflictStrategy,
+			tadmin.QueueArchiveImportParams{
+				WorkspaceID: data.WorkspaceID,
+				FileName:    archive.FileName("tasks"),
+				ImportRequest: tadmin.ImportRequest{
+					ConflictStrategy: data.ConflictStrategy,
+					Secrets:          data.Secrets,
+				},
+				Archive: bytes.NewReader(data.Archive),
 			},
 		)
 
-		return Response{Result: value}, err
+		return Response{Job: value}, err
 	},
 }

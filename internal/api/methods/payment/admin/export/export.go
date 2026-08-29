@@ -7,6 +7,7 @@ import (
 
 	"github.com/elum2b/platform/internal/services"
 	adapter "github.com/elum2b/platform/internal/utils/adapter"
+	"github.com/elum2b/platform/internal/utils/archive"
 )
 
 type Request struct {
@@ -15,13 +16,13 @@ type Request struct {
 }
 
 type Response struct {
-	Package padm.ExportPackage `json:"package"`
+	Job padm.ArchiveJob `json:"job"`
 }
 
 var (
 	methodKey         = "payment.export"
 	methodDescription = `
-Exports payment configuration from a workspace. Requires the 'payment.export'
+Queues an archive export of payment configuration from a workspace. Requires the 'payment.export'
 permission in the target workspace.`
 )
 
@@ -33,12 +34,15 @@ var Method = adapter.Method[Request, Response]{
 		adapter.WorkspaceAccess(methodKey),
 	},
 	Handler: func(ctx *adapter.Context, data Request) (Response, error) {
-		value, err := services.Payment.Admin.Export(
+		value, err := services.Payment.Admin.QueueArchiveExport(
 			ctx.Context,
-			data.WorkspaceID,
-			padm.ExportRequest{Now: data.Now},
+			padm.QueueArchiveExportParams{
+				WorkspaceID:   data.WorkspaceID,
+				FileName:      archive.FileName("payment"),
+				ExportRequest: padm.ExportRequest{Now: data.Now},
+			},
 		)
 
-		return Response{Package: value}, err
+		return Response{Job: value}, err
 	},
 }

@@ -1,26 +1,29 @@
 package importapi
 
 import (
+	"bytes"
+
 	padm "github.com/elum2b/services/payment/service/admin"
 
 	"github.com/elum2b/platform/internal/services"
 	adapter "github.com/elum2b/platform/internal/utils/adapter"
+	"github.com/elum2b/platform/internal/utils/archive"
 )
 
 type Request struct {
-	WorkspaceID      string             `json:"workspace_id"                validate:"required,uuid"`
-	Package          padm.ExportPackage `json:"package"                     validate:"required"`
-	ConflictStrategy string             `json:"conflict_strategy,omitempty" validate:"omitempty,oneof=fail_on_conflict skip_existing update_existing"`
+	WorkspaceID      string `json:"workspace_id"                validate:"required,uuid"`
+	Archive          []byte `json:"archive"                     validate:"required"`
+	ConflictStrategy string `json:"conflict_strategy,omitempty" validate:"omitempty,oneof=fail_on_conflict skip_existing update_existing"`
 }
 
 type Response struct {
-	Result padm.ImportResult `json:"result"`
+	Job padm.ArchiveJob `json:"job"`
 }
 
 var (
 	methodKey         = "payment.import"
 	methodDescription = `
-Imports payment configuration into a workspace. Requires the 'payment.import'
+Queues an archive import of payment configuration into a workspace. Requires the 'payment.import'
 permission in the target workspace.`
 )
 
@@ -32,15 +35,18 @@ var Method = adapter.Method[Request, Response]{
 		adapter.WorkspaceAccess(methodKey),
 	},
 	Handler: func(ctx *adapter.Context, data Request) (Response, error) {
-		value, err := services.Payment.Admin.Import(
+		value, err := services.Payment.Admin.QueueArchiveImport(
 			ctx.Context,
-			data.WorkspaceID,
-			padm.ImportRequest{
-				Package:          data.Package,
-				ConflictStrategy: data.ConflictStrategy,
+			padm.QueueArchiveImportParams{
+				WorkspaceID: data.WorkspaceID,
+				FileName:    archive.FileName("payment"),
+				ImportRequest: padm.ImportRequest{
+					ConflictStrategy: data.ConflictStrategy,
+				},
+				Archive: bytes.NewReader(data.Archive),
 			},
 		)
 
-		return Response{Result: value}, err
+		return Response{Job: value}, err
 	},
 }

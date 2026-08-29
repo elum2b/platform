@@ -32,7 +32,6 @@ func Register(registry adapter.Registry) {
 	cpareward.List.Register(admin)
 	cpareward.Delete.Register(admin)
 	cpaexport.Method.Register(admin)
-	cpaimport.Preview.Register(admin)
 	cpaimport.Method.Register(admin)
 	cpacode.Add.Register(admin)
 	cpacode.DeleteAvailable.Register(admin)

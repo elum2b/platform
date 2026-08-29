@@ -27,7 +27,6 @@ func Register(registry adapter.Registry) {
 	reflocalization.Delete.Register(admin)
 	refstats.Get.Register(admin)
 	refexport.Method.Register(admin)
-	refimport.Preview.Register(admin)
 	refimport.Method.Register(admin)
 
 	user := registry.Group(adapter.ApplicationUser)

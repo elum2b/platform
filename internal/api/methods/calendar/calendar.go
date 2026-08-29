@@ -39,7 +39,6 @@ func Register(registry adapter.Registry) {
 	calstats.DailyList.Register(admin)
 	calstats.Refresh.Register(admin)
 	calexport.Method.Register(admin)
-	calimport.Preview.Register(admin)
 	calimport.Method.Register(admin)
 	calcallback.List.Register(admin)
 	calcallback.Get.Register(admin)

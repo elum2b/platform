@@ -80,7 +80,6 @@ func Register(registry adapter.Registry) {
 	payoperation.RebuildProductCache.Register(admin)
 	payoperation.ExecuteRefund.Register(admin)
 	payexport.Method.Register(admin)
-	payimport.Preview.Register(admin)
 	payimport.Method.Register(admin)
 	paypurchasekey.List.Register(admin)
 	paypurchasekey.Get.Register(admin)

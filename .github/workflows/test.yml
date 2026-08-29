@@ -51,5 +51,11 @@ jobs:
       - name: Build application
         run: go build ./...
 
+      - name: Generate API schema
+        run: go generate ./schema
+
+      - name: Check API schema
+        run: git diff --exit-code -- schema/schema.json
+
       - name: Check git diff
         run: git diff --check

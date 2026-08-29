@@ -1,26 +1,29 @@
 package importapi
 
 import (
+	"bytes"
+
 	caladmin "github.com/elum2b/services/calendar/service/admin"
 
 	"github.com/elum2b/platform/internal/services"
 	adapter "github.com/elum2b/platform/internal/utils/adapter"
+	"github.com/elum2b/platform/internal/utils/archive"
 )
 
 type Request struct {
-	WorkspaceID      string                 `json:"workspace_id"                validate:"required,uuid"`
-	Package          caladmin.ExportPackage `json:"package"                     validate:"required"`
-	ConflictStrategy string                 `json:"conflict_strategy,omitempty" validate:"omitempty,oneof=fail_on_conflict skip_existing update_existing"`
+	WorkspaceID      string `json:"workspace_id"                validate:"required,uuid"`
+	Archive          []byte `json:"archive"                     validate:"required"`
+	ConflictStrategy string `json:"conflict_strategy,omitempty" validate:"omitempty,oneof=fail_on_conflict skip_existing update_existing"`
 }
 
 type Response struct {
-	Result caladmin.ImportResult `json:"result"`
+	Job caladmin.ArchiveJob `json:"job"`
 }
 
 var (
 	methodKey         = "calendar.import"
 	methodDescription = `
-Imports calendars and configuration into a workspace. Requires the
+Queues an archive import of calendars and configuration into a workspace. Requires the
 'calendar.import' permission in the target workspace.`
 )
 
@@ -33,15 +36,18 @@ var Method = adapter.Method[Request, Response]{
 		adapter.WorkspaceAccess(methodKey),
 	},
 	Handler: func(ctx *adapter.Context, data Request) (Response, error) {
-		value, err := services.Calendar.Admin.Import(
+		value, err := services.Calendar.Admin.QueueArchiveImport(
 			ctx.Context,
-			data.WorkspaceID,
-			caladmin.ImportRequest{
-				Package:          data.Package,
-				ConflictStrategy: data.ConflictStrategy,
+			caladmin.QueueArchiveImportParams{
+				WorkspaceID: data.WorkspaceID,
+				FileName:    archive.FileName("calendar"),
+				ImportRequest: caladmin.ImportRequest{
+					ConflictStrategy: data.ConflictStrategy,
+				},
+				Archive: bytes.NewReader(data.Archive),
 			},
 		)
 
-		return Response{Result: value}, err
+		return Response{Job: value}, err
 	},
 }

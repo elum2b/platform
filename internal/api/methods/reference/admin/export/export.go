@@ -1,28 +1,26 @@
 package exportapi
 
 import (
-	"time"
-
 	refadmin "github.com/elum2b/services/reference/service/admin"
 
 	"github.com/elum2b/platform/internal/services"
 	adapter "github.com/elum2b/platform/internal/utils/adapter"
+	"github.com/elum2b/platform/internal/utils/archive"
 )
 
 type Request struct {
-	WorkspaceID    string    `json:"workspace_id"               validate:"required,uuid"`
-	Now            time.Time `json:"now,omitempty"`
-	OnlyNotDeleted bool      `json:"only_not_deleted,omitempty"`
+	WorkspaceID  string `json:"workspace_id"             validate:"required,uuid"`
+	IncludeMedia bool   `json:"include_media,omitempty"`
 }
 
 type Response struct {
-	Package refadmin.ExportPackage `json:"package"`
+	Job refadmin.ArchiveJob `json:"job"`
 }
 
 var (
 	methodKey         = "reference.export"
 	methodDescription = `
-Exports all reference items and their localizations from a workspace. Requires
+Queues an archive export of reference items and their localizations from a workspace. Requires
 the 'reference.export' permission in the target workspace.`
 )
 
@@ -35,15 +33,15 @@ var Method = adapter.Method[Request, Response]{
 		adapter.WorkspaceAccess(methodKey),
 	},
 	Handler: func(ctx *adapter.Context, data Request) (Response, error) {
-		value, err := services.Reference.Admin.Export(
+		value, err := services.Reference.Admin.QueueArchiveExport(
 			ctx.Context,
-			data.WorkspaceID,
-			refadmin.ExportRequest{
-				Now:            data.Now,
-				OnlyNotDeleted: data.OnlyNotDeleted,
+			refadmin.QueueArchiveExportParams{
+				WorkspaceID:  data.WorkspaceID,
+				FileName:     archive.FileName("reference"),
+				IncludeMedia: data.IncludeMedia,
 			},
 		)
 
-		return Response{Package: value}, err
+		return Response{Job: value}, err
 	},
 }
