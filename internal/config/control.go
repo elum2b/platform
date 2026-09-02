@@ -147,6 +147,13 @@ var (
 		15*time.Second,
 	)
 
+	// ControlAuthDiscordClientID contains the Discord OAuth client ID.
+	// Env: CONTROL_AUTH_DISCORD_CLIENT_ID.
+	ControlAuthDiscordClientID = env.GetEnvString(
+		"CONTROL_AUTH_DISCORD_CLIENT_ID",
+		"",
+	)
+
 	// ControlAuthVKClientID contains the VK ID OAuth client ID.
 	// Env: CONTROL_AUTH_VK_CLIENT_ID.
 	ControlAuthVKClientID = env.GetEnvString(

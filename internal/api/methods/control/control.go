@@ -33,6 +33,7 @@ func Register(registry adapter.Registry) {
 	controlauth.Check.Register(registry)
 	controlauth.VKID.Register(registry)
 	controlauth.Telegram.Register(registry)
+	controlauth.Discord.Register(registry)
 	controlauth.GitHub.Register(registry)
 	controlauth.GitLab.Register(registry)
 	controlauth.Google.Register(registry)

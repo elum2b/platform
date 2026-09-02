@@ -27,6 +27,7 @@ func TestInitRegistersControlAuthenticationRoutes(t *testing.T) {
 		"/internal/control/control.auth.check":         fiber.MethodGet,
 		"/internal/control/control.auth.vkid":          fiber.MethodPost,
 		"/internal/control/control.auth.telegram":      fiber.MethodPost,
+		"/internal/control/control.auth.discord":       fiber.MethodPost,
 		"/internal/control/control.auth.github":        fiber.MethodPost,
 		"/internal/control/control.auth.gitlab":        fiber.MethodPost,
 		"/internal/control/control.auth.google":        fiber.MethodPost,

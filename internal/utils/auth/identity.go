@@ -31,6 +31,16 @@ func ResolveIdentity(
 	data IdentityRequest,
 ) (admin.AuthIdentityParams, error) {
 	switch strings.ToLower(strings.TrimSpace(data.Provider)) {
+	case ProviderDiscord:
+		return resolveOAuth(
+			ctx,
+			data,
+			config.ControlAuthDiscordClientID,
+			"",
+			"",
+			"",
+			Discord,
+		)
 	case controlauth.ProviderVKID:
 		return resolveOAuth(
 			ctx,

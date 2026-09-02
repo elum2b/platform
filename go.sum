@@ -47,8 +47,6 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/elum-utils/env v1.0.2 h1:ZheC0/TqV8gvlfE5fAayI5DqRxHTklI3961UPsyLD78=
 github.com/elum-utils/env v1.0.2/go.mod h1:pm8B6qM91QUYROdeIBspcSJHm3swE61oSlw81N+SaUk=
-github.com/elum-utils/go-etp v0.0.6 h1:5lpJYgA6WWLdbttJrrCoJik3gllgRqP90HsmawAdeRY=
-github.com/elum-utils/go-etp v0.0.6/go.mod h1:HqW0afF1iCvx0zmxk7Mz3Ym5PXh/Ul5PpYBQrQ4pzgw=
 github.com/elum-utils/go-etp v0.0.7 h1:Xo6NKEJbRmS7s864bdEnxTSoUQAxjaH5gBr+XZObeDc=
 github.com/elum-utils/go-etp v0.0.7/go.mod h1:HqW0afF1iCvx0zmxk7Mz3Ym5PXh/Ul5PpYBQrQ4pzgw=
 github.com/elum-utils/go-etp/adapters/fiber v0.0.0-20260721051115-a66e506774e9 h1:vcafL5MzNLnCXALvBpuJUzfcPdSEa+ZLMqeLBRYQ3A0=
