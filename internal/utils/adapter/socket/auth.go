@@ -61,6 +61,10 @@ func authHandler(
 		return etp.AuthResult{OK: false, Reason: "unauthorized"}, nil
 	}
 
+    if err := peer.SetRateLimitID(session.AccountID); err != nil {
+        return etp.AuthResult{}, err
+    }
+
 	return etp.AuthResult{
 		OK:     true,
 		UserID: session.AccountID,

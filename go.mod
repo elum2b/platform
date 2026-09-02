@@ -5,7 +5,7 @@ go 1.26.5
 require (
 	github.com/andybalholm/brotli v1.2.2
 	github.com/elum-utils/env v1.0.2
-	github.com/elum-utils/go-etp v0.0.6
+	github.com/elum-utils/go-etp v0.0.7
 	github.com/elum-utils/go-etp/adapters/fiber v0.0.0-20260721051115-a66e506774e9
 	github.com/elum-utils/supervisor v0.0.2
 	github.com/elum2b/services v0.0.50
