@@ -657,6 +657,13 @@
               "UpdatedAt": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "Attempt": {
+                "type": "integer"
+              },
+              "NextAttemptAt": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "additionalProperties": false,
@@ -678,7 +685,9 @@
               "CreatedAt",
               "StartedAt",
               "FinishedAt",
-              "UpdatedAt"
+              "UpdatedAt",
+              "Attempt",
+              "NextAttemptAt"
             ]
           },
           "Response": {
@@ -1016,6 +1025,13 @@
               "UpdatedAt": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "Attempt": {
+                "type": "integer"
+              },
+              "NextAttemptAt": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "additionalProperties": false,
@@ -1037,7 +1053,9 @@
               "CreatedAt",
               "StartedAt",
               "FinishedAt",
-              "UpdatedAt"
+              "UpdatedAt",
+              "Attempt",
+              "NextAttemptAt"
             ]
           },
           "Response": {
@@ -4685,6 +4703,119 @@
         "properties": {},
         "additionalProperties": false,
         "type": "object"
+      },
+      "output": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://github.com/elum2b/platform/internal/api/methods/control/auth/auth-response",
+        "$ref": "#/$defs/AuthResponse",
+        "$defs": {
+          "AccountResponse": {
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "display_name": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updated_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+              "id",
+              "display_name",
+              "status",
+              "created_at",
+              "updated_at"
+            ]
+          },
+          "AuthResponse": {
+            "properties": {
+              "authenticated": {
+                "type": "boolean"
+              },
+              "two_factor_required": {
+                "type": "boolean"
+              },
+              "created": {
+                "type": "boolean"
+              },
+              "account": {
+                "$ref": "#/$defs/AccountResponse"
+              },
+              "session_id": {
+                "type": "string"
+              },
+              "session_expires_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+              "authenticated",
+              "two_factor_required",
+              "created",
+              "account",
+              "session_id",
+              "session_expires_at"
+            ]
+          }
+        }
+      }
+    },
+    "control.auth.discord": {
+      "key": "control.auth.discord",
+      "description": "\nAuthenticates an account through a Discord OAuth access token.",
+      "transports": [
+        "http"
+      ],
+      "http_method": "POST",
+      "input": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://github.com/elum2b/platform/internal/api/methods/control/auth/o-auth-request",
+        "$ref": "#/$defs/OAuthRequest",
+        "$defs": {
+          "OAuthRequest": {
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "access_token": {
+                "type": "string"
+              },
+              "redirect_uri": {
+                "type": "string"
+              },
+              "invite_token": {
+                "type": "string"
+              },
+              "bind_to_ip": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+              "code",
+              "access_token",
+              "redirect_uri",
+              "invite_token",
+              "bind_to_ip"
+            ]
+          }
+        }
       },
       "output": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -10407,6 +10538,13 @@
               "UpdatedAt": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "Attempt": {
+                "type": "integer"
+              },
+              "NextAttemptAt": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "additionalProperties": false,
@@ -10428,7 +10566,9 @@
               "CreatedAt",
               "StartedAt",
               "FinishedAt",
-              "UpdatedAt"
+              "UpdatedAt",
+              "Attempt",
+              "NextAttemptAt"
             ]
           },
           "Response": {
@@ -10549,6 +10689,13 @@
               "UpdatedAt": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "Attempt": {
+                "type": "integer"
+              },
+              "NextAttemptAt": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "additionalProperties": false,
@@ -10570,7 +10717,9 @@
               "CreatedAt",
               "StartedAt",
               "FinishedAt",
-              "UpdatedAt"
+              "UpdatedAt",
+              "Attempt",
+              "NextAttemptAt"
             ]
           },
           "Response": {
@@ -14046,6 +14195,13 @@
               "UpdatedAt": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "Attempt": {
+                "type": "integer"
+              },
+              "NextAttemptAt": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "additionalProperties": false,
@@ -14067,7 +14223,9 @@
               "CreatedAt",
               "StartedAt",
               "FinishedAt",
-              "UpdatedAt"
+              "UpdatedAt",
+              "Attempt",
+              "NextAttemptAt"
             ]
           },
           "Response": {
@@ -14701,6 +14859,13 @@
               "UpdatedAt": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "Attempt": {
+                "type": "integer"
+              },
+              "NextAttemptAt": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "additionalProperties": false,
@@ -14722,7 +14887,9 @@
               "CreatedAt",
               "StartedAt",
               "FinishedAt",
-              "UpdatedAt"
+              "UpdatedAt",
+              "Attempt",
+              "NextAttemptAt"
             ]
           },
           "Response": {
@@ -25249,6 +25416,13 @@
               "UpdatedAt": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "Attempt": {
+                "type": "integer"
+              },
+              "NextAttemptAt": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "additionalProperties": false,
@@ -25270,7 +25444,9 @@
               "CreatedAt",
               "StartedAt",
               "FinishedAt",
-              "UpdatedAt"
+              "UpdatedAt",
+              "Attempt",
+              "NextAttemptAt"
             ]
           },
           "Response": {
@@ -25559,6 +25735,13 @@
               "UpdatedAt": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "Attempt": {
+                "type": "integer"
+              },
+              "NextAttemptAt": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "additionalProperties": false,
@@ -25580,7 +25763,9 @@
               "CreatedAt",
               "StartedAt",
               "FinishedAt",
-              "UpdatedAt"
+              "UpdatedAt",
+              "Attempt",
+              "NextAttemptAt"
             ]
           },
           "Response": {
@@ -27117,6 +27302,13 @@
               "UpdatedAt": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "Attempt": {
+                "type": "integer"
+              },
+              "NextAttemptAt": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "additionalProperties": false,
@@ -27138,7 +27330,9 @@
               "CreatedAt",
               "StartedAt",
               "FinishedAt",
-              "UpdatedAt"
+              "UpdatedAt",
+              "Attempt",
+              "NextAttemptAt"
             ]
           },
           "Response": {
@@ -27444,6 +27638,13 @@
               "UpdatedAt": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "Attempt": {
+                "type": "integer"
+              },
+              "NextAttemptAt": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "additionalProperties": false,
@@ -27465,7 +27666,9 @@
               "CreatedAt",
               "StartedAt",
               "FinishedAt",
-              "UpdatedAt"
+              "UpdatedAt",
+              "Attempt",
+              "NextAttemptAt"
             ]
           },
           "Response": {
@@ -27960,6 +28163,108 @@
               "locale",
               "title",
               "description"
+            ]
+          }
+        }
+      },
+      "output": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {},
+        "additionalProperties": false,
+        "type": "object"
+      }
+    },
+    "reference.resource.insert_after": {
+      "key": "reference.resource.insert_after",
+      "description": "\nAttaches an unattached resource after another item resource. An empty\n'after_resource_key' places it first. Requires the\n'reference.resource.insert_after' permission in the target workspace.",
+      "transports": [
+        "ws",
+        "mcp"
+      ],
+      "input": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://github.com/elum2b/platform/internal/api/methods/reference/admin/resource/order-request",
+        "$ref": "#/$defs/OrderRequest",
+        "$defs": {
+          "OrderRequest": {
+            "properties": {
+              "workspace_id": {
+                "type": "string",
+                "minLength": 1,
+                "format": "uuid"
+              },
+              "item_key": {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              },
+              "resource_key": {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              },
+              "after_resource_key": {
+                "type": "string",
+                "maxLength": 255
+              }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+              "workspace_id",
+              "item_key",
+              "resource_key"
+            ]
+          }
+        }
+      },
+      "output": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {},
+        "additionalProperties": false,
+        "type": "object"
+      }
+    },
+    "reference.resource.move_after": {
+      "key": "reference.resource.move_after",
+      "description": "\nMoves an attached resource after another item resource. An empty\n'after_resource_key' places it first. Requires the\n'reference.resource.move_after' permission in the target workspace.",
+      "transports": [
+        "ws",
+        "mcp"
+      ],
+      "input": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://github.com/elum2b/platform/internal/api/methods/reference/admin/resource/order-request",
+        "$ref": "#/$defs/OrderRequest",
+        "$defs": {
+          "OrderRequest": {
+            "properties": {
+              "workspace_id": {
+                "type": "string",
+                "minLength": 1,
+                "format": "uuid"
+              },
+              "item_key": {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              },
+              "resource_key": {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              },
+              "after_resource_key": {
+                "type": "string",
+                "maxLength": 255
+              }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+              "workspace_id",
+              "item_key",
+              "resource_key"
             ]
           }
         }
@@ -29096,9 +29401,6 @@
                 },
                 "type": "array"
               },
-              "include_secrets": {
-                "type": "boolean"
-              },
               "now": {
                 "type": "string",
                 "format": "date-time"
@@ -29173,6 +29475,13 @@
               "UpdatedAt": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "Attempt": {
+                "type": "integer"
+              },
+              "NextAttemptAt": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "additionalProperties": false,
@@ -29194,7 +29503,9 @@
               "CreatedAt",
               "StartedAt",
               "FinishedAt",
-              "UpdatedAt"
+              "UpdatedAt",
+              "Attempt",
+              "NextAttemptAt"
             ]
           },
           "Response": {
@@ -29931,6 +30242,13 @@
               "UpdatedAt": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "Attempt": {
+                "type": "integer"
+              },
+              "NextAttemptAt": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "additionalProperties": false,
@@ -29952,7 +30270,9 @@
               "CreatedAt",
               "StartedAt",
               "FinishedAt",
-              "UpdatedAt"
+              "UpdatedAt",
+              "Attempt",
+              "NextAttemptAt"
             ]
           },
           "Response": {

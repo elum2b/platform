@@ -5,6 +5,7 @@ import (
 	refimport "github.com/elum2b/platform/internal/api/methods/reference/admin/import"
 	refitem "github.com/elum2b/platform/internal/api/methods/reference/admin/item"
 	reflocalization "github.com/elum2b/platform/internal/api/methods/reference/admin/localization"
+	refresource "github.com/elum2b/platform/internal/api/methods/reference/admin/resource"
 	refstats "github.com/elum2b/platform/internal/api/methods/reference/admin/stats"
 	refuser "github.com/elum2b/platform/internal/api/methods/reference/user"
 	adapter "github.com/elum2b/platform/internal/utils/adapter"
@@ -21,6 +22,8 @@ func Register(registry adapter.Registry) {
 	refitem.List.Register(admin)
 	refitem.Delete.Register(admin)
 	refitem.Restore.Register(admin)
+	refresource.InsertAfter.Register(admin)
+	refresource.MoveAfter.Register(admin)
 	reflocalization.Upsert.Register(admin)
 	reflocalization.Get.Register(admin)
 	reflocalization.List.Register(admin)

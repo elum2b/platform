@@ -39,10 +39,9 @@ var Manifest = adapter.Method[struct{}, ManifestResponse]{
 }
 
 type Request struct {
-	WorkspaceID    string    `json:"workspace_id"               validate:"required,uuid"`
-	Sections       []string  `json:"sections,omitempty"`
-	IncludeSecrets bool      `json:"include_secrets,omitempty"`
-	Now            time.Time `json:"now,omitempty"`
+	WorkspaceID string    `json:"workspace_id" validate:"required,uuid"`
+	Sections    []string  `json:"sections,omitempty"`
+	Now         time.Time `json:"now"`
 }
 
 type Response struct {
@@ -71,9 +70,8 @@ var Method = adapter.Method[Request, Response]{
 				WorkspaceID: data.WorkspaceID,
 				FileName:    archive.FileName("tasks"),
 				ExportRequest: tadmin.ExportRequest{
-					Sections:       data.Sections,
-					IncludeSecrets: data.IncludeSecrets,
-					Now:            data.Now,
+					Sections: data.Sections,
+					Now:      data.Now,
 				},
 			},
 		)
