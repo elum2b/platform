@@ -177,6 +177,7 @@ func discordUser(
 
 	user := new(discordUserResponse)
 	decoder := json.NewDecoder(bytes.NewReader(body))
+
 	if err := decoder.Decode(user); err != nil {
 		return discordUserResponse{}, nil, err
 	}

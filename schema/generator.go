@@ -50,9 +50,11 @@ func (catalog *catalog) Add(method adapter.MethodInfo) {
 	if method.Transports&adapter.HTTP != 0 {
 		schema.Transports = append(schema.Transports, "http")
 	}
+
 	if method.Transports&adapter.WS != 0 {
 		schema.Transports = append(schema.Transports, "ws")
 	}
+
 	if method.Transports&adapter.MCP != 0 {
 		schema.Transports = append(schema.Transports, "mcp")
 	}
@@ -62,6 +64,7 @@ func (catalog *catalog) Add(method adapter.MethodInfo) {
 
 func main() {
 	output := flag.String("out", "schema.json", "path to the generated schema")
+
 	flag.Parse()
 
 	catalog := &catalog{Methods: make(map[string]methodSchema)}
@@ -76,6 +79,7 @@ func main() {
 	encoder := json.NewEncoder(file)
 	encoder.SetEscapeHTML(false)
 	encoder.SetIndent("", "  ")
+
 	if err := encoder.Encode(catalog); err != nil {
 		panic(fmt.Errorf("schema: write %s: %w", filepath.Clean(*output), err))
 	}
@@ -110,30 +114,7 @@ func applyValidation(
 
 	switch typ.Kind() {
 	case reflect.Struct:
-		if visited[typ] {
-			return
-		}
-		visited[typ] = true
-		for field := range typ.Fields() {
-			field := field
-			name, embedded := jsonField(field)
-			if name == "" {
-				continue
-			}
-			if embedded {
-				applyValidation(schema, field.Type, definitions, visited)
-				continue
-			}
-			property, exists := schema.Properties.Get(name)
-			if !exists {
-				continue
-			}
-			applyRules(property, field.Type, field.Tag.Get("validate"))
-			if hasRule(field.Tag.Get("validate"), "required") {
-				schema.Required = appendUnique(schema.Required, name)
-			}
-			applyValidation(property, field.Type, definitions, visited)
-		}
+		applyStructValidation(schema, typ, definitions, visited)
 	case reflect.Slice, reflect.Array:
 		applyValidation(schema.Items, typ.Elem(), definitions, visited)
 	case reflect.Map:
@@ -144,6 +125,55 @@ func applyValidation(
 			visited,
 		)
 	}
+}
+
+func applyStructValidation(
+	schema *jsonschema.Schema,
+	typ reflect.Type,
+	definitions jsonschema.Definitions,
+	visited map[reflect.Type]bool,
+) {
+	if visited[typ] {
+		return
+	}
+
+	visited[typ] = true
+
+	for field := range typ.Fields() {
+		applyFieldValidation(schema, field, definitions, visited)
+	}
+}
+
+func applyFieldValidation(
+	schema *jsonschema.Schema,
+	field reflect.StructField,
+	definitions jsonschema.Definitions,
+	visited map[reflect.Type]bool,
+) {
+	name, embedded := jsonField(field)
+	if name == "" {
+		return
+	}
+
+	if embedded {
+		applyValidation(schema, field.Type, definitions, visited)
+
+		return
+	}
+
+	property, exists := schema.Properties.Get(name)
+	if !exists {
+		return
+	}
+
+	tag := field.Tag.Get("validate")
+	applyRules(property, field.Type, tag)
+
+	if hasRule(tag, "required") {
+		schema.Required = appendUnique(schema.Required, name)
+	}
+
+	applyValidation(property, field.Type, definitions, visited)
 }
 
 func applyRules(schema *jsonschema.Schema, typ reflect.Type, tag string) {
@@ -166,23 +196,25 @@ func applyRules(schema *jsonschema.Schema, typ reflect.Type, tag string) {
 		case "oneof":
 			applyEnum(schema, typ, value)
 		case "dive":
-			typ = indirectType(typ)
-			if typ.Kind() == reflect.Slice || typ.Kind() == reflect.Array {
-				applyRules(
-					schema.Items,
-					typ.Elem(),
-					strings.Join(rules[index+1:], ","),
-				)
-			}
-			if typ.Kind() == reflect.Map {
-				applyRules(
-					schema.AdditionalProperties,
-					typ.Elem(),
-					strings.Join(rules[index+1:], ","),
-				)
-			}
+			applyDiveRules(schema, indirectType(typ), rules[index+1:])
+
 			return
 		}
+	}
+}
+
+func applyDiveRules(
+	schema *jsonschema.Schema,
+	typ reflect.Type,
+	rules []string,
+) {
+	tag := strings.Join(rules, ",")
+
+	switch typ.Kind() {
+	case reflect.Slice, reflect.Array:
+		applyRules(schema.Items, typ.Elem(), tag)
+	case reflect.Map:
+		applyRules(schema.AdditionalProperties, typ.Elem(), tag)
 	}
 }
 
@@ -218,32 +250,11 @@ func applyBound(
 	value string,
 	minimum bool,
 ) {
-	switch indirectType(typ).Kind() {
+	typ = indirectType(typ)
+
+	switch typ.Kind() {
 	case reflect.String, reflect.Slice, reflect.Array, reflect.Map:
-		bound, err := strconv.ParseUint(value, 10, 64)
-		if err != nil {
-			return
-		}
-		switch indirectType(typ).Kind() {
-		case reflect.String:
-			if minimum {
-				setMinLength(schema, bound)
-			} else {
-				setMaxLength(schema, bound)
-			}
-		case reflect.Slice, reflect.Array:
-			if minimum {
-				setMinItems(schema, bound)
-			} else {
-				setMaxItems(schema, bound)
-			}
-		case reflect.Map:
-			if minimum {
-				setMinProperties(schema, bound)
-			} else {
-				setMaxProperties(schema, bound)
-			}
-		}
+		applyCollectionBound(schema, typ.Kind(), value, minimum)
 	case reflect.Int,
 		reflect.Int8,
 		reflect.Int16,
@@ -256,14 +267,55 @@ func applyBound(
 		reflect.Uint64,
 		reflect.Float32,
 		reflect.Float64:
-		if _, err := strconv.ParseFloat(value, 64); err == nil {
-			if minimum {
-				schema.Minimum = json.Number(value)
-			} else {
-				schema.Maximum = json.Number(value)
-			}
+		applyNumericBound(schema, value, minimum)
+	}
+}
+
+func applyCollectionBound(
+	schema *jsonschema.Schema,
+	kind reflect.Kind,
+	value string,
+	minimum bool,
+) {
+	bound, err := strconv.ParseUint(value, 10, 64)
+	if err != nil {
+		return
+	}
+
+	switch kind {
+	case reflect.String:
+		if minimum {
+			setMinLength(schema, bound)
+		} else {
+			setMaxLength(schema, bound)
+		}
+	case reflect.Slice, reflect.Array:
+		if minimum {
+			setMinItems(schema, bound)
+		} else {
+			setMaxItems(schema, bound)
+		}
+	case reflect.Map:
+		if minimum {
+			setMinProperties(schema, bound)
+		} else {
+			setMaxProperties(schema, bound)
 		}
 	}
+}
+
+func applyNumericBound(schema *jsonschema.Schema, value string, minimum bool) {
+	if _, err := strconv.ParseFloat(value, 64); err != nil {
+		return
+	}
+
+	if minimum {
+		schema.Minimum = json.Number(value)
+
+		return
+	}
+
+	schema.Maximum = json.Number(value)
 }
 
 func applyEnum(schema *jsonschema.Schema, typ reflect.Type, value string) {
@@ -303,16 +355,20 @@ func jsonField(field reflect.StructField) (string, bool) {
 	if field.PkgPath != "" {
 		return "", false
 	}
+
 	parts := strings.Split(field.Tag.Get("json"), ",")
 	if parts[0] == "-" {
 		return "", false
 	}
+
 	if field.Anonymous && parts[0] == "" {
 		return field.Name, true
 	}
+
 	if parts[0] != "" {
 		return parts[0], false
 	}
+
 	return field.Name, false
 }
 
@@ -321,9 +377,11 @@ func resolve(
 	definitions jsonschema.Definitions,
 ) *jsonschema.Schema {
 	const prefix = "#/$defs/"
+
 	if schema != nil && strings.HasPrefix(schema.Ref, prefix) {
 		return definitions[strings.TrimPrefix(schema.Ref, prefix)]
 	}
+
 	return schema
 }
 
@@ -331,6 +389,7 @@ func indirectType(typ reflect.Type) reflect.Type {
 	for typ.Kind() == reflect.Pointer {
 		typ = typ.Elem()
 	}
+
 	return typ
 }
 
@@ -341,6 +400,7 @@ func hasRule(tag string, target string) bool {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -350,6 +410,7 @@ func appendUnique(values []string, value string) []string {
 			return values
 		}
 	}
+
 	return append(values, value)
 }
 

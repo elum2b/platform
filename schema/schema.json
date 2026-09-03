@@ -29409,7 +29409,8 @@
             "additionalProperties": false,
             "type": "object",
             "required": [
-              "workspace_id"
+              "workspace_id",
+              "now"
             ]
           }
         }
