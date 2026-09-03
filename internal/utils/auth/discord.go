@@ -123,7 +123,13 @@ func discordAuthorization(
 	token string,
 ) (discordAuthorizationResponse, error) {
 	response := new(discordAuthorizationResponse)
-	if err := discordGet(ctx, client, token, discordAuthorizationURL, response); err != nil {
+	if err := discordGet(
+		ctx,
+		client,
+		token,
+		discordAuthorizationURL,
+		response,
+	); err != nil {
 		return discordAuthorizationResponse{}, err
 	}
 
@@ -154,12 +160,15 @@ func discordUser(
 	}
 	defer response.Body.Close()
 
-	body, err := io.ReadAll(io.LimitReader(response.Body, discordResponseMaxSize))
+	body, err := io.ReadAll(
+		io.LimitReader(response.Body, discordResponseMaxSize),
+	)
 	if err != nil {
 		return discordUserResponse{}, nil, err
 	}
 
-	if response.StatusCode < http.StatusOK || response.StatusCode >= http.StatusMultipleChoices {
+	if response.StatusCode < http.StatusOK ||
+		response.StatusCode >= http.StatusMultipleChoices {
 		return discordUserResponse{}, nil, serviceerrors.New(
 			serviceerrors.CodeUnauthorized,
 			"discord user request failed",
@@ -196,12 +205,15 @@ func discordGet(
 	}
 	defer response.Body.Close()
 
-	body, err := io.ReadAll(io.LimitReader(response.Body, discordResponseMaxSize))
+	body, err := io.ReadAll(
+		io.LimitReader(response.Body, discordResponseMaxSize),
+	)
 	if err != nil {
 		return err
 	}
 
-	if response.StatusCode < http.StatusOK || response.StatusCode >= http.StatusMultipleChoices {
+	if response.StatusCode < http.StatusOK ||
+		response.StatusCode >= http.StatusMultipleChoices {
 		return serviceerrors.New(
 			serviceerrors.CodeUnauthorized,
 			"discord authorization request failed",

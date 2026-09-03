@@ -9,7 +9,7 @@ import (
 )
 
 type Request struct {
-	WorkspaceID  string `json:"workspace_id"             validate:"required,uuid"`
+	WorkspaceID  string `json:"workspace_id"            validate:"required,uuid"`
 	IncludeMedia bool   `json:"include_media,omitempty"`
 }
 

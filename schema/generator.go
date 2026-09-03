@@ -16,9 +16,10 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/invopop/jsonschema"
+
 	"github.com/elum2b/platform/internal/api/methods"
 	adapter "github.com/elum2b/platform/internal/utils/adapter"
-	"github.com/invopop/jsonschema"
 )
 
 type catalog struct {
@@ -82,12 +83,22 @@ func main() {
 
 func schemaFor(typ reflect.Type) *jsonschema.Schema {
 	schema := jsonschema.ReflectFromType(typ)
-	applyValidation(schema, typ, schema.Definitions, make(map[reflect.Type]bool))
+	applyValidation(
+		schema,
+		typ,
+		schema.Definitions,
+		make(map[reflect.Type]bool),
+	)
 
 	return schema
 }
 
-func applyValidation(schema *jsonschema.Schema, typ reflect.Type, definitions jsonschema.Definitions, visited map[reflect.Type]bool) {
+func applyValidation(
+	schema *jsonschema.Schema,
+	typ reflect.Type,
+	definitions jsonschema.Definitions,
+	visited map[reflect.Type]bool,
+) {
 	for typ.Kind() == reflect.Pointer {
 		typ = typ.Elem()
 	}
@@ -126,7 +137,12 @@ func applyValidation(schema *jsonschema.Schema, typ reflect.Type, definitions js
 	case reflect.Slice, reflect.Array:
 		applyValidation(schema.Items, typ.Elem(), definitions, visited)
 	case reflect.Map:
-		applyValidation(schema.AdditionalProperties, typ.Elem(), definitions, visited)
+		applyValidation(
+			schema.AdditionalProperties,
+			typ.Elem(),
+			definitions,
+			visited,
+		)
 	}
 }
 
@@ -152,10 +168,18 @@ func applyRules(schema *jsonschema.Schema, typ reflect.Type, tag string) {
 		case "dive":
 			typ = indirectType(typ)
 			if typ.Kind() == reflect.Slice || typ.Kind() == reflect.Array {
-				applyRules(schema.Items, typ.Elem(), strings.Join(rules[index+1:], ","))
+				applyRules(
+					schema.Items,
+					typ.Elem(),
+					strings.Join(rules[index+1:], ","),
+				)
 			}
 			if typ.Kind() == reflect.Map {
-				applyRules(schema.AdditionalProperties, typ.Elem(), strings.Join(rules[index+1:], ","))
+				applyRules(
+					schema.AdditionalProperties,
+					typ.Elem(),
+					strings.Join(rules[index+1:], ","),
+				)
 			}
 			return
 		}
@@ -172,12 +196,28 @@ func applyRequired(schema *jsonschema.Schema, typ reflect.Type) {
 		setMinProperties(schema, 1)
 	case reflect.Bool:
 		schema.Const = true
-	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Float32, reflect.Float64:
+	case reflect.Int,
+		reflect.Int8,
+		reflect.Int16,
+		reflect.Int32,
+		reflect.Int64,
+		reflect.Uint,
+		reflect.Uint8,
+		reflect.Uint16,
+		reflect.Uint32,
+		reflect.Uint64,
+		reflect.Float32,
+		reflect.Float64:
 		schema.Not = &jsonschema.Schema{Const: 0}
 	}
 }
 
-func applyBound(schema *jsonschema.Schema, typ reflect.Type, value string, minimum bool) {
+func applyBound(
+	schema *jsonschema.Schema,
+	typ reflect.Type,
+	value string,
+	minimum bool,
+) {
 	switch indirectType(typ).Kind() {
 	case reflect.String, reflect.Slice, reflect.Array, reflect.Map:
 		bound, err := strconv.ParseUint(value, 10, 64)
@@ -204,7 +244,18 @@ func applyBound(schema *jsonschema.Schema, typ reflect.Type, value string, minim
 				setMaxProperties(schema, bound)
 			}
 		}
-	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Float32, reflect.Float64:
+	case reflect.Int,
+		reflect.Int8,
+		reflect.Int16,
+		reflect.Int32,
+		reflect.Int64,
+		reflect.Uint,
+		reflect.Uint8,
+		reflect.Uint16,
+		reflect.Uint32,
+		reflect.Uint64,
+		reflect.Float32,
+		reflect.Float64:
 		if _, err := strconv.ParseFloat(value, 64); err == nil {
 			if minimum {
 				schema.Minimum = json.Number(value)
@@ -220,11 +271,19 @@ func applyEnum(schema *jsonschema.Schema, typ reflect.Type, value string) {
 		switch indirectType(typ).Kind() {
 		case reflect.String:
 			schema.Enum = append(schema.Enum, item)
-		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+		case reflect.Int,
+			reflect.Int8,
+			reflect.Int16,
+			reflect.Int32,
+			reflect.Int64:
 			if parsed, err := strconv.ParseInt(item, 10, 64); err == nil {
 				schema.Enum = append(schema.Enum, parsed)
 			}
-		case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+		case reflect.Uint,
+			reflect.Uint8,
+			reflect.Uint16,
+			reflect.Uint32,
+			reflect.Uint64:
 			if parsed, err := strconv.ParseUint(item, 10, 64); err == nil {
 				schema.Enum = append(schema.Enum, parsed)
 			}
@@ -257,7 +316,10 @@ func jsonField(field reflect.StructField) (string, bool) {
 	return field.Name, false
 }
 
-func resolve(schema *jsonschema.Schema, definitions jsonschema.Definitions) *jsonschema.Schema {
+func resolve(
+	schema *jsonschema.Schema,
+	definitions jsonschema.Definitions,
+) *jsonschema.Schema {
 	const prefix = "#/$defs/"
 	if schema != nil && strings.HasPrefix(schema.Ref, prefix) {
 		return definitions[strings.TrimPrefix(schema.Ref, prefix)]

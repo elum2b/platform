@@ -48,7 +48,11 @@ func TestDiscordResolvesTokenIdentity(t *testing.T) {
 	}
 
 	if identity.DisplayName != "Discord User" {
-		t.Errorf("DisplayName = %q, want %q", identity.DisplayName, "Discord User")
+		t.Errorf(
+			"DisplayName = %q, want %q",
+			identity.DisplayName,
+			"Discord User",
+		)
 	}
 }
 
@@ -66,7 +70,11 @@ func TestDiscordRejectsTokenFromAnotherApplication(t *testing.T) {
 		HTTPClient:  client,
 	})
 	if serviceerrors.CodeOf(err) != serviceerrors.CodeUnauthorized {
-		t.Fatalf("error code = %q, want %q", serviceerrors.CodeOf(err), serviceerrors.CodeUnauthorized)
+		t.Fatalf(
+			"error code = %q, want %q",
+			serviceerrors.CodeOf(err),
+			serviceerrors.CodeUnauthorized,
+		)
 	}
 }
 
@@ -76,29 +84,36 @@ func discordRoundTripper(
 ) http.RoundTripper {
 	t.Helper()
 
-	return roundTripperFunc(func(request *http.Request) (*http.Response, error) {
-		t.Helper()
+	return roundTripperFunc(
+		func(request *http.Request) (*http.Response, error) {
+			t.Helper()
 
-		if request.Header.Get("Authorization") != "Bearer access-token" {
-			t.Errorf("Authorization = %q", request.Header.Get("Authorization"))
-		}
+			if request.Header.Get("Authorization") != "Bearer access-token" {
+				t.Errorf(
+					"Authorization = %q",
+					request.Header.Get("Authorization"),
+				)
+			}
 
-		body, ok := bodies[request.URL.Path]
-		if !ok {
-			t.Fatalf("unexpected request path %q", request.URL.Path)
-		}
+			body, ok := bodies[request.URL.Path]
+			if !ok {
+				t.Fatalf("unexpected request path %q", request.URL.Path)
+			}
 
-		return &http.Response{
-			StatusCode: http.StatusOK,
-			Body:       io.NopCloser(strings.NewReader(body)),
-			Header:     make(http.Header),
-			Request:    request,
-		}, nil
-	})
+			return &http.Response{
+				StatusCode: http.StatusOK,
+				Body:       io.NopCloser(strings.NewReader(body)),
+				Header:     make(http.Header),
+				Request:    request,
+			}, nil
+		},
+	)
 }
 
 type roundTripperFunc func(*http.Request) (*http.Response, error)
 
-func (function roundTripperFunc) RoundTrip(request *http.Request) (*http.Response, error) {
+func (function roundTripperFunc) RoundTrip(
+	request *http.Request,
+) (*http.Response, error) {
 	return function(request)
 }

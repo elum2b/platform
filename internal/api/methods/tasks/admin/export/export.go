@@ -39,7 +39,7 @@ var Manifest = adapter.Method[struct{}, ManifestResponse]{
 }
 
 type Request struct {
-	WorkspaceID string    `json:"workspace_id" validate:"required,uuid"`
+	WorkspaceID string    `json:"workspace_id"       validate:"required,uuid"`
 	Sections    []string  `json:"sections,omitempty"`
 	Now         time.Time `json:"now"`
 }
