@@ -8,12 +8,12 @@ import (
 )
 
 type UpdateStatusRequest struct {
-	WorkspaceID            string  `json:"workspace_id"             validate:"required,uuid"`
-	ProviderCode           string  `json:"provider_code"            validate:"required,max=255"`
-	ProviderSubscriptionID string  `json:"provider_subscription_id" validate:"required,max=255"`
-	Status                 string  `json:"status"                   validate:"required"`
-	CancelReason           *string `json:"cancel_reason,omitempty"`
-	EndedAt                *int64  `json:"ended_at,omitempty"`
+	WorkspaceID            string  `json:"workspace_id"             query:"workspace_id"             validate:"required,uuid"`
+	ProviderCode           string  `json:"provider_code"            query:"provider_code"            validate:"required,max=255"`
+	ProviderSubscriptionID string  `json:"provider_subscription_id" query:"provider_subscription_id" validate:"required,max=255"`
+	Status                 string  `json:"status"                   query:"status"                   validate:"required"`
+	CancelReason           *string `json:"cancel_reason,omitempty"  query:"cancel_reason"`
+	EndedAt                *int64  `json:"ended_at,omitempty"       query:"ended_at"`
 }
 
 type UpdateStatusResponse struct {

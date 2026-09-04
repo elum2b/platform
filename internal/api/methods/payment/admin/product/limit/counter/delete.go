@@ -10,14 +10,14 @@ import (
 )
 
 type DeleteRequest struct {
-	WorkspaceID    string `json:"workspace_id"               validate:"required,uuid"`
-	AppID          int64  `json:"app_id"                     validate:"required,min=1"`
-	PlatformID     int64  `json:"platform_id"                validate:"required,min=1"`
-	ProductID      string `json:"product_id"                 validate:"required,max=255"`
-	CounterScope   string `json:"counter_scope"              validate:"required,oneof=global user"`
-	PlatformUserID string `json:"platform_user_id,omitempty"`
-	WindowStart    int64  `json:"window_start"               validate:"required,min=0"`
-	WindowEnd      int64  `json:"window_end"                 validate:"required,min=0"`
+	WorkspaceID    string `json:"workspace_id"               query:"workspace_id"     validate:"required,uuid"`
+	AppID          int64  `json:"app_id"                     query:"app_id"           validate:"required,min=1"`
+	PlatformID     int64  `json:"platform_id"                query:"platform_id"      validate:"required,min=1"`
+	ProductID      string `json:"product_id"                 query:"product_id"       validate:"required,max=255"`
+	CounterScope   string `json:"counter_scope"              query:"counter_scope"    validate:"required,oneof=global user"`
+	PlatformUserID string `json:"platform_user_id,omitempty" query:"platform_user_id"`
+	WindowStart    int64  `json:"window_start"               query:"window_start"     validate:"required,min=0"`
+	WindowEnd      int64  `json:"window_end"                 query:"window_end"       validate:"required,min=0"`
 }
 
 type DeleteResponse struct {

@@ -6,9 +6,9 @@ import (
 )
 
 type SetActiveRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	ID          string `json:"id"           validate:"required,max=255"`
-	Active      bool   `json:"active"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	ID          string `json:"id"           query:"id"           validate:"required,max=255"`
+	Active      bool   `json:"active"       query:"active"`
 }
 
 type SetActiveResponse struct {

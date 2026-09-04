@@ -6,8 +6,8 @@ import (
 )
 
 type RevokeRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	InviteID    string `json:"invite_id"    validate:"required,uuid"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	InviteID    string `json:"invite_id"    query:"invite_id"    validate:"required,uuid"`
 }
 
 type RevokeResponse struct {

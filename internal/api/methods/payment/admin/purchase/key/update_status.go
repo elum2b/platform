@@ -6,9 +6,9 @@ import (
 )
 
 type UpdateStatusRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	ID          uint64 `json:"id"           validate:"required,min=1"`
-	Status      string `json:"status"       validate:"required"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	ID          uint64 `json:"id"           query:"id"           validate:"required,min=1"`
+	Status      string `json:"status"       query:"status"       validate:"required"`
 }
 
 type UpdateStatusResponse struct {

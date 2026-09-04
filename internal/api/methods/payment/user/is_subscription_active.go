@@ -8,12 +8,11 @@ import (
 )
 
 type IsSubscriptionActiveRequest struct {
-	WorkspaceID  string `json:"workspace_id"  validate:"required,uuid"`
-	AppID        int64  `json:"app_id"        validate:"required,min=1"`
-	PlatformID   int64  `json:"platform_id"   validate:"required,min=1"`
-	Params       string `json:"params"        validate:"required"`
-	ProductID    string `json:"product_id"    validate:"required,max=255"`
-	ProviderCode string `json:"provider_code" validate:"required,max=255"`
+	WorkspaceID  string `json:"workspace_id"  query:"workspace_id"  validate:"required,uuid"`
+	AppID        int64  `json:"app_id"        query:"app_id"        validate:"required,min=1"`
+	PlatformID   int64  `json:"platform_id"   query:"platform_id"   validate:"required,min=1"`
+	ProductID    string `json:"product_id"    query:"product_id"    validate:"required,max=255"`
+	ProviderCode string `json:"provider_code" query:"provider_code" validate:"required,max=255"`
 }
 
 type IsSubscriptionActiveResponse struct {
@@ -29,7 +28,7 @@ Checks if the authenticated application user has an active subscription.`
 var IsSubscriptionActive = adapter.Method[IsSubscriptionActiveRequest, IsSubscriptionActiveResponse]{
 	Key:         isSubscriptionActiveKey,
 	Description: isSubscriptionActiveDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, d IsSubscriptionActiveRequest) (IsSubscriptionActiveResponse, error) {
 		active, err := services.Payment.User.IsSubscriptionActive(
 			ctx.Context,

@@ -8,15 +8,15 @@ import (
 )
 
 type CreateRequest struct {
-	WorkspaceID      string  `json:"workspace_id"                 validate:"required,uuid"`
-	OrderID          uint64  `json:"order_id"                     validate:"required,min=1"`
-	AttemptID        uint64  `json:"attempt_id"                   validate:"required,min=1"`
-	ProviderCode     string  `json:"provider_code"                validate:"required,max=255"`
-	ProviderRefundID *string `json:"provider_refund_id,omitempty"`
-	AmountMinor      uint64  `json:"amount_minor"                 validate:"required,min=0"`
-	AssetCode        string  `json:"asset_code"                   validate:"required,max=255"`
-	Status           string  `json:"status,omitempty"`
-	Reason           *string `json:"reason,omitempty"`
+	WorkspaceID      string  `json:"workspace_id"                 query:"workspace_id"       validate:"required,uuid"`
+	OrderID          uint64  `json:"order_id"                     query:"order_id"           validate:"required,min=1"`
+	AttemptID        uint64  `json:"attempt_id"                   query:"attempt_id"         validate:"required,min=1"`
+	ProviderCode     string  `json:"provider_code"                query:"provider_code"      validate:"required,max=255"`
+	ProviderRefundID *string `json:"provider_refund_id,omitempty" query:"provider_refund_id"`
+	AmountMinor      uint64  `json:"amount_minor"                 query:"amount_minor"       validate:"required,min=0"`
+	AssetCode        string  `json:"asset_code"                   query:"asset_code"         validate:"required,max=255"`
+	Status           string  `json:"status,omitempty"             query:"status"`
+	Reason           *string `json:"reason,omitempty"             query:"reason"`
 }
 
 type CreateResponse struct {

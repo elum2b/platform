@@ -11,18 +11,18 @@ import (
 )
 
 type UpsertRequest struct {
-	WorkspaceID       string          `json:"workspace_id"                 validate:"required,uuid"`
-	ID                string          `json:"id"                           validate:"required,max=255"`
-	Payload           json.RawMessage `json:"payload"                      validate:"required"`
-	Target            json.RawMessage `json:"target,omitempty"`
-	CodeMode          string          `json:"code_mode"                    validate:"required"`
-	CodeSource        *string         `json:"code_source,omitempty"`
-	SharedCode        *string         `json:"shared_code,omitempty"`
-	GeneratedLength   *int16          `json:"generated_length,omitempty"`
-	GeneratedAlphabet *string         `json:"generated_alphabet,omitempty"`
-	IsActive          bool            `json:"is_active"`
-	StartAt           *time.Time      `json:"start_at,omitempty"`
-	EndAt             *time.Time      `json:"end_at,omitempty"`
+	WorkspaceID       string          `json:"workspace_id"                 query:"workspace_id"       validate:"required,uuid"`
+	ID                string          `json:"id"                           query:"id"                 validate:"required,max=255"`
+	Payload           json.RawMessage `json:"payload"                      query:"payload"            validate:"required"`
+	Target            json.RawMessage `json:"target,omitempty"             query:"target"`
+	CodeMode          string          `json:"code_mode"                    query:"code_mode"          validate:"required"`
+	CodeSource        *string         `json:"code_source,omitempty"        query:"code_source"`
+	SharedCode        *string         `json:"shared_code,omitempty"        query:"shared_code"`
+	GeneratedLength   *int16          `json:"generated_length,omitempty"   query:"generated_length"`
+	GeneratedAlphabet *string         `json:"generated_alphabet,omitempty" query:"generated_alphabet"`
+	IsActive          bool            `json:"is_active"                    query:"is_active"`
+	StartAt           *time.Time      `json:"start_at,omitempty"           query:"start_at"`
+	EndAt             *time.Time      `json:"end_at,omitempty"             query:"end_at"`
 }
 
 var (

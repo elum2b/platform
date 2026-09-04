@@ -8,10 +8,9 @@ import (
 )
 
 type ListUSDTPricesRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	AppID       int64  `json:"app_id"       validate:"required,min=1"`
-	PlatformID  int64  `json:"platform_id"  validate:"required,min=1"`
-	Params      string `json:"params"       validate:"required"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	AppID       int64  `json:"app_id"       query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64  `json:"platform_id"  query:"platform_id"  validate:"required,min=1"`
 }
 
 type ListUSDTPricesResponse struct {
@@ -27,7 +26,7 @@ Lists USDT prices for the authenticated application user.`
 var ListUSDTPrices = adapter.Method[ListUSDTPricesRequest, ListUSDTPricesResponse]{
 	Key:         listUSDTPricesKey,
 	Description: listUSDTPricesDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, d ListUSDTPricesRequest) (ListUSDTPricesResponse, error) {
 		v, err := services.Payment.User.ListUSDTPrices(
 			ctx.Context,

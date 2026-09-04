@@ -8,12 +8,11 @@ import (
 )
 
 type GetRequest struct {
-	WorkspaceID string `json:"workspace_id"     validate:"required,uuid"`
-	AppID       int64  `json:"app_id"           validate:"required,min=1"`
-	PlatformID  int64  `json:"platform_id"      validate:"required,min=1"`
-	Params      string `json:"params"           validate:"required"`
-	Ref         string `json:"ref"              validate:"required,max=255"`
-	Locale      string `json:"locale,omitempty"`
+	WorkspaceID string `json:"workspace_id"     query:"workspace_id" validate:"required,uuid"`
+	AppID       int64  `json:"app_id"           query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64  `json:"platform_id"      query:"platform_id"  validate:"required,min=1"`
+	Ref         string `json:"ref"              query:"ref"          validate:"required,max=255"`
+	Locale      string `json:"locale,omitempty" query:"locale"`
 }
 
 type GetResponse struct {
@@ -31,7 +30,7 @@ application user.`
 var Get = adapter.Method[GetRequest, GetResponse]{
 	Key:         getKey,
 	Description: getDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, data GetRequest) (GetResponse, error) {
 		cal, err := services.Calendar.User.GetCalendar(
 			ctx.Context,

@@ -8,9 +8,9 @@ import (
 )
 
 type GetRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	Locale      string `json:"locale"       validate:"required,max=255"`
-	Key         string `json:"key"          validate:"required,max=255"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	Locale      string `json:"locale"       query:"locale"       validate:"required,max=255"`
+	Key         string `json:"key"          query:"key"          validate:"required,max=255"`
 }
 
 type GetResponse struct {

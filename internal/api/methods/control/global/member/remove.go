@@ -6,7 +6,7 @@ import (
 )
 
 type RemoveRequest struct {
-	AccountID string `json:"account_id" validate:"required,uuid"`
+	AccountID string `json:"account_id" query:"account_id" validate:"required,uuid"`
 }
 
 type RemoveResponse struct {

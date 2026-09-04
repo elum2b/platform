@@ -6,7 +6,7 @@ import (
 )
 
 type RevokeRequest struct {
-	SessionID string `json:"session_id" validate:"required,uuid"`
+	SessionID string `json:"session_id" query:"session_id" validate:"required,uuid"`
 }
 
 type RevokeResponse struct {

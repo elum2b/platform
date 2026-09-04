@@ -11,18 +11,17 @@ import (
 )
 
 type CreateOrderRequest struct {
-	WorkspaceID    string     `json:"workspace_id"               validate:"required,uuid"`
-	AppID          int64      `json:"app_id"                     validate:"required,min=1"`
-	PlatformID     int64      `json:"platform_id"                validate:"required,min=1"`
-	Params         string     `json:"params"                     validate:"required"`
-	InternalUserID *int64     `json:"internal_user_id,omitempty"`
-	Payer          string     `json:"payer"                      validate:"required"`
-	ProductID      string     `json:"product_id"                 validate:"required,max=255"`
-	Quantity       uint64     `json:"quantity"                   validate:"required,min=1"`
-	AssetCode      string     `json:"asset_code"                 validate:"required,max=255"`
-	Locale         string     `json:"locale,omitempty"`
-	ReservedUntil  *time.Time `json:"reserved_until,omitempty"`
-	ExpiresAt      *time.Time `json:"expires_at,omitempty"`
+	WorkspaceID    string     `json:"workspace_id"               query:"workspace_id"     validate:"required,uuid"`
+	AppID          int64      `json:"app_id"                     query:"app_id"           validate:"required,min=1"`
+	PlatformID     int64      `json:"platform_id"                query:"platform_id"      validate:"required,min=1"`
+	InternalUserID *int64     `json:"internal_user_id,omitempty" query:"internal_user_id"`
+	Payer          string     `json:"payer"                      query:"payer"            validate:"required"`
+	ProductID      string     `json:"product_id"                 query:"product_id"       validate:"required,max=255"`
+	Quantity       uint64     `json:"quantity"                   query:"quantity"         validate:"required,min=1"`
+	AssetCode      string     `json:"asset_code"                 query:"asset_code"       validate:"required,max=255"`
+	Locale         string     `json:"locale,omitempty"           query:"locale"`
+	ReservedUntil  *time.Time `json:"reserved_until,omitempty"   query:"reserved_until"`
+	ExpiresAt      *time.Time `json:"expires_at,omitempty"       query:"expires_at"`
 }
 
 type CreateOrderResponse struct {
@@ -38,7 +37,7 @@ Creates an order for the authenticated application user.`
 var CreateOrder = adapter.Method[CreateOrderRequest, CreateOrderResponse]{
 	Key:         createOrderKey,
 	Description: createOrderDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, d CreateOrderRequest) (CreateOrderResponse, error) {
 		v, err := appservices.Payment.User.CreateOrder(
 			ctx.Context,

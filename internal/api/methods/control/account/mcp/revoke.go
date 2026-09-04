@@ -8,7 +8,7 @@ import (
 )
 
 type RevokeRequest struct {
-	TokenID string `json:"token_id" validate:"required,uuid"`
+	TokenID string `json:"token_id" query:"token_id" validate:"required,uuid"`
 }
 
 type RevokeResponse struct {

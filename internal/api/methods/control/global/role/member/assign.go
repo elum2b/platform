@@ -8,8 +8,8 @@ import (
 )
 
 type AssignRequest struct {
-	AccountID string `json:"account_id" validate:"required,uuid"`
-	RoleID    string `json:"role_id"    validate:"required,uuid"`
+	AccountID string `json:"account_id" query:"account_id" validate:"required,uuid"`
+	RoleID    string `json:"role_id"    query:"role_id"    validate:"required,uuid"`
 }
 
 var (

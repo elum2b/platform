@@ -8,8 +8,8 @@ import (
 )
 
 type GetByPublicIDRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	PublicID    string `json:"public_id"    validate:"required,max=255"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	PublicID    string `json:"public_id"    query:"public_id"    validate:"required,max=255"`
 }
 
 type GetByPublicIDResponse struct {

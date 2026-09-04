@@ -10,20 +10,20 @@ import (
 )
 
 type UpsertRequest struct {
-	WorkspaceID         string     `json:"workspace_id"          validate:"required,uuid"`
-	ID                  string     `json:"id"                    validate:"required,max=255"`
-	Type                string     `json:"type"                  validate:"required"`
-	Mode                string     `json:"mode"                  validate:"required"`
-	IntervalType        string     `json:"interval_type"         validate:"required"`
-	IntervalUnit        string     `json:"interval_unit"         validate:"required"`
-	IntervalCount       uint32     `json:"interval_count"`
-	ResetAfterIntervals uint32     `json:"reset_after_intervals"`
-	EndBehavior         string     `json:"end_behavior"          validate:"required"`
-	Timezone            string     `json:"timezone"              validate:"required"`
-	HideFutureRewards   bool       `json:"hide_future_rewards"`
-	IsActive            bool       `json:"is_active"`
-	StartAt             *time.Time `json:"start_at,omitempty"`
-	EndAt               *time.Time `json:"end_at,omitempty"`
+	WorkspaceID         string     `json:"workspace_id"          query:"workspace_id"          validate:"required,uuid"`
+	ID                  string     `json:"id"                    query:"id"                    validate:"required,max=255"`
+	Type                string     `json:"type"                  query:"type"                  validate:"required"`
+	Mode                string     `json:"mode"                  query:"mode"                  validate:"required"`
+	IntervalType        string     `json:"interval_type"         query:"interval_type"         validate:"required"`
+	IntervalUnit        string     `json:"interval_unit"         query:"interval_unit"         validate:"required"`
+	IntervalCount       uint32     `json:"interval_count"        query:"interval_count"`
+	ResetAfterIntervals uint32     `json:"reset_after_intervals" query:"reset_after_intervals"`
+	EndBehavior         string     `json:"end_behavior"          query:"end_behavior"          validate:"required"`
+	Timezone            string     `json:"timezone"              query:"timezone"              validate:"required"`
+	HideFutureRewards   bool       `json:"hide_future_rewards"   query:"hide_future_rewards"`
+	IsActive            bool       `json:"is_active"             query:"is_active"`
+	StartAt             *time.Time `json:"start_at,omitempty"    query:"start_at"`
+	EndAt               *time.Time `json:"end_at,omitempty"      query:"end_at"`
 }
 
 type UpsertResponse struct {

@@ -6,9 +6,9 @@ import (
 )
 
 type DeleteRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	ProductID   string `json:"product_id"   validate:"required,max=255"`
-	ItemID      string `json:"item_id"      validate:"required,max=255"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	ProductID   string `json:"product_id"   query:"product_id"   validate:"required,max=255"`
+	ItemID      string `json:"item_id"      query:"item_id"      validate:"required,max=255"`
 }
 
 type DeleteResponse struct {

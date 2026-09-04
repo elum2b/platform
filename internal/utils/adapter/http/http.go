@@ -26,10 +26,9 @@ type RegisterFunc func(fiber.Router)
 
 // Init registers the internal HTTP API used exclusively for authentication.
 func Init(app fiber.Router, register RegisterFunc) {
-	internal := app.Group("/internal")
-	control := internal.Group("/control")
+	http := app.Group("/http")
 
-	register(control)
+	register(http)
 }
 
 func Decode(ctx fiber.Ctx, data any) bool {

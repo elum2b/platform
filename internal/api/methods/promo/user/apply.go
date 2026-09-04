@@ -8,12 +8,11 @@ import (
 )
 
 type Request struct {
-	WorkspaceID string `json:"workspace_id"     validate:"required,uuid"`
-	AppID       int64  `json:"app_id"           validate:"required,min=1"`
-	PlatformID  int64  `json:"platform_id"      validate:"required,min=1"`
-	Params      string `json:"params"           validate:"required"`
-	Code        string `json:"code"             validate:"required"`
-	Locale      string `json:"locale,omitempty"`
+	WorkspaceID string `json:"workspace_id"     query:"workspace_id" validate:"required,uuid"`
+	AppID       int64  `json:"app_id"           query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64  `json:"platform_id"      query:"platform_id"  validate:"required,min=1"`
+	Code        string `json:"code"             query:"code"         validate:"required"`
+	Locale      string `json:"locale,omitempty" query:"locale"`
 }
 
 type Response struct {
@@ -31,7 +30,7 @@ details and redemption status.`
 var Method = adapter.Method[Request, Response]{
 	Key:         applyKey,
 	Description: applyDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, data Request) (Response, error) {
 		result, err := services.Promo.User.Apply(
 			ctx.Context,

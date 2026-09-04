@@ -8,13 +8,12 @@ import (
 )
 
 type ListRequest struct {
-	WorkspaceID string `json:"workspace_id"     validate:"required,uuid"`
-	AppID       int64  `json:"app_id"           validate:"required,min=1"`
-	PlatformID  int64  `json:"platform_id"      validate:"required,min=1"`
-	Params      string `json:"params"           validate:"required"`
-	Locale      string `json:"locale,omitempty"`
-	Limit       int32  `json:"limit,omitempty"  validate:"omitempty,min=1,max=100"`
-	Offset      int32  `json:"offset,omitempty" validate:"min=0"`
+	WorkspaceID string `json:"workspace_id"     query:"workspace_id" validate:"required,uuid"`
+	AppID       int64  `json:"app_id"           query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64  `json:"platform_id"      query:"platform_id"  validate:"required,min=1"`
+	Locale      string `json:"locale,omitempty" query:"locale"`
+	Limit       int32  `json:"limit,omitempty"  query:"limit"        validate:"omitempty,min=1,max=100"`
+	Offset      int32  `json:"offset,omitempty" query:"offset"       validate:"min=0"`
 }
 
 type ListResponse struct {
@@ -31,7 +30,7 @@ Lists reference items for the authenticated application user.`
 var List = adapter.Method[ListRequest, ListResponse]{
 	Key:         listKey,
 	Description: listDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, data ListRequest) (ListResponse, error) {
 		items, err := services.Reference.User.List(
 			ctx.Context,

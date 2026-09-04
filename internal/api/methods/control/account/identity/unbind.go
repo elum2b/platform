@@ -6,7 +6,7 @@ import (
 )
 
 type UnbindRequest struct {
-	Provider string `json:"provider" validate:"required"`
+	Provider string `json:"provider" query:"provider" validate:"required"`
 }
 
 type UnbindResponse struct {

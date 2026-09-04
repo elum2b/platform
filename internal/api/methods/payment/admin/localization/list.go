@@ -8,10 +8,10 @@ import (
 )
 
 type ListRequest struct {
-	WorkspaceID string `json:"workspace_id"     validate:"required,uuid"`
-	Locale      string `json:"locale,omitempty"`
-	Limit       int32  `json:"limit,omitempty"  validate:"omitempty,min=1,max=100"`
-	Offset      int32  `json:"offset,omitempty" validate:"min=0"`
+	WorkspaceID string `json:"workspace_id"     query:"workspace_id" validate:"required,uuid"`
+	Locale      string `json:"locale,omitempty" query:"locale"`
+	Limit       int32  `json:"limit,omitempty"  query:"limit"        validate:"omitempty,min=1,max=100"`
+	Offset      int32  `json:"offset,omitempty" query:"offset"       validate:"min=0"`
 }
 
 type ListResponse struct {

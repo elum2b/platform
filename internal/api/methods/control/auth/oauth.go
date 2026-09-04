@@ -12,11 +12,11 @@ import (
 )
 
 type OAuthRequest struct {
-	Code        string `json:"code"`
-	AccessToken string `json:"access_token"`
-	RedirectURI string `json:"redirect_uri"`
-	InviteToken string `json:"invite_token"`
-	BindToIP    bool   `json:"bind_to_ip"`
+	Code        string `json:"code"         query:"code"`
+	AccessToken string `json:"access_token" query:"access_token"`
+	RedirectURI string `json:"redirect_uri" query:"redirect_uri"`
+	InviteToken string `json:"invite_token" query:"invite_token"`
+	BindToIP    bool   `json:"bind_to_ip"   query:"bind_to_ip"`
 }
 
 type oauthConfig struct {

@@ -8,12 +8,12 @@ import (
 )
 
 type UpsertRequest struct {
-	WorkspaceID     string `json:"workspace_id"      validate:"required,uuid"`
-	ParentTaskID    uint64 `json:"parent_task_id"    validate:"required,min=1"`
-	ConditionTaskID uint64 `json:"condition_task_id" validate:"required,min=1"`
-	RequiredStatus  string `json:"required_status"   validate:"required"`
-	Position        int32  `json:"position"`
-	IsRequired      bool   `json:"is_required"`
+	WorkspaceID     string `json:"workspace_id"      query:"workspace_id"      validate:"required,uuid"`
+	ParentTaskID    uint64 `json:"parent_task_id"    query:"parent_task_id"    validate:"required,min=1"`
+	ConditionTaskID uint64 `json:"condition_task_id" query:"condition_task_id" validate:"required,min=1"`
+	RequiredStatus  string `json:"required_status"   query:"required_status"   validate:"required"`
+	Position        int32  `json:"position"          query:"position"`
+	IsRequired      bool   `json:"is_required"       query:"is_required"`
 }
 
 var (

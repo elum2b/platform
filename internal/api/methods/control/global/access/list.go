@@ -8,8 +8,8 @@ import (
 )
 
 type ListRequest struct {
-	Locale string                   `json:"locale,omitempty" validate:"max=32"`
-	Scope  controladmin.AccessScope `json:"scope,omitempty"  validate:"omitempty,oneof=global workspace"`
+	Locale string                   `json:"locale,omitempty" query:"locale" validate:"max=32"`
+	Scope  controladmin.AccessScope `json:"scope,omitempty"  query:"scope"  validate:"omitempty,oneof=global workspace"`
 }
 
 type Access struct {

@@ -8,12 +8,11 @@ import (
 )
 
 type PartnerCheckRequest struct {
-	WorkspaceID string            `json:"workspace_id"        validate:"required,uuid"`
-	AppID       int64             `json:"app_id"              validate:"required,min=1"`
-	PlatformID  int64             `json:"platform_id"         validate:"required,min=1"`
-	Params      string            `json:"params"              validate:"required"`
-	IssueRef    string            `json:"issue_ref"           validate:"required"`
-	Variables   map[string]string `json:"variables,omitempty"`
+	WorkspaceID string            `json:"workspace_id"        query:"workspace_id" validate:"required,uuid"`
+	AppID       int64             `json:"app_id"              query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64             `json:"platform_id"         query:"platform_id"  validate:"required,min=1"`
+	IssueRef    string            `json:"issue_ref"           query:"issue_ref"    validate:"required"`
+	Variables   map[string]string `json:"variables,omitempty" query:"variables"`
 }
 
 type PartnerCheckResponse struct {
@@ -31,7 +30,7 @@ application user.`
 var PartnerCheck = adapter.Method[PartnerCheckRequest, PartnerCheckResponse]{
 	Key:         partnerCheckKey,
 	Description: partnerCheckDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, data PartnerCheckRequest) (PartnerCheckResponse, error) {
 		result, err := services.Tasks.User.CheckPartner(
 			ctx.Context,

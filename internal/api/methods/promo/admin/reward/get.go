@@ -8,9 +8,9 @@ import (
 )
 
 type GetRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	PromoID     uint64 `json:"promo_id"     validate:"required,min=1"`
-	Key         string `json:"key"          validate:"required,max=255"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	PromoID     uint64 `json:"promo_id"     query:"promo_id"     validate:"required,min=1"`
+	Key         string `json:"key"          query:"key"          validate:"required,max=255"`
 }
 
 type GetResponse struct {

@@ -8,12 +8,11 @@ import (
 )
 
 type ResolveRequest struct {
-	WorkspaceID string   `json:"workspace_id"     validate:"required,uuid"`
-	AppID       int64    `json:"app_id"           validate:"required,min=1"`
-	PlatformID  int64    `json:"platform_id"      validate:"required,min=1"`
-	Params      string   `json:"params"           validate:"required"`
-	Keys        []string `json:"keys"             validate:"required,min=1,max=1000"`
-	Locale      string   `json:"locale,omitempty"`
+	WorkspaceID string   `json:"workspace_id"     query:"workspace_id" validate:"required,uuid"`
+	AppID       int64    `json:"app_id"           query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64    `json:"platform_id"      query:"platform_id"  validate:"required,min=1"`
+	Keys        []string `json:"keys"             query:"keys"         validate:"required,min=1,max=1000"`
+	Locale      string   `json:"locale,omitempty" query:"locale"`
 }
 
 type ResolveResponse struct {
@@ -31,7 +30,7 @@ user. Returns found items and a list of missing keys.`
 var Resolve = adapter.Method[ResolveRequest, ResolveResponse]{
 	Key:         resolveKey,
 	Description: resolveDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, data ResolveRequest) (ResolveResponse, error) {
 		result, err := services.Reference.User.Resolve(
 			ctx.Context,

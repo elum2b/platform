@@ -72,3 +72,73 @@ func TestErrorEnvelope(t *testing.T) {
 		)
 	}
 }
+
+func TestDecodeGETQueryBinding(t *testing.T) {
+	type request struct {
+		ID string `json:"id" query:"id" validate:"required,uuid"`
+
+		Name string `json:"name" query:"name" validate:"required"`
+
+		Count int `json:"count" query:"count" validate:"required,min=1"`
+
+		Labels []string `json:"labels" query:"labels" validate:"required,min=2"`
+	}
+
+	app := fiber.New()
+	app.Get("/", func(ctx fiber.Ctx) error {
+		var data request
+
+		if !Decode(ctx, &data) {
+			return Error(ctx, serviceerrors.ErrInvalidFields)
+		}
+
+		if data.ID != "f47ac10b-58cc-4372-a567-0e02b2c3d479" ||
+			data.Name != "test" ||
+			data.Count != 2 ||
+			len(data.Labels) != 2 ||
+			data.Labels[0] != "first" ||
+			data.Labels[1] != "second" {
+			return Error(ctx, serviceerrors.ErrInvalidFields)
+		}
+
+		return ctx.SendStatus(http.StatusOK)
+	})
+
+	for _, test := range []struct {
+		name   string
+		query  string
+		status int
+	}{
+		{
+			name:   "valid",
+			query:  "?id=f47ac10b-58cc-4372-a567-0e02b2c3d479&name=test&count=2&labels=first&labels=second",
+			status: http.StatusOK,
+		},
+		{
+			name:   "invalid integer",
+			query:  "?id=f47ac10b-58cc-4372-a567-0e02b2c3d479&name=test&count=invalid&labels=first&labels=second",
+			status: http.StatusBadRequest,
+		},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			response, err := app.Test(httptest.NewRequestWithContext(
+				context.Background(),
+				http.MethodGet,
+				"/"+test.query,
+				http.NoBody,
+			))
+			if err != nil {
+				t.Fatalf("app.Test() error = %v", err)
+			}
+			defer response.Body.Close()
+
+			if response.StatusCode != test.status {
+				t.Errorf(
+					"GET binding status = %d, want %d",
+					response.StatusCode,
+					test.status,
+				)
+			}
+		})
+	}
+}

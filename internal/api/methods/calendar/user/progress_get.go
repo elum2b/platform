@@ -8,11 +8,10 @@ import (
 )
 
 type GetProgressRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	AppID       int64  `json:"app_id"       validate:"required,min=1"`
-	PlatformID  int64  `json:"platform_id"  validate:"required,min=1"`
-	Params      string `json:"params"       validate:"required"`
-	CalendarID  string `json:"calendar_id"  validate:"required,max=255"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	AppID       int64  `json:"app_id"       query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64  `json:"platform_id"  query:"platform_id"  validate:"required,min=1"`
+	CalendarID  string `json:"calendar_id"  query:"calendar_id"  validate:"required,max=255"`
 }
 
 type GetProgressResponse struct {
@@ -29,7 +28,7 @@ Returns the application user's progress on a calendar.`
 var GetProgress = adapter.Method[GetProgressRequest, GetProgressResponse]{
 	Key:         getProgressKey,
 	Description: getProgressDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, data GetProgressRequest) (GetProgressResponse, error) {
 		progress, err := services.Calendar.User.GetProgress(
 			ctx.Context,

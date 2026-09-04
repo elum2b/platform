@@ -10,9 +10,9 @@ import (
 )
 
 type CreateRequest struct {
-	WorkspaceID string     `json:"workspace_id"         validate:"required,uuid"`
-	RoleIDs     []string   `json:"role_ids"             validate:"dive,uuid"`
-	ExpiresAt   *time.Time `json:"expires_at,omitempty"`
+	WorkspaceID string     `json:"workspace_id"         query:"workspace_id" validate:"required,uuid"`
+	RoleIDs     []string   `json:"role_ids"             query:"role_ids"     validate:"dive,uuid"`
+	ExpiresAt   *time.Time `json:"expires_at,omitempty" query:"expires_at"`
 }
 
 type CreateResponse struct {

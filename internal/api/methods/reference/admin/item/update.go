@@ -10,10 +10,10 @@ import (
 )
 
 type UpdateRequest struct {
-	WorkspaceID string          `json:"workspace_id" validate:"required,uuid"`
-	Key         string          `json:"key"          validate:"required,max=255"`
-	Payload     json.RawMessage `json:"payload"      validate:"required"`
-	IsActive    bool            `json:"is_active"`
+	WorkspaceID string          `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	Key         string          `json:"key"          query:"key"          validate:"required,max=255"`
+	Payload     json.RawMessage `json:"payload"      query:"payload"      validate:"required"`
+	IsActive    bool            `json:"is_active"    query:"is_active"`
 }
 
 type UpdateResponse struct {

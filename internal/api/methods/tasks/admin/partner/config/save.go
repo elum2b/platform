@@ -10,15 +10,15 @@ import (
 )
 
 type SaveRequest struct {
-	WorkspaceID   string          `json:"workspace_id"             validate:"required,uuid"`
-	Provider      string          `json:"provider"                 validate:"required"`
-	GroupKey      string          `json:"group_key"                validate:"required,max=255"`
-	Platform      string          `json:"platform"                 validate:"required"`
-	IsEnabled     bool            `json:"is_enabled"`
-	Secret        *string         `json:"secret,omitempty"`
-	WebhookSecret *string         `json:"webhook_secret,omitempty"`
-	Target        json.RawMessage `json:"target,omitempty"`
-	Settings      json.RawMessage `json:"settings,omitempty"`
+	WorkspaceID   string          `json:"workspace_id"             query:"workspace_id"   validate:"required,uuid"`
+	Provider      string          `json:"provider"                 query:"provider"       validate:"required"`
+	GroupKey      string          `json:"group_key"                query:"group_key"      validate:"required,max=255"`
+	Platform      string          `json:"platform"                 query:"platform"       validate:"required"`
+	IsEnabled     bool            `json:"is_enabled"               query:"is_enabled"`
+	Secret        *string         `json:"secret,omitempty"         query:"secret"`
+	WebhookSecret *string         `json:"webhook_secret,omitempty" query:"webhook_secret"`
+	Target        json.RawMessage `json:"target,omitempty"         query:"target"`
+	Settings      json.RawMessage `json:"settings,omitempty"       query:"settings"`
 }
 
 var (

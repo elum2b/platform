@@ -9,13 +9,13 @@ import (
 )
 
 type TONRequest struct {
-	Address         string                      `json:"address"           validate:"required"`
-	Network         string                      `json:"network"`
-	PublicKey       string                      `json:"public_key"`
-	WalletStateInit string                      `json:"wallet_state_init"`
-	Proof           controlauth.TONConnectProof `json:"proof"             validate:"required"`
-	InviteToken     string                      `json:"invite_token"`
-	BindToIP        bool                        `json:"bind_to_ip"`
+	Address         string                      `json:"address"           query:"address"           validate:"required"`
+	Network         string                      `json:"network"           query:"network"`
+	PublicKey       string                      `json:"public_key"        query:"public_key"`
+	WalletStateInit string                      `json:"wallet_state_init" query:"wallet_state_init"`
+	Proof           controlauth.TONConnectProof `json:"proof"             query:"proof"             validate:"required"`
+	InviteToken     string                      `json:"invite_token"      query:"invite_token"`
+	BindToIP        bool                        `json:"bind_to_ip"        query:"bind_to_ip"`
 }
 
 var (

@@ -2,6 +2,7 @@ package adapter
 
 import (
 	"context"
+	"strings"
 
 	etp "github.com/elum-utils/go-etp"
 	serviceapi "github.com/elum2b/services"
@@ -77,13 +78,26 @@ func ApplicationUser(ctx *Context) error {
 		return serviceerrors.ErrInvalidFields
 	}
 
+	launch := data.Params
+	if ctx.Transport == HTTP {
+		var ok bool
+
+		launch, ok = authorizationLaunch(ctx.HTTP.Get("Authorization"))
+
+		if !ok {
+			return serviceerrors.ErrUnauthorized
+		}
+	} else if launch == "" {
+		return serviceerrors.ErrInvalidFields
+	}
+
 	identity, err := services.Control.Internal.AuthenticateApplicationUser(
 		ctx.Context,
 		internalapi.AuthenticateApplicationUserRequest{
 			WorkspaceID: data.WorkspaceID,
 			AppID:       data.AppID,
 			PlatformID:  data.PlatformID,
-			Launch:      data.Params,
+			Launch:      launch,
 		},
 	)
 	if err != nil {
@@ -161,7 +175,16 @@ type applicationUserRequest struct {
 	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
 	AppID       int64  `json:"app_id"       validate:"required,min=1"`
 	PlatformID  int64  `json:"platform_id"  validate:"required,min=1"`
-	Params      string `json:"params"       validate:"required"`
+	Params      string `json:"params"`
+}
+
+func authorizationLaunch(authorization string) (string, bool) {
+	launch := strings.TrimSpace(authorization)
+	if launch == "" {
+		return "", false
+	}
+
+	return launch, true
 }
 
 var validate = validator.New()

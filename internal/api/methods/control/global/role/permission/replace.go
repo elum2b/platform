@@ -8,8 +8,8 @@ import (
 )
 
 type ReplaceRequest struct {
-	RoleID     string   `json:"role_id"     validate:"required,uuid"`
-	MethodKeys []string `json:"method_keys" validate:"dive,required"`
+	RoleID     string   `json:"role_id"     query:"role_id"     validate:"required,uuid"`
+	MethodKeys []string `json:"method_keys" query:"method_keys" validate:"dive,required"`
 }
 
 var (

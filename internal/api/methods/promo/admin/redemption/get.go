@@ -9,12 +9,12 @@ import (
 )
 
 type GetRequest struct {
-	WorkspaceID    string `json:"workspace_id"       validate:"required,uuid"`
-	ID             uint64 `json:"id"                 validate:"required,min=1"`
-	AppID          int64  `json:"app_id"             validate:"required,min=1"`
-	PlatformID     int64  `json:"platform_id"        validate:"required,min=1"`
-	Platform       string `json:"platform,omitempty"`
-	PlatformUserID string `json:"platform_user_id"   validate:"required"`
+	WorkspaceID    string `json:"workspace_id"       query:"workspace_id"     validate:"required,uuid"`
+	ID             uint64 `json:"id"                 query:"id"               validate:"required,min=1"`
+	AppID          int64  `json:"app_id"             query:"app_id"           validate:"required,min=1"`
+	PlatformID     int64  `json:"platform_id"        query:"platform_id"      validate:"required,min=1"`
+	Platform       string `json:"platform,omitempty" query:"platform"`
+	PlatformUserID string `json:"platform_user_id"   query:"platform_user_id" validate:"required"`
 }
 
 type GetResponse struct {

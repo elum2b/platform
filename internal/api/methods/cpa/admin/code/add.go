@@ -8,9 +8,9 @@ import (
 )
 
 type AddRequest struct {
-	WorkspaceID string   `json:"workspace_id" validate:"required,uuid"`
-	CPAID       string   `json:"cpa_id"       validate:"required,max=255"`
-	Codes       []string `json:"codes"        validate:"required,min=1,dive,required"`
+	WorkspaceID string   `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	CPAID       string   `json:"cpa_id"       query:"cpa_id"       validate:"required,max=255"`
+	Codes       []string `json:"codes"        query:"codes"        validate:"required,min=1,dive,required"`
 }
 type AddResponse struct {
 	Added int `json:"added"`

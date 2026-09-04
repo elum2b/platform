@@ -6,7 +6,7 @@ import (
 )
 
 type ArchiveRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
 }
 
 type ArchiveResponse struct {

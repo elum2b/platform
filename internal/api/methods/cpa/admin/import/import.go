@@ -11,9 +11,9 @@ import (
 )
 
 type Request struct {
-	WorkspaceID      string `json:"workspace_id"                validate:"required,uuid"`
-	Archive          []byte `json:"archive"                     validate:"required"`
-	ConflictStrategy string `json:"conflict_strategy,omitempty" validate:"omitempty,oneof=fail_on_conflict skip_existing update_existing"`
+	WorkspaceID      string `json:"workspace_id"                query:"workspace_id"      validate:"required,uuid"`
+	Archive          []byte `json:"archive"                     query:"archive"           validate:"required"`
+	ConflictStrategy string `json:"conflict_strategy,omitempty" query:"conflict_strategy" validate:"omitempty,oneof=fail_on_conflict skip_existing update_existing"`
 }
 
 type Response struct {

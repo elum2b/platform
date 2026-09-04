@@ -6,7 +6,7 @@ import (
 )
 
 type ResetExpiredRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
 }
 type ResetExpiredResponse struct {
 	Affected int64 `json:"affected"`

@@ -10,10 +10,10 @@ import (
 )
 
 type DailyListRequest struct {
-	WorkspaceID string    `json:"workspace_id" validate:"required,uuid"`
-	CPAID       string    `json:"cpa_id"       validate:"required,max=255"`
-	From        time.Time `json:"from"         validate:"required"`
-	Until       time.Time `json:"until"        validate:"required"`
+	WorkspaceID string    `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	CPAID       string    `json:"cpa_id"       query:"cpa_id"       validate:"required,max=255"`
+	From        time.Time `json:"from"         query:"from"         validate:"required"`
+	Until       time.Time `json:"until"        query:"until"        validate:"required"`
 }
 type DailyListResponse struct {
 	Stats []cpaadmin.DailyStatsModel `json:"stats"`

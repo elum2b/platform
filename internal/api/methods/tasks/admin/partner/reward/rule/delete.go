@@ -6,11 +6,11 @@ import (
 )
 
 type DeleteRequest struct {
-	WorkspaceID  string `json:"workspace_id"  validate:"required,uuid"`
-	Provider     string `json:"provider"      validate:"required"`
-	GroupKey     string `json:"group_key"     validate:"required,max=255"`
-	ExternalType string `json:"external_type" validate:"required"`
-	RewardKey    string `json:"reward_key"    validate:"required,max=255"`
+	WorkspaceID  string `json:"workspace_id"  query:"workspace_id"  validate:"required,uuid"`
+	Provider     string `json:"provider"      query:"provider"      validate:"required"`
+	GroupKey     string `json:"group_key"     query:"group_key"     validate:"required,max=255"`
+	ExternalType string `json:"external_type" query:"external_type" validate:"required"`
+	RewardKey    string `json:"reward_key"    query:"reward_key"    validate:"required,max=255"`
 }
 
 type DeleteResponse struct {

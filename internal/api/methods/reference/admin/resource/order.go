@@ -6,10 +6,10 @@ import (
 )
 
 type OrderRequest struct {
-	WorkspaceID      string `json:"workspace_id"                 validate:"required,uuid"`
-	ItemKey          string `json:"item_key"                     validate:"required,max=255"`
-	ResourceKey      string `json:"resource_key"                 validate:"required,max=255"`
-	AfterResourceKey string `json:"after_resource_key,omitempty" validate:"omitempty,max=255"`
+	WorkspaceID      string `json:"workspace_id"                 query:"workspace_id"       validate:"required,uuid"`
+	ItemKey          string `json:"item_key"                     query:"item_key"           validate:"required,max=255"`
+	ResourceKey      string `json:"resource_key"                 query:"resource_key"       validate:"required,max=255"`
+	AfterResourceKey string `json:"after_resource_key,omitempty" query:"after_resource_key" validate:"omitempty,max=255"`
 }
 
 var (

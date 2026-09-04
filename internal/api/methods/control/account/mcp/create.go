@@ -10,8 +10,8 @@ import (
 )
 
 type CreateRequest struct {
-	Name     string `json:"name"     validate:"required,max=128"`
-	Duration int64  `json:"duration" validate:"min=0,max=9223372036854" jsonschema:"Token lifetime in milliseconds. Zero means no expiration."`
+	Name     string `json:"name"     query:"name"     validate:"required,max=128"`
+	Duration int64  `json:"duration" query:"duration" validate:"min=0,max=9223372036854" jsonschema:"Token lifetime in milliseconds. Zero means no expiration."`
 }
 
 type CreateTokenResponse struct {

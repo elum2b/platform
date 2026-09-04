@@ -6,7 +6,7 @@ import (
 )
 
 type CancelRequest struct {
-	RequestID string `json:"request_id" validate:"required,uuid"`
+	RequestID string `json:"request_id" query:"request_id" validate:"required,uuid"`
 }
 
 type CancelResponse struct {

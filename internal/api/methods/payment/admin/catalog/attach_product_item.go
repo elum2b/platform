@@ -8,13 +8,13 @@ import (
 )
 
 type AttachProductItemRequest struct {
-	WorkspaceID  string  `json:"workspace_id"            validate:"required,uuid"`
-	ProductID    string  `json:"product_id"              validate:"required,max=255"`
-	ItemID       string  `json:"item_id"                 validate:"required,max=255"`
-	RewardType   string  `json:"reward_type"             validate:"required"`
-	Quantity     int64   `json:"quantity"`
-	Scale        uint16  `json:"scale"`
-	DurationUnit *string `json:"duration_unit,omitempty"`
+	WorkspaceID  string  `json:"workspace_id"            query:"workspace_id"  validate:"required,uuid"`
+	ProductID    string  `json:"product_id"              query:"product_id"    validate:"required,max=255"`
+	ItemID       string  `json:"item_id"                 query:"item_id"       validate:"required,max=255"`
+	RewardType   string  `json:"reward_type"             query:"reward_type"   validate:"required"`
+	Quantity     int64   `json:"quantity"                query:"quantity"`
+	Scale        uint16  `json:"scale"                   query:"scale"`
+	DurationUnit *string `json:"duration_unit,omitempty" query:"duration_unit"`
 }
 
 var (

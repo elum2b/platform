@@ -8,9 +8,9 @@ import (
 )
 
 type CreateRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	CalendarID  string `json:"calendar_id"  validate:"required,max=255"`
-	Position    uint32 `json:"position"     validate:"required,min=1"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	CalendarID  string `json:"calendar_id"  query:"calendar_id"  validate:"required,max=255"`
+	Position    uint32 `json:"position"     query:"position"     validate:"required,min=1"`
 }
 
 type CreateResponse struct {

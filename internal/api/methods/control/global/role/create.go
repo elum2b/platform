@@ -10,11 +10,11 @@ import (
 )
 
 type CreateRequest struct {
-	ID          string `json:"id,omitempty"          validate:"omitempty,uuid"`
-	Code        string `json:"code"                  validate:"required,max=255"`
-	Title       string `json:"title"                 validate:"required,max=255"`
-	Description string `json:"description,omitempty" validate:"max=1000"`
-	Position    int32  `json:"position,omitempty"`
+	ID          string `json:"id,omitempty"          query:"id"          validate:"omitempty,uuid"`
+	Code        string `json:"code"                  query:"code"        validate:"required,max=255"`
+	Title       string `json:"title"                 query:"title"       validate:"required,max=255"`
+	Description string `json:"description,omitempty" query:"description" validate:"max=1000"`
+	Position    int32  `json:"position,omitempty"    query:"position"`
 }
 
 type CreateResponse struct {

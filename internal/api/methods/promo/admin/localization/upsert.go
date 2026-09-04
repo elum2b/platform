@@ -8,11 +8,11 @@ import (
 )
 
 type UpsertRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	PromoID     uint64 `json:"promo_id"     validate:"required,min=1"`
-	Locale      string `json:"locale"       validate:"required,max=32"`
-	Title       string `json:"title"        validate:"required"`
-	Description string `json:"description"  validate:"required"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	PromoID     uint64 `json:"promo_id"     query:"promo_id"     validate:"required,min=1"`
+	Locale      string `json:"locale"       query:"locale"       validate:"required,max=32"`
+	Title       string `json:"title"        query:"title"        validate:"required"`
+	Description string `json:"description"  query:"description"  validate:"required"`
 }
 
 var (

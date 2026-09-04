@@ -10,10 +10,10 @@ import (
 )
 
 type MemberListRequest struct {
-	WorkspaceID string    `json:"workspace_id"        validate:"required,uuid"`
-	Limit       int32     `json:"limit,omitempty"     validate:"omitempty,min=1,max=100"`
-	CursorAt    time.Time `json:"cursor_at,omitempty"`
-	CursorID    string    `json:"cursor_id,omitempty"`
+	WorkspaceID string    `json:"workspace_id"        query:"workspace_id" validate:"required,uuid"`
+	Limit       int32     `json:"limit,omitempty"     query:"limit"        validate:"omitempty,min=1,max=100"`
+	CursorAt    time.Time `json:"cursor_at,omitempty" query:"cursor_at"`
+	CursorID    string    `json:"cursor_id,omitempty" query:"cursor_id"`
 }
 
 type MemberResponse struct {

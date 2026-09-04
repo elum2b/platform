@@ -8,8 +8,8 @@ import (
 )
 
 type GetRequest struct {
-	ProviderCode string `json:"provider_code" validate:"required,max=255"`
-	AssetCode    string `json:"asset_code"    validate:"required,max=255"`
+	ProviderCode string `json:"provider_code" query:"provider_code" validate:"required,max=255"`
+	AssetCode    string `json:"asset_code"    query:"asset_code"    validate:"required,max=255"`
 }
 
 type GetResponse struct {

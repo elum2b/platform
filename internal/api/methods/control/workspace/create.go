@@ -11,9 +11,9 @@ import (
 )
 
 type CreateRequest struct {
-	ID    string `json:"id,omitempty" validate:"omitempty,uuid"`
-	Slug  string `json:"slug"         validate:"required,max=255"`
-	Title string `json:"title"        validate:"required,max=255"`
+	ID    string `json:"id,omitempty" query:"id"    validate:"omitempty,uuid"`
+	Slug  string `json:"slug"         query:"slug"  validate:"required,max=255"`
+	Title string `json:"title"        query:"title" validate:"required,max=255"`
 }
 
 type CreateResponse struct {

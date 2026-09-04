@@ -39,9 +39,9 @@ var Manifest = adapter.Method[struct{}, ManifestResponse]{
 }
 
 type Request struct {
-	WorkspaceID string    `json:"workspace_id"       validate:"required,uuid"`
-	Sections    []string  `json:"sections,omitempty"`
-	Now         time.Time `json:"now"`
+	WorkspaceID string    `json:"workspace_id"       query:"workspace_id" validate:"required,uuid"`
+	Sections    []string  `json:"sections,omitempty" query:"sections"`
+	Now         time.Time `json:"now"                query:"now"`
 }
 
 type Response struct {

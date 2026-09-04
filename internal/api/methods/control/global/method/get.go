@@ -10,7 +10,7 @@ import (
 )
 
 type GetRequest struct {
-	Key string `json:"key" validate:"required"`
+	Key string `json:"key" query:"key" validate:"required"`
 }
 
 type GetResponse struct {

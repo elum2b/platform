@@ -8,17 +8,17 @@ import (
 )
 
 type SaveRequest struct {
-	WorkspaceID  string  `json:"workspace_id"   validate:"required,uuid"`
-	Provider     string  `json:"provider"       validate:"required"`
-	GroupKey     string  `json:"group_key"      validate:"required,max=255"`
-	ExternalType string  `json:"external_type"  validate:"required"`
-	Key          string  `json:"key"            validate:"required,max=255"`
-	Type         string  `json:"type"           validate:"required,max=255"`
-	Quantity     int64   `json:"quantity"`
-	Scale        uint16  `json:"scale"`
-	Unit         *string `json:"unit,omitempty"`
-	Position     int32   `json:"position"       validate:"required,min=1"`
-	IsEnabled    bool    `json:"is_enabled"`
+	WorkspaceID  string  `json:"workspace_id"   query:"workspace_id"  validate:"required,uuid"`
+	Provider     string  `json:"provider"       query:"provider"      validate:"required"`
+	GroupKey     string  `json:"group_key"      query:"group_key"     validate:"required,max=255"`
+	ExternalType string  `json:"external_type"  query:"external_type" validate:"required"`
+	Key          string  `json:"key"            query:"key"           validate:"required,max=255"`
+	Type         string  `json:"type"           query:"type"          validate:"required,max=255"`
+	Quantity     int64   `json:"quantity"       query:"quantity"`
+	Scale        uint16  `json:"scale"          query:"scale"`
+	Unit         *string `json:"unit,omitempty" query:"unit"`
+	Position     int32   `json:"position"       query:"position"      validate:"required,min=1"`
+	IsEnabled    bool    `json:"is_enabled"     query:"is_enabled"`
 }
 
 var (

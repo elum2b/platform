@@ -12,9 +12,9 @@ import (
 )
 
 type ListRequest struct {
-	Limit    int32     `json:"limit,omitempty"     validate:"omitempty,min=1,max=100"`
-	CursorAt time.Time `json:"cursor_at,omitempty"`
-	CursorID string    `json:"cursor_id,omitempty"`
+	Limit    int32     `json:"limit,omitempty"     query:"limit"     validate:"omitempty,min=1,max=100"`
+	CursorAt time.Time `json:"cursor_at,omitempty" query:"cursor_at"`
+	CursorID string    `json:"cursor_id,omitempty" query:"cursor_id"`
 }
 
 type Item struct {

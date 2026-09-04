@@ -10,14 +10,14 @@ import (
 )
 
 type UpdateRequest struct {
-	ID                  uint64     `json:"id"                              validate:"required,min=1"`
-	WorkspaceID         string     `json:"workspace_id"                    validate:"required,uuid"`
-	AssetCode           string     `json:"asset_code,omitempty"`
-	ListAmountMinor     uint64     `json:"list_amount_minor,omitempty"`
-	DiscountAmountMinor uint64     `json:"discount_amount_minor,omitempty"`
-	IsPromotion         bool       `json:"is_promotion,omitempty"`
-	StartsAt            *time.Time `json:"starts_at,omitempty"`
-	EndsAt              *time.Time `json:"ends_at,omitempty"`
+	ID                  uint64     `json:"id"                              query:"id"                    validate:"required,min=1"`
+	WorkspaceID         string     `json:"workspace_id"                    query:"workspace_id"          validate:"required,uuid"`
+	AssetCode           string     `json:"asset_code,omitempty"            query:"asset_code"`
+	ListAmountMinor     uint64     `json:"list_amount_minor,omitempty"     query:"list_amount_minor"`
+	DiscountAmountMinor uint64     `json:"discount_amount_minor,omitempty" query:"discount_amount_minor"`
+	IsPromotion         bool       `json:"is_promotion,omitempty"          query:"is_promotion"`
+	StartsAt            *time.Time `json:"starts_at,omitempty"             query:"starts_at"`
+	EndsAt              *time.Time `json:"ends_at,omitempty"               query:"ends_at"`
 }
 
 type UpdateResponse struct {

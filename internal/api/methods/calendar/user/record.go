@@ -8,12 +8,11 @@ import (
 )
 
 type RecordRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	AppID       int64  `json:"app_id"       validate:"required,min=1"`
-	PlatformID  int64  `json:"platform_id"  validate:"required,min=1"`
-	Params      string `json:"params"       validate:"required"`
-	CalendarRef string `json:"calendar_ref" validate:"required,max=255"`
-	OperationID string `json:"operation_id" validate:"required"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	AppID       int64  `json:"app_id"       query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64  `json:"platform_id"  query:"platform_id"  validate:"required,min=1"`
+	CalendarRef string `json:"calendar_ref" query:"calendar_ref" validate:"required,max=255"`
+	OperationID string `json:"operation_id" query:"operation_id" validate:"required"`
 }
 
 type RecordResponse struct {
@@ -30,7 +29,7 @@ Records a calendar operation for the authenticated application user.`
 var Record = adapter.Method[RecordRequest, RecordResponse]{
 	Key:         recordKey,
 	Description: recordDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, data RecordRequest) (RecordResponse, error) {
 		result, err := services.Calendar.User.Record(
 			ctx.Context,

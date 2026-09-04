@@ -8,13 +8,13 @@ import (
 )
 
 type UpsertRequest struct {
-	WorkspaceID string  `json:"workspace_id"   validate:"required,uuid"`
-	PromoID     uint64  `json:"promo_id"       validate:"required,min=1"`
-	Key         string  `json:"key"            validate:"required,max=255"`
-	Type        string  `json:"type"           validate:"required,max=255"`
-	Quantity    int64   `json:"quantity"`
-	Scale       uint16  `json:"scale"`
-	Unit        *string `json:"unit,omitempty"`
+	WorkspaceID string  `json:"workspace_id"   query:"workspace_id" validate:"required,uuid"`
+	PromoID     uint64  `json:"promo_id"       query:"promo_id"     validate:"required,min=1"`
+	Key         string  `json:"key"            query:"key"          validate:"required,max=255"`
+	Type        string  `json:"type"           query:"type"         validate:"required,max=255"`
+	Quantity    int64   `json:"quantity"       query:"quantity"`
+	Scale       uint16  `json:"scale"          query:"scale"`
+	Unit        *string `json:"unit,omitempty" query:"unit"`
 }
 
 var (

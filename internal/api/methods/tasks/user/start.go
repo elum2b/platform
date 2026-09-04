@@ -10,12 +10,11 @@ import (
 )
 
 type StartRequest struct {
-	WorkspaceID string    `json:"workspace_id"  validate:"required,uuid"`
-	AppID       int64     `json:"app_id"        validate:"required,min=1"`
-	PlatformID  int64     `json:"platform_id"   validate:"required,min=1"`
-	Params      string    `json:"params"        validate:"required"`
-	TaskRef     string    `json:"task_ref"      validate:"required"`
-	Now         time.Time `json:"now,omitempty"`
+	WorkspaceID string    `json:"workspace_id"  query:"workspace_id" validate:"required,uuid"`
+	AppID       int64     `json:"app_id"        query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64     `json:"platform_id"   query:"platform_id"  validate:"required,min=1"`
+	TaskRef     string    `json:"task_ref"      query:"task_ref"     validate:"required"`
+	Now         time.Time `json:"now,omitempty" query:"now"`
 }
 
 type StartResponse struct {
@@ -32,7 +31,7 @@ Starts a task for the authenticated application user.`
 var Start = adapter.Method[StartRequest, StartResponse]{
 	Key:         startKey,
 	Description: startDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, data StartRequest) (StartResponse, error) {
 		result, err := services.Tasks.User.StartTask(
 			ctx.Context,

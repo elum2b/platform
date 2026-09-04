@@ -6,8 +6,8 @@ import (
 )
 
 type RetryRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	ID          uint64 `json:"id"           validate:"required,min=1"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	ID          uint64 `json:"id"           query:"id"           validate:"required,min=1"`
 }
 
 type RetryResponse struct {

@@ -11,10 +11,10 @@ import (
 )
 
 type ResolveRequest struct {
-	RequestID     string `json:"request_id"        validate:"required,uuid"`
-	Approved      bool   `json:"approved"`
-	ApprovedLimit int32  `json:"approved_limit"    validate:"min=0"`
-	Comment       string `json:"comment,omitempty" validate:"max=1000"`
+	RequestID     string `json:"request_id"        query:"request_id"     validate:"required,uuid"`
+	Approved      bool   `json:"approved"          query:"approved"`
+	ApprovedLimit int32  `json:"approved_limit"    query:"approved_limit" validate:"min=0"`
+	Comment       string `json:"comment,omitempty" query:"comment"        validate:"max=1000"`
 }
 
 type ResolveResponse struct {

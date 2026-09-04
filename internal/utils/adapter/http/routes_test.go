@@ -24,17 +24,17 @@ func TestInitRegistersControlAuthenticationRoutes(t *testing.T) {
 	initHTTP(app)
 
 	expected := map[string]string{
-		"/internal/control/control.auth.check":         fiber.MethodGet,
-		"/internal/control/control.auth.vkid":          fiber.MethodPost,
-		"/internal/control/control.auth.telegram":      fiber.MethodPost,
-		"/internal/control/control.auth.discord":       fiber.MethodPost,
-		"/internal/control/control.auth.github":        fiber.MethodPost,
-		"/internal/control/control.auth.gitlab":        fiber.MethodPost,
-		"/internal/control/control.auth.google":        fiber.MethodPost,
-		"/internal/control/control.auth.yandex":        fiber.MethodPost,
-		"/internal/control/control.auth.ton.challenge": fiber.MethodGet,
-		"/internal/control/control.auth.ton":           fiber.MethodPost,
-		"/internal/control/control.auth.twoFactor":     fiber.MethodPost,
+		"/http/control.auth.check":         fiber.MethodGet,
+		"/http/control.auth.vkid":          fiber.MethodPost,
+		"/http/control.auth.telegram":      fiber.MethodPost,
+		"/http/control.auth.discord":       fiber.MethodPost,
+		"/http/control.auth.github":        fiber.MethodPost,
+		"/http/control.auth.gitlab":        fiber.MethodPost,
+		"/http/control.auth.google":        fiber.MethodPost,
+		"/http/control.auth.yandex":        fiber.MethodPost,
+		"/http/control.auth.ton.challenge": fiber.MethodGet,
+		"/http/control.auth.ton":           fiber.MethodPost,
+		"/http/control.auth.twoFactor":     fiber.MethodPost,
 	}
 
 	for _, route := range app.GetRoutes() {
@@ -48,6 +48,62 @@ func TestInitRegistersControlAuthenticationRoutes(t *testing.T) {
 	}
 }
 
+func TestInitRegistersUserGETAndPOSTRoutes(t *testing.T) {
+	app := fiber.New()
+	initHTTP(app)
+
+	expectedPaths := []string{
+		"/http/calendar.user.get",
+		"/http/calendar.user.list_active",
+		"/http/calendar.user.next",
+		"/http/calendar.user.progress.get",
+		"/http/calendar.user.record",
+		"/http/cpa.user.code.get",
+		"/http/cpa.user.offer.list",
+		"/http/cpa.user.status.get",
+		"/http/payment.user.create_attempt",
+		"/http/payment.user.create_order",
+		"/http/payment.user.create_order_by_key",
+		"/http/payment.user.get_product",
+		"/http/payment.user.get_product_by_key",
+		"/http/payment.user.get_usdt_price",
+		"/http/payment.user.is_subscription_active",
+		"/http/payment.user.list_assets",
+		"/http/payment.user.list_products",
+		"/http/payment.user.list_usdt_prices",
+		"/http/promo.apply",
+		"/http/reference.user.get",
+		"/http/reference.user.list",
+		"/http/reference.user.resolve",
+		"/http/tasks.user.claim",
+		"/http/tasks.user.list_active",
+		"/http/tasks.user.partner.check",
+		"/http/tasks.user.partner.list",
+		"/http/tasks.user.partner.start",
+		"/http/tasks.user.start",
+	}
+
+	expected := make(map[string]map[string]struct{}, len(expectedPaths))
+	for _, path := range expectedPaths {
+		expected[path] = map[string]struct{}{
+			fiber.MethodGet:  {},
+			fiber.MethodPost: {},
+		}
+	}
+
+	for _, route := range app.GetRoutes() {
+		if methods, ok := expected[route.Path]; ok {
+			delete(methods, route.Method)
+		}
+	}
+
+	for path, methods := range expected {
+		for method := range methods {
+			t.Errorf("%s %s route is not registered", method, path)
+		}
+	}
+}
+
 func TestAuthCheckAcceptsGETWithoutBody(t *testing.T) {
 	app := fiber.New()
 	initHTTP(app)
@@ -55,7 +111,7 @@ func TestAuthCheckAcceptsGETWithoutBody(t *testing.T) {
 	response, err := app.Test(httptest.NewRequestWithContext(
 		context.Background(),
 		http.MethodGet,
-		"/internal/control/control.auth.check",
+		"/http/control.auth.check",
 		http.NoBody,
 	))
 	if err != nil {

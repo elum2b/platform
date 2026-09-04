@@ -9,9 +9,9 @@ import (
 )
 
 type TelegramRequest struct {
-	InitData    string `json:"init_data"    validate:"required"`
-	InviteToken string `json:"invite_token"`
-	BindToIP    bool   `json:"bind_to_ip"`
+	InitData    string `json:"init_data"    query:"init_data"    validate:"required"`
+	InviteToken string `json:"invite_token" query:"invite_token"`
+	BindToIP    bool   `json:"bind_to_ip"   query:"bind_to_ip"`
 }
 
 var (

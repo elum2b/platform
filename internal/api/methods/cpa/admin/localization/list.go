@@ -8,8 +8,8 @@ import (
 )
 
 type ListRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	CPAID       string `json:"cpa_id"       validate:"required,max=255"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	CPAID       string `json:"cpa_id"       query:"cpa_id"       validate:"required,max=255"`
 }
 type ListResponse struct {
 	Localizations []cpaadmin.LocalizationModel `json:"localizations"`

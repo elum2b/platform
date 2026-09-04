@@ -8,8 +8,8 @@ import (
 )
 
 type ListRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	TaskID      uint64 `json:"task_id"      validate:"required,min=1"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	TaskID      uint64 `json:"task_id"      query:"task_id"      validate:"required,min=1"`
 }
 
 type ListResponse struct {

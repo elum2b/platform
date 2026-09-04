@@ -8,11 +8,10 @@ import (
 )
 
 type GetRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	AppID       int64  `json:"app_id"       validate:"required,min=1"`
-	PlatformID  int64  `json:"platform_id"  validate:"required,min=1"`
-	Params      string `json:"params"       validate:"required"`
-	CPAID       string `json:"cpa_id"       validate:"required,max=255"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	AppID       int64  `json:"app_id"       query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64  `json:"platform_id"  query:"platform_id"  validate:"required,min=1"`
+	CPAID       string `json:"cpa_id"       query:"cpa_id"       validate:"required,max=255"`
 }
 
 type GetResponse struct {
@@ -29,7 +28,7 @@ Returns the authenticated application user's assignment for a CPA offer.`
 var Get = adapter.Method[GetRequest, GetResponse]{
 	Key:         getKey,
 	Description: getDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, data GetRequest) (GetResponse, error) {
 		assignment, err := services.CPA.User.GetStatus(
 			ctx.Context,

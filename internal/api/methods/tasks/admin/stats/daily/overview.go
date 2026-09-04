@@ -10,9 +10,9 @@ import (
 )
 
 type OverviewRequest struct {
-	WorkspaceID string    `json:"workspace_id" validate:"required,uuid"`
-	From        time.Time `json:"from"         validate:"required"`
-	Until       time.Time `json:"until"        validate:"required"`
+	WorkspaceID string    `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	From        time.Time `json:"from"         query:"from"         validate:"required"`
+	Until       time.Time `json:"until"        query:"until"        validate:"required"`
 }
 
 type OverviewResponse struct {

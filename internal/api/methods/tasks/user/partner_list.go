@@ -8,16 +8,15 @@ import (
 )
 
 type PartnerListRequest struct {
-	WorkspaceID string            `json:"workspace_id"        validate:"required,uuid"`
-	AppID       int64             `json:"app_id"              validate:"required,min=1"`
-	PlatformID  int64             `json:"platform_id"         validate:"required,min=1"`
-	Params      string            `json:"params"              validate:"required"`
-	Provider    string            `json:"provider"            validate:"required"`
-	GroupKey    string            `json:"group_key"           validate:"required,max=255"`
-	Platform    string            `json:"platform"            validate:"required"`
-	Locale      string            `json:"locale,omitempty"`
-	Limit       int32             `json:"limit,omitempty"     validate:"omitempty,min=1,max=100"`
-	Variables   map[string]string `json:"variables,omitempty"`
+	WorkspaceID string            `json:"workspace_id"        query:"workspace_id" validate:"required,uuid"`
+	AppID       int64             `json:"app_id"              query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64             `json:"platform_id"         query:"platform_id"  validate:"required,min=1"`
+	Provider    string            `json:"provider"            query:"provider"     validate:"required"`
+	GroupKey    string            `json:"group_key"           query:"group_key"    validate:"required,max=255"`
+	Platform    string            `json:"platform"            query:"platform"     validate:"required"`
+	Locale      string            `json:"locale,omitempty"    query:"locale"`
+	Limit       int32             `json:"limit,omitempty"     query:"limit"        validate:"omitempty,min=1,max=100"`
+	Variables   map[string]string `json:"variables,omitempty" query:"variables"`
 }
 
 type PartnerListResponse struct {
@@ -34,7 +33,7 @@ Lists partner tasks for the authenticated application user.`
 var PartnerList = adapter.Method[PartnerListRequest, PartnerListResponse]{
 	Key:         partnerListKey,
 	Description: partnerListDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, data PartnerListRequest) (PartnerListResponse, error) {
 		tasks, err := services.Tasks.User.ListPartner(
 			ctx.Context,

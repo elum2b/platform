@@ -36,7 +36,7 @@ func Init(app *fiber.App, register RegisterFunc) {
 	handler := fiberAdapter.Handler(socket)
 	socket.Compile()
 
-	app.Get("/ws", func(ctx fiber.Ctx) error {
+	app.Get("/socket", func(ctx fiber.Ctx) error {
 		ctx.SetContext(withSessionToken(
 			ctx.Context(),
 			ctx.Cookies(config.ControlAuthCookieName),

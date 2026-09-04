@@ -8,9 +8,9 @@ import (
 )
 
 type UpdateRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	Slug        string `json:"slug"         validate:"required,max=255"`
-	Title       string `json:"title"        validate:"required,max=255"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	Slug        string `json:"slug"         query:"slug"         validate:"required,max=255"`
+	Title       string `json:"title"        query:"title"        validate:"required,max=255"`
 }
 
 type UpdateResponse struct {

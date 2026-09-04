@@ -8,10 +8,10 @@ import (
 )
 
 type ListRequest struct {
-	ProviderCode string `json:"provider_code,omitempty"`
-	AssetCode    string `json:"asset_code,omitempty"`
-	Limit        int32  `json:"limit,omitempty"         validate:"omitempty,min=1,max=100"`
-	Offset       int32  `json:"offset,omitempty"        validate:"min=0"`
+	ProviderCode string `json:"provider_code,omitempty" query:"provider_code"`
+	AssetCode    string `json:"asset_code,omitempty"    query:"asset_code"`
+	Limit        int32  `json:"limit,omitempty"         query:"limit"         validate:"omitempty,min=1,max=100"`
+	Offset       int32  `json:"offset,omitempty"        query:"offset"        validate:"min=0"`
 }
 
 type ListResponse struct {

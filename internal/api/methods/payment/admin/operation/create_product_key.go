@@ -10,14 +10,14 @@ import (
 )
 
 type CreateProductKeyRequest struct {
-	WorkspaceID    string `json:"workspace_id"               validate:"required,uuid"`
-	AppID          int64  `json:"app_id"                     validate:"required,min=1"`
-	PlatformID     int64  `json:"platform_id"                validate:"required,min=1"`
-	PlatformUserID string `json:"platform_user_id"           validate:"required"`
-	InternalUserID *int64 `json:"internal_user_id,omitempty"`
-	ProductID      string `json:"product_id"                 validate:"required,max=255"`
-	MaxUses        int32  `json:"max_uses,omitempty"`
-	ExpiresAt      *int64 `json:"expires_at,omitempty"`
+	WorkspaceID    string `json:"workspace_id"               query:"workspace_id"     validate:"required,uuid"`
+	AppID          int64  `json:"app_id"                     query:"app_id"           validate:"required,min=1"`
+	PlatformID     int64  `json:"platform_id"                query:"platform_id"      validate:"required,min=1"`
+	PlatformUserID string `json:"platform_user_id"           query:"platform_user_id" validate:"required"`
+	InternalUserID *int64 `json:"internal_user_id,omitempty" query:"internal_user_id"`
+	ProductID      string `json:"product_id"                 query:"product_id"       validate:"required,max=255"`
+	MaxUses        int32  `json:"max_uses,omitempty"         query:"max_uses"`
+	ExpiresAt      *int64 `json:"expires_at,omitempty"       query:"expires_at"`
 }
 
 type CreateProductKeyResponse struct {

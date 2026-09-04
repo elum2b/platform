@@ -8,9 +8,9 @@ import (
 )
 
 type ReplaceRequest struct {
-	WorkspaceID string   `json:"workspace_id" validate:"required,uuid"`
-	RoleID      string   `json:"role_id"      validate:"required,uuid"`
-	MethodKeys  []string `json:"method_keys"  validate:"dive,required"`
+	WorkspaceID string   `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	RoleID      string   `json:"role_id"      query:"role_id"      validate:"required,uuid"`
+	MethodKeys  []string `json:"method_keys"  query:"method_keys"  validate:"dive,required"`
 }
 
 var (

@@ -6,10 +6,10 @@ import (
 )
 
 type UpsertRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	Key         string `json:"key"          validate:"required,max=255"`
-	Position    int32  `json:"position"`
-	Active      bool   `json:"active"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	Key         string `json:"key"          query:"key"          validate:"required,max=255"`
+	Position    int32  `json:"position"     query:"position"`
+	Active      bool   `json:"active"       query:"active"`
 }
 
 var (

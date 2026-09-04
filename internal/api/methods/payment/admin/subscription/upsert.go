@@ -10,20 +10,20 @@ import (
 )
 
 type UpsertRequest struct {
-	WorkspaceID            string  `json:"workspace_id"               validate:"required,uuid"`
-	AppID                  int64   `json:"app_id"                     validate:"required,min=1"`
-	PlatformID             int64   `json:"platform_id"                validate:"required,min=1"`
-	PlatformUserID         string  `json:"platform_user_id"           validate:"required"`
-	InternalUserID         *int64  `json:"internal_user_id,omitempty"`
-	ProductID              string  `json:"product_id"                 validate:"required,max=255"`
-	OrderID                *int64  `json:"order_id,omitempty"`
-	AttemptID              *int64  `json:"attempt_id,omitempty"`
-	ProviderCode           string  `json:"provider_code"              validate:"required,max=255"`
-	ProviderSubscriptionID string  `json:"provider_subscription_id"   validate:"required,max=255"`
-	Status                 string  `json:"status"                     validate:"required"`
-	CancelReason           *string `json:"cancel_reason,omitempty"`
-	StartedAt              int64   `json:"started_at"                 validate:"required,min=0"`
-	EndedAt                *int64  `json:"ended_at,omitempty"`
+	WorkspaceID            string  `json:"workspace_id"               query:"workspace_id"             validate:"required,uuid"`
+	AppID                  int64   `json:"app_id"                     query:"app_id"                   validate:"required,min=1"`
+	PlatformID             int64   `json:"platform_id"                query:"platform_id"              validate:"required,min=1"`
+	PlatformUserID         string  `json:"platform_user_id"           query:"platform_user_id"         validate:"required"`
+	InternalUserID         *int64  `json:"internal_user_id,omitempty" query:"internal_user_id"`
+	ProductID              string  `json:"product_id"                 query:"product_id"               validate:"required,max=255"`
+	OrderID                *int64  `json:"order_id,omitempty"         query:"order_id"`
+	AttemptID              *int64  `json:"attempt_id,omitempty"       query:"attempt_id"`
+	ProviderCode           string  `json:"provider_code"              query:"provider_code"            validate:"required,max=255"`
+	ProviderSubscriptionID string  `json:"provider_subscription_id"   query:"provider_subscription_id" validate:"required,max=255"`
+	Status                 string  `json:"status"                     query:"status"                   validate:"required"`
+	CancelReason           *string `json:"cancel_reason,omitempty"    query:"cancel_reason"`
+	StartedAt              int64   `json:"started_at"                 query:"started_at"               validate:"required,min=0"`
+	EndedAt                *int64  `json:"ended_at,omitempty"         query:"ended_at"`
 }
 
 type UpsertResponse struct {

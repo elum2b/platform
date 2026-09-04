@@ -11,15 +11,15 @@ import (
 )
 
 type UpsertRequest struct {
-	WorkspaceID    string          `json:"workspace_id"       validate:"required,uuid"`
-	ID             uint64          `json:"id,omitempty"`
-	Code           string          `json:"code"               validate:"required"`
-	Payload        json.RawMessage `json:"payload"            validate:"required"`
-	Target         json.RawMessage `json:"target,omitempty"`
-	MaxActivations uint64          `json:"max_activations"`
-	IsActive       bool            `json:"is_active"`
-	StartAt        *time.Time      `json:"start_at,omitempty"`
-	EndAt          *time.Time      `json:"end_at,omitempty"`
+	WorkspaceID    string          `json:"workspace_id"       query:"workspace_id"    validate:"required,uuid"`
+	ID             uint64          `json:"id,omitempty"       query:"id"`
+	Code           string          `json:"code"               query:"code"            validate:"required"`
+	Payload        json.RawMessage `json:"payload"            query:"payload"         validate:"required"`
+	Target         json.RawMessage `json:"target,omitempty"   query:"target"`
+	MaxActivations uint64          `json:"max_activations"    query:"max_activations"`
+	IsActive       bool            `json:"is_active"          query:"is_active"`
+	StartAt        *time.Time      `json:"start_at,omitempty" query:"start_at"`
+	EndAt          *time.Time      `json:"end_at,omitempty"   query:"end_at"`
 }
 
 type UpsertResponse struct {

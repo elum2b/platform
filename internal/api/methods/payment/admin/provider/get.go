@@ -8,7 +8,7 @@ import (
 )
 
 type GetRequest struct {
-	Code string `json:"code" validate:"required,max=255"`
+	Code string `json:"code" query:"code" validate:"required,max=255"`
 }
 
 type GetResponse struct {

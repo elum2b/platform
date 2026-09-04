@@ -6,8 +6,8 @@ import (
 )
 
 type OwnerTransferRequest struct {
-	WorkspaceID     string `json:"workspace_id"      validate:"required,uuid"`
-	TargetAccountID string `json:"target_account_id" validate:"required,uuid"`
+	WorkspaceID     string `json:"workspace_id"      query:"workspace_id"      validate:"required,uuid"`
+	TargetAccountID string `json:"target_account_id" query:"target_account_id" validate:"required,uuid"`
 }
 
 type OwnerTransferResponse struct {

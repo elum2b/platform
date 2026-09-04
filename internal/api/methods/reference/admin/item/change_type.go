@@ -8,11 +8,11 @@ import (
 )
 
 type ChangeTypeRequest struct {
-	WorkspaceID  string `json:"workspace_id" validate:"required,uuid"`
-	Key          string `json:"key"          validate:"required,max=255"`
-	CurrentType  string `json:"current_type" validate:"required"`
-	NewType      string `json:"new_type"     validate:"required"`
-	Confirmation string `json:"confirmation" validate:"required"`
+	WorkspaceID  string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	Key          string `json:"key"          query:"key"          validate:"required,max=255"`
+	CurrentType  string `json:"current_type" query:"current_type" validate:"required"`
+	NewType      string `json:"new_type"     query:"new_type"     validate:"required"`
+	Confirmation string `json:"confirmation" query:"confirmation" validate:"required"`
 }
 
 type ChangeTypeResponse struct {

@@ -8,11 +8,11 @@ import (
 )
 
 type UpdateRequest struct {
-	WorkspaceID string `json:"workspace_id"          validate:"required,uuid"`
-	RoleID      string `json:"role_id"               validate:"required,uuid"`
-	Title       string `json:"title"                 validate:"required,max=255"`
-	Description string `json:"description,omitempty" validate:"max=1000"`
-	Position    int32  `json:"position,omitempty"`
+	WorkspaceID string `json:"workspace_id"          query:"workspace_id" validate:"required,uuid"`
+	RoleID      string `json:"role_id"               query:"role_id"      validate:"required,uuid"`
+	Title       string `json:"title"                 query:"title"        validate:"required,max=255"`
+	Description string `json:"description,omitempty" query:"description"  validate:"max=1000"`
+	Position    int32  `json:"position,omitempty"    query:"position"`
 }
 
 type UpdateResponse struct {

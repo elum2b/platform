@@ -11,9 +11,9 @@ import (
 )
 
 type EmployeeLimitRequest struct {
-	WorkspaceID    string `json:"workspace_id"     validate:"required,uuid"`
-	RequestedLimit int32  `json:"requested_limit"  validate:"required,min=1"`
-	Reason         string `json:"reason,omitempty" validate:"max=1000"`
+	WorkspaceID    string `json:"workspace_id"     query:"workspace_id"    validate:"required,uuid"`
+	RequestedLimit int32  `json:"requested_limit"  query:"requested_limit" validate:"required,min=1"`
+	Reason         string `json:"reason,omitempty" query:"reason"          validate:"max=1000"`
 }
 
 type EmployeeLimitResponse struct {

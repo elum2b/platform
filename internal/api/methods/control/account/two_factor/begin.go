@@ -6,7 +6,7 @@ import (
 )
 
 type BeginRequest struct {
-	Issuer string `json:"issuer" validate:"required,max=255"`
+	Issuer string `json:"issuer" query:"issuer" validate:"required,max=255"`
 }
 
 type BeginResponse struct {

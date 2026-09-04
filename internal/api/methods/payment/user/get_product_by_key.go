@@ -8,13 +8,12 @@ import (
 )
 
 type GetProductByKeyRequest struct {
-	WorkspaceID string `json:"workspace_id"         validate:"required,uuid"`
-	AppID       int64  `json:"app_id"               validate:"required,min=1"`
-	PlatformID  int64  `json:"platform_id"          validate:"required,min=1"`
-	Params      string `json:"params"               validate:"required"`
-	Key         string `json:"key"                  validate:"required,max=255"`
-	AssetCode   string `json:"asset_code,omitempty"`
-	Locale      string `json:"locale,omitempty"`
+	WorkspaceID string `json:"workspace_id"         query:"workspace_id" validate:"required,uuid"`
+	AppID       int64  `json:"app_id"               query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64  `json:"platform_id"          query:"platform_id"  validate:"required,min=1"`
+	Key         string `json:"key"                  query:"key"          validate:"required,max=255"`
+	AssetCode   string `json:"asset_code,omitempty" query:"asset_code"`
+	Locale      string `json:"locale,omitempty"     query:"locale"`
 }
 
 type GetProductByKeyResponse struct {
@@ -30,7 +29,7 @@ Returns a product by key for the authenticated application user.`
 var GetProductByKey = adapter.Method[GetProductByKeyRequest, GetProductByKeyResponse]{
 	Key:         getProductByKeyKey,
 	Description: getProductByKeyDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, d GetProductByKeyRequest) (GetProductByKeyResponse, error) {
 		v, err := services.Payment.User.GetProductByKey(
 			ctx.Context,

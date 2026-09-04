@@ -6,8 +6,8 @@ import (
 )
 
 type MemberRemoveRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	AccountID   string `json:"account_id"   validate:"required,uuid"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	AccountID   string `json:"account_id"   query:"account_id"   validate:"required,uuid"`
 }
 
 type MemberRemoveResponse struct {

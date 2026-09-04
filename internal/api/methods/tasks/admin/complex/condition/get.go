@@ -8,9 +8,9 @@ import (
 )
 
 type GetRequest struct {
-	WorkspaceID     string `json:"workspace_id"      validate:"required,uuid"`
-	ParentTaskID    uint64 `json:"parent_task_id"    validate:"required,min=1"`
-	ConditionTaskID uint64 `json:"condition_task_id" validate:"required,min=1"`
+	WorkspaceID     string `json:"workspace_id"      query:"workspace_id"      validate:"required,uuid"`
+	ParentTaskID    uint64 `json:"parent_task_id"    query:"parent_task_id"    validate:"required,min=1"`
+	ConditionTaskID uint64 `json:"condition_task_id" query:"condition_task_id" validate:"required,min=1"`
 }
 
 type GetResponse struct {

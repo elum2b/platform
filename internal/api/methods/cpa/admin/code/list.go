@@ -9,11 +9,11 @@ import (
 )
 
 type ListRequest struct {
-	WorkspaceID string              `json:"workspace_id"     validate:"required,uuid"`
-	CPAID       string              `json:"cpa_id"           validate:"required,max=255"`
-	Status      cpamodel.CodeStatus `json:"status,omitempty" validate:"omitempty,oneof=available issued completed deleted"`
-	Limit       int32               `json:"limit,omitempty"  validate:"omitempty,min=1,max=100"`
-	Offset      int32               `json:"offset,omitempty" validate:"min=0"`
+	WorkspaceID string              `json:"workspace_id"     query:"workspace_id" validate:"required,uuid"`
+	CPAID       string              `json:"cpa_id"           query:"cpa_id"       validate:"required,max=255"`
+	Status      cpamodel.CodeStatus `json:"status,omitempty" query:"status"       validate:"omitempty,oneof=available issued completed deleted"`
+	Limit       int32               `json:"limit,omitempty"  query:"limit"        validate:"omitempty,min=1,max=100"`
+	Offset      int32               `json:"offset,omitempty" query:"offset"       validate:"min=0"`
 }
 type ListResponse struct {
 	Codes []cpaadmin.CodeModel `json:"codes"`

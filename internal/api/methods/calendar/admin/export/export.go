@@ -11,8 +11,8 @@ import (
 )
 
 type Request struct {
-	WorkspaceID string    `json:"workspace_id"  validate:"required,uuid"`
-	Now         time.Time `json:"now,omitempty"`
+	WorkspaceID string    `json:"workspace_id"  query:"workspace_id" validate:"required,uuid"`
+	Now         time.Time `json:"now,omitempty" query:"now"`
 }
 
 type Response struct {

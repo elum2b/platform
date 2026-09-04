@@ -8,8 +8,8 @@ import (
 )
 
 type GetRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	RoleID      string `json:"role_id"      validate:"required,uuid"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	RoleID      string `json:"role_id"      query:"role_id"      validate:"required,uuid"`
 }
 
 type GetResponse struct {

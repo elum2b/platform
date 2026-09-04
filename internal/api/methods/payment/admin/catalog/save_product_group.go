@@ -8,12 +8,12 @@ import (
 )
 
 type SaveProductGroupRequest struct {
-	WorkspaceID    string  `json:"workspace_id"              validate:"required,uuid"`
-	Code           string  `json:"code"                      validate:"required,max=255"`
-	TitleKey       *string `json:"title_key,omitempty"`
-	DescriptionKey *string `json:"description_key,omitempty"`
-	Position       int32   `json:"position"`
-	IsActive       bool    `json:"is_active"`
+	WorkspaceID    string  `json:"workspace_id"              query:"workspace_id"    validate:"required,uuid"`
+	Code           string  `json:"code"                      query:"code"            validate:"required,max=255"`
+	TitleKey       *string `json:"title_key,omitempty"       query:"title_key"`
+	DescriptionKey *string `json:"description_key,omitempty" query:"description_key"`
+	Position       int32   `json:"position"                  query:"position"`
+	IsActive       bool    `json:"is_active"                 query:"is_active"`
 }
 
 var (

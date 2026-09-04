@@ -11,10 +11,10 @@ import (
 )
 
 type ListRequest struct {
-	Status   controlmodel.LimitRequestStatus `json:"status,omitempty"`
-	Limit    int32                           `json:"limit,omitempty"     validate:"omitempty,min=1,max=100"`
-	CursorAt time.Time                       `json:"cursor_at,omitempty"`
-	CursorID string                          `json:"cursor_id,omitempty"`
+	Status   controlmodel.LimitRequestStatus `json:"status,omitempty"    query:"status"`
+	Limit    int32                           `json:"limit,omitempty"     query:"limit"     validate:"omitempty,min=1,max=100"`
+	CursorAt time.Time                       `json:"cursor_at,omitempty" query:"cursor_at"`
+	CursorID string                          `json:"cursor_id,omitempty" query:"cursor_id"`
 }
 
 type Item struct {

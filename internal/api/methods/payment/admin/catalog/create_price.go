@@ -10,13 +10,13 @@ import (
 )
 
 type CreateCatalogPriceRequest struct {
-	WorkspaceID         string     `json:"workspace_id"                    validate:"required,uuid"`
-	ProductID           string     `json:"product_id"                      validate:"required,max=255"`
-	AssetCode           string     `json:"asset_code"                      validate:"required,max=255"`
-	ListAmountMinor     uint64     `json:"list_amount_minor"               validate:"required,min=0"`
-	DiscountAmountMinor uint64     `json:"discount_amount_minor,omitempty"`
-	StartsAt            *time.Time `json:"starts_at,omitempty"`
-	EndsAt              *time.Time `json:"ends_at,omitempty"`
+	WorkspaceID         string     `json:"workspace_id"                    query:"workspace_id"          validate:"required,uuid"`
+	ProductID           string     `json:"product_id"                      query:"product_id"            validate:"required,max=255"`
+	AssetCode           string     `json:"asset_code"                      query:"asset_code"            validate:"required,max=255"`
+	ListAmountMinor     uint64     `json:"list_amount_minor"               query:"list_amount_minor"     validate:"required,min=0"`
+	DiscountAmountMinor uint64     `json:"discount_amount_minor,omitempty" query:"discount_amount_minor"`
+	StartsAt            *time.Time `json:"starts_at,omitempty"             query:"starts_at"`
+	EndsAt              *time.Time `json:"ends_at,omitempty"               query:"ends_at"`
 }
 
 type CreateCatalogPriceResponse struct {

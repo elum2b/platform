@@ -8,11 +8,11 @@ import (
 )
 
 type GetByExternalIDRequest struct {
-	WorkspaceID           string `json:"workspace_id"            validate:"required,uuid"`
-	ProviderCode          string `json:"provider_code"           validate:"required,max=255"`
-	Network               string `json:"network"                 validate:"required,max=255"`
-	SourceKey             string `json:"source_key"              validate:"required,max=255"`
-	ExternalTransactionID string `json:"external_transaction_id" validate:"required,max=255"`
+	WorkspaceID           string `json:"workspace_id"            query:"workspace_id"            validate:"required,uuid"`
+	ProviderCode          string `json:"provider_code"           query:"provider_code"           validate:"required,max=255"`
+	Network               string `json:"network"                 query:"network"                 validate:"required,max=255"`
+	SourceKey             string `json:"source_key"              query:"source_key"              validate:"required,max=255"`
+	ExternalTransactionID string `json:"external_transaction_id" query:"external_transaction_id" validate:"required,max=255"`
 }
 
 type GetByExternalIDResponse struct {

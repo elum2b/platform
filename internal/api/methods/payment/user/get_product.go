@@ -8,13 +8,12 @@ import (
 )
 
 type GetProductRequest struct {
-	WorkspaceID string `json:"workspace_id"         validate:"required,uuid"`
-	AppID       int64  `json:"app_id"               validate:"required,min=1"`
-	PlatformID  int64  `json:"platform_id"          validate:"required,min=1"`
-	Params      string `json:"params"               validate:"required"`
-	ProductID   string `json:"product_id"           validate:"required,max=255"`
-	AssetCode   string `json:"asset_code,omitempty"`
-	Locale      string `json:"locale,omitempty"`
+	WorkspaceID string `json:"workspace_id"         query:"workspace_id" validate:"required,uuid"`
+	AppID       int64  `json:"app_id"               query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64  `json:"platform_id"          query:"platform_id"  validate:"required,min=1"`
+	ProductID   string `json:"product_id"           query:"product_id"   validate:"required,max=255"`
+	AssetCode   string `json:"asset_code,omitempty" query:"asset_code"`
+	Locale      string `json:"locale,omitempty"     query:"locale"`
 }
 
 type GetProductResponse struct {
@@ -30,7 +29,7 @@ Returns a product for the authenticated application user.`
 var GetProduct = adapter.Method[GetProductRequest, GetProductResponse]{
 	Key:         getProductKey,
 	Description: getProductDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, d GetProductRequest) (GetProductResponse, error) {
 		v, err := services.Payment.User.GetProduct(
 			ctx.Context,

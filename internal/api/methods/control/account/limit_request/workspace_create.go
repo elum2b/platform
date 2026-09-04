@@ -10,8 +10,8 @@ import (
 )
 
 type WorkspaceCreateRequest struct {
-	RequestedLimit int32  `json:"requested_limit" validate:"required,min=1"`
-	Reason         string `json:"reason"          validate:"required,max=1000"`
+	RequestedLimit int32  `json:"requested_limit" query:"requested_limit" validate:"required,min=1"`
+	Reason         string `json:"reason"          query:"reason"          validate:"required,max=1000"`
 }
 
 type WorkspaceCreateResponse struct {

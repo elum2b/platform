@@ -8,7 +8,7 @@ import (
 )
 
 type GetRequest struct {
-	RoleID string `json:"role_id" validate:"required,uuid"`
+	RoleID string `json:"role_id" query:"role_id" validate:"required,uuid"`
 }
 
 type GetResponse struct {

@@ -8,12 +8,12 @@ import (
 )
 
 type ExecuteRefundRequest struct {
-	WorkspaceID    string `json:"workspace_id"     validate:"required,uuid"`
-	OrderID        uint64 `json:"order_id"         validate:"required,min=1"`
-	AttemptID      uint64 `json:"attempt_id"       validate:"required,min=1"`
-	IdempotencyKey string `json:"idempotency_key"  validate:"required,max=255"`
-	AmountMinor    uint64 `json:"amount_minor"     validate:"required,min=0"`
-	Reason         string `json:"reason,omitempty"`
+	WorkspaceID    string `json:"workspace_id"     query:"workspace_id"    validate:"required,uuid"`
+	OrderID        uint64 `json:"order_id"         query:"order_id"        validate:"required,min=1"`
+	AttemptID      uint64 `json:"attempt_id"       query:"attempt_id"      validate:"required,min=1"`
+	IdempotencyKey string `json:"idempotency_key"  query:"idempotency_key" validate:"required,max=255"`
+	AmountMinor    uint64 `json:"amount_minor"     query:"amount_minor"    validate:"required,min=0"`
+	Reason         string `json:"reason,omitempty" query:"reason"`
 }
 
 type ExecuteRefundResponse struct {

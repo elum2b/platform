@@ -11,7 +11,7 @@ import (
 )
 
 type TwoFactorRequest struct {
-	Code string `json:"code" validate:"required"`
+	Code string `json:"code" query:"code" validate:"required"`
 }
 
 var (

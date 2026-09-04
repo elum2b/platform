@@ -10,9 +10,9 @@ import (
 )
 
 type OverviewRequest struct {
-	WorkspaceID string `json:"workspace_id" validate:"required,uuid"`
-	From        int64  `json:"from"         validate:"required,min=0"`
-	Until       int64  `json:"until"        validate:"required,min=0"`
+	WorkspaceID string `json:"workspace_id" query:"workspace_id" validate:"required,uuid"`
+	From        int64  `json:"from"         query:"from"         validate:"required,min=0"`
+	Until       int64  `json:"until"        query:"until"        validate:"required,min=0"`
 }
 
 type OverviewResponse struct {

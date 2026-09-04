@@ -9,13 +9,13 @@ import (
 )
 
 type ListUserRequest struct {
-	WorkspaceID    string `json:"workspace_id"     validate:"required,uuid"`
-	AppID          int64  `json:"app_id"           validate:"required,min=1"`
-	PlatformID     int64  `json:"platform_id"      validate:"required,min=1"`
-	PlatformUserID string `json:"platform_user_id" validate:"required"`
-	Status         string `json:"status,omitempty"`
-	Limit          int32  `json:"limit,omitempty"  validate:"omitempty,min=1,max=100"`
-	Offset         int32  `json:"offset,omitempty" validate:"min=0"`
+	WorkspaceID    string `json:"workspace_id"     query:"workspace_id"     validate:"required,uuid"`
+	AppID          int64  `json:"app_id"           query:"app_id"           validate:"required,min=1"`
+	PlatformID     int64  `json:"platform_id"      query:"platform_id"      validate:"required,min=1"`
+	PlatformUserID string `json:"platform_user_id" query:"platform_user_id" validate:"required"`
+	Status         string `json:"status,omitempty" query:"status"`
+	Limit          int32  `json:"limit,omitempty"  query:"limit"            validate:"omitempty,min=1,max=100"`
+	Offset         int32  `json:"offset,omitempty" query:"offset"           validate:"min=0"`
 }
 
 type ListUserResponse struct {

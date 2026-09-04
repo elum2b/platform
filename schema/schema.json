@@ -2641,7 +2641,7 @@
       "key": "calendar.user.get",
       "description": "\nReturns a calendar with its steps and rewards for the authenticated\napplication user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -2669,10 +2669,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "ref": {
                 "type": "string",
                 "maxLength": 255,
@@ -2688,7 +2684,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "ref"
             ]
           }
@@ -2841,7 +2836,7 @@
       "key": "calendar.user.list_active",
       "description": "\nLists active calendars available to the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -2869,10 +2864,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "locale": {
                 "type": "string"
               },
@@ -2886,8 +2877,7 @@
             "required": [
               "workspace_id",
               "app_id",
-              "platform_id",
-              "params"
+              "platform_id"
             ]
           }
         }
@@ -2959,7 +2949,7 @@
       "key": "calendar.user.next",
       "description": "\nAdvances the authenticated application user to the next claimable step of a\ncalendar and grants its rewards.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -2987,10 +2977,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "calendar_ref": {
                 "type": "string",
                 "maxLength": 255,
@@ -3006,7 +2992,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "calendar_ref"
             ]
           }
@@ -3243,7 +3228,7 @@
       "key": "calendar.user.progress.get",
       "description": "\nReturns the application user's progress on a calendar.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -3271,10 +3256,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "calendar_id": {
                 "type": "string",
                 "maxLength": 255,
@@ -3287,7 +3268,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "calendar_id"
             ]
           }
@@ -3356,7 +3336,7 @@
       "key": "calendar.user.record",
       "description": "\nRecords a calendar operation for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -3384,10 +3364,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "calendar_ref": {
                 "type": "string",
                 "maxLength": 255,
@@ -3404,7 +3380,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "calendar_ref",
               "operation_id"
             ]
@@ -11845,7 +11820,7 @@
       "key": "cpa.user.code.get",
       "description": "\nIssues or returns the authenticated application user's code for a CPA offer.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -11873,10 +11848,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "cpa_id": {
                 "type": "string",
                 "maxLength": 255,
@@ -11889,7 +11860,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "cpa_id"
             ]
           }
@@ -12005,7 +11975,7 @@
       "key": "cpa.user.offer.list",
       "description": "\nLists active CPA offers available to the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -12033,10 +12003,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "locale": {
                 "type": "string"
               }
@@ -12046,8 +12012,7 @@
             "required": [
               "workspace_id",
               "app_id",
-              "platform_id",
-              "params"
+              "platform_id"
             ]
           }
         }
@@ -12186,7 +12151,7 @@
       "key": "cpa.user.status.get",
       "description": "\nReturns the authenticated application user's assignment for a CPA offer.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -12214,10 +12179,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "cpa_id": {
                 "type": "string",
                 "maxLength": 255,
@@ -12230,7 +12191,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "cpa_id"
             ]
           }
@@ -22918,7 +22878,7 @@
       "key": "payment.user.create_attempt",
       "description": "\nCreates a payment attempt for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -22945,10 +22905,6 @@
                 },
                 "type": "integer",
                 "minimum": 1
-              },
-              "params": {
-                "type": "string",
-                "minLength": 1
               },
               "order_id": {
                 "not": {
@@ -22994,7 +22950,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "order_id",
               "provider_code"
             ]
@@ -23060,7 +23015,7 @@
       "key": "payment.user.create_order",
       "description": "\nCreates an order for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -23087,10 +23042,6 @@
                 },
                 "type": "integer",
                 "minimum": 1
-              },
-              "params": {
-                "type": "string",
-                "minLength": 1
               },
               "internal_user_id": {
                 "type": "integer"
@@ -23134,7 +23085,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "payer",
               "product_id",
               "quantity",
@@ -23247,7 +23197,7 @@
       "key": "payment.user.create_order_by_key",
       "description": "\nCreates an order by product key for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -23274,10 +23224,6 @@
                 },
                 "type": "integer",
                 "minimum": 1
-              },
-              "params": {
-                "type": "string",
-                "minLength": 1
               },
               "key": {
                 "type": "string",
@@ -23318,7 +23264,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "key",
               "payer",
               "asset_code",
@@ -23431,7 +23376,7 @@
       "key": "payment.user.get_product",
       "description": "\nReturns a product for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -23459,10 +23404,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "product_id": {
                 "type": "string",
                 "maxLength": 255,
@@ -23481,7 +23422,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "product_id"
             ]
           }
@@ -23662,7 +23602,7 @@
       "key": "payment.user.get_product_by_key",
       "description": "\nReturns a product by key for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -23690,10 +23630,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "key": {
                 "type": "string",
                 "maxLength": 255,
@@ -23712,7 +23648,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "key"
             ]
           }
@@ -23893,7 +23828,7 @@
       "key": "payment.user.get_usdt_price",
       "description": "\nReturns the USDT price for an asset for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -23921,10 +23856,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "asset_code": {
                 "type": "string",
                 "maxLength": 255,
@@ -23937,7 +23868,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "asset_code"
             ]
           }
@@ -24009,7 +23939,7 @@
       "key": "payment.user.is_subscription_active",
       "description": "\nChecks if the authenticated application user has an active subscription.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -24037,10 +23967,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "product_id": {
                 "type": "string",
                 "maxLength": 255,
@@ -24058,7 +23984,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "product_id",
               "provider_code"
             ]
@@ -24089,7 +24014,7 @@
       "key": "payment.user.list_assets",
       "description": "\nLists available assets for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -24116,10 +24041,6 @@
                 },
                 "type": "integer",
                 "minimum": 1
-              },
-              "params": {
-                "type": "string",
-                "minLength": 1
               }
             },
             "additionalProperties": false,
@@ -24127,8 +24048,7 @@
             "required": [
               "workspace_id",
               "app_id",
-              "platform_id",
-              "params"
+              "platform_id"
             ]
           }
         }
@@ -24226,7 +24146,7 @@
       "key": "payment.user.list_products",
       "description": "\nLists available products for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -24254,10 +24174,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "group_code": {
                 "type": "string"
               },
@@ -24273,8 +24189,7 @@
             "required": [
               "workspace_id",
               "app_id",
-              "platform_id",
-              "params"
+              "platform_id"
             ]
           }
         }
@@ -24457,7 +24372,7 @@
       "key": "payment.user.list_usdt_prices",
       "description": "\nLists USDT prices for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -24484,10 +24399,6 @@
                 },
                 "type": "integer",
                 "minimum": 1
-              },
-              "params": {
-                "type": "string",
-                "minLength": 1
               }
             },
             "additionalProperties": false,
@@ -24495,8 +24406,7 @@
             "required": [
               "workspace_id",
               "app_id",
-              "platform_id",
-              "params"
+              "platform_id"
             ]
           }
         }
@@ -24570,7 +24480,7 @@
       "key": "promo.apply",
       "description": "\nRedeems a promo code for the authenticated application user. Returns the promo\ndetails and redemption status.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -24598,10 +24508,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "code": {
                 "type": "string",
                 "minLength": 1
@@ -24616,7 +24522,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "code"
             ]
           }
@@ -28480,7 +28385,7 @@
       "key": "reference.user.get",
       "description": "\nReturns a reference item for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -28508,10 +28413,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "key": {
                 "type": "string",
                 "maxLength": 255,
@@ -28527,7 +28428,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "key"
             ]
           }
@@ -28656,7 +28556,7 @@
       "key": "reference.user.list",
       "description": "\nLists reference items for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -28684,10 +28584,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "locale": {
                 "type": "string"
               },
@@ -28706,8 +28602,7 @@
             "required": [
               "workspace_id",
               "app_id",
-              "platform_id",
-              "params"
+              "platform_id"
             ]
           }
         }
@@ -28838,7 +28733,7 @@
       "key": "reference.user.resolve",
       "description": "\nResolves multiple reference items by key for the authenticated application\nuser. Returns found items and a list of missing keys.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -28866,10 +28761,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "keys": {
                 "items": {
                   "type": "string"
@@ -28888,7 +28779,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "keys"
             ]
           }
@@ -32726,7 +32616,7 @@
       "key": "tasks.user.claim",
       "description": "\nClaims a completed task for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -32754,10 +32644,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "task_ref": {
                 "type": "string",
                 "minLength": 1
@@ -32777,7 +32663,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "task_ref",
               "operation_id"
             ]
@@ -32954,7 +32839,7 @@
       "key": "tasks.user.list_active",
       "description": "\nLists active tasks grouped for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -32982,10 +32867,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "locale": {
                 "type": "string"
               },
@@ -33002,8 +32883,7 @@
             "required": [
               "workspace_id",
               "app_id",
-              "platform_id",
-              "params"
+              "platform_id"
             ]
           }
         }
@@ -33191,7 +33071,7 @@
       "key": "tasks.user.partner.check",
       "description": "\nChecks the completion status of a partner task for the authenticated\napplication user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -33219,10 +33099,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "issue_ref": {
                 "type": "string",
                 "minLength": 1
@@ -33240,7 +33116,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "issue_ref"
             ]
           }
@@ -33420,7 +33295,7 @@
       "key": "tasks.user.partner.list",
       "description": "\nLists partner tasks for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -33447,10 +33322,6 @@
                 },
                 "type": "integer",
                 "minimum": 1
-              },
-              "params": {
-                "type": "string",
-                "minLength": 1
               },
               "provider": {
                 "type": "string",
@@ -33486,7 +33357,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "provider",
               "group_key",
               "platform"
@@ -33652,7 +33522,7 @@
       "key": "tasks.user.partner.start",
       "description": "\nStarts a partner task for the authenticated application user and returns the\ndeep link.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -33680,10 +33550,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "issue_ref": {
                 "type": "string",
                 "minLength": 1
@@ -33705,7 +33571,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "issue_ref"
             ]
           }
@@ -33888,7 +33753,7 @@
       "key": "tasks.user.start",
       "description": "\nStarts a task for the authenticated application user.",
       "transports": [
-        "ws"
+        "http"
       ],
       "input": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -33916,10 +33781,6 @@
                 "type": "integer",
                 "minimum": 1
               },
-              "params": {
-                "type": "string",
-                "minLength": 1
-              },
               "task_ref": {
                 "type": "string",
                 "minLength": 1
@@ -33935,7 +33796,6 @@
               "workspace_id",
               "app_id",
               "platform_id",
-              "params",
               "task_ref"
             ]
           }

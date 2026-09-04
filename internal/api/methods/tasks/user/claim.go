@@ -10,13 +10,12 @@ import (
 )
 
 type ClaimRequest struct {
-	WorkspaceID string    `json:"workspace_id"  validate:"required,uuid"`
-	AppID       int64     `json:"app_id"        validate:"required,min=1"`
-	PlatformID  int64     `json:"platform_id"   validate:"required,min=1"`
-	Params      string    `json:"params"        validate:"required"`
-	TaskRef     string    `json:"task_ref"      validate:"required"`
-	OperationID string    `json:"operation_id"  validate:"required"`
-	Now         time.Time `json:"now,omitempty"`
+	WorkspaceID string    `json:"workspace_id"  query:"workspace_id" validate:"required,uuid"`
+	AppID       int64     `json:"app_id"        query:"app_id"       validate:"required,min=1"`
+	PlatformID  int64     `json:"platform_id"   query:"platform_id"  validate:"required,min=1"`
+	TaskRef     string    `json:"task_ref"      query:"task_ref"     validate:"required"`
+	OperationID string    `json:"operation_id"  query:"operation_id" validate:"required"`
+	Now         time.Time `json:"now,omitempty" query:"now"`
 }
 
 type ClaimResponse struct {
@@ -33,7 +32,7 @@ Claims a completed task for the authenticated application user.`
 var Claim = adapter.Method[ClaimRequest, ClaimResponse]{
 	Key:         claimKey,
 	Description: claimDescription,
-	Transports:  adapter.WS,
+	Transports:  adapter.HTTP,
 	Handler: func(ctx *adapter.Context, data ClaimRequest) (ClaimResponse, error) {
 		result, err := services.Tasks.User.Claim(
 			ctx.Context,
