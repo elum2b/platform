@@ -86,4 +86,67 @@ var (
 		"REFERENCE_CACHE_TTL_CHECK",
 		ServicesCacheTTLCheck,
 	)
+
+	// ReferenceStorageDirectory contains Reference local resource directory.
+	ReferenceStorageDirectory = env.GetEnvString(
+		"REFERENCE_STORAGE_DIRECTORY",
+		"",
+	)
+
+	// ReferenceStorageEndpoint contains Reference S3/MinIO endpoint.
+	// Fallback: **S3_ENDPOINT**.
+	ReferenceStorageEndpoint = env.GetEnvString(
+		"REFERENCE_STORAGE_ENDPOINT",
+		S3Endpoint,
+	)
+
+	// ReferenceStorageBucket contains Reference S3/MinIO bucket.
+	// When empty, local disk storage remains active.
+	// Fallback: **S3_BUCKET**.
+	ReferenceStorageBucket = env.GetEnvString(
+		"REFERENCE_STORAGE_BUCKET",
+		S3Bucket,
+	)
+
+	// ReferenceStorageAccessKey contains Reference S3/MinIO access key.
+	// Fallback: **S3_ACCESS_KEY**.
+	ReferenceStorageAccessKey = env.GetEnvString(
+		"REFERENCE_STORAGE_ACCESS_KEY",
+		S3AccessKey,
+	)
+
+	// ReferenceStorageSecretKey contains Reference S3/MinIO secret key.
+	// Fallback: **S3_SECRET_KEY**.
+	ReferenceStorageSecretKey = env.GetEnvString(
+		"REFERENCE_STORAGE_SECRET_KEY",
+		S3SecretKey,
+	)
+
+	// ReferenceStorageSessionToken contains Reference S3 session token.
+	// Fallback: **S3_SESSION_TOKEN**.
+	ReferenceStorageSessionToken = env.GetEnvString(
+		"REFERENCE_STORAGE_SESSION_TOKEN",
+		S3SessionToken,
+	)
+
+	// ReferenceStorageRegion contains Reference S3/MinIO region.
+	// Fallback: **S3_REGION**.
+	ReferenceStorageRegion = env.GetEnvString(
+		"REFERENCE_STORAGE_REGION",
+		S3Region,
+	)
+
+	// ReferenceStorageSecure contains Reference S3/MinIO HTTPS state.
+	// Fallback: **S3_SECURE**.
+	ReferenceStorageSecure = env.GetEnvBool(
+		"REFERENCE_STORAGE_SECURE",
+		S3Secure,
+	)
+
+	// ReferenceStorageUsePathStyle contains Reference S3 path-style state.
+	// Fallback: **S3_USE_PATH_STYLE**.
+	ReferenceStorageUsePathStyle = env.GetEnvBool(
+		"REFERENCE_STORAGE_USE_PATH_STYLE",
+		S3UsePathStyle,
+	)
 )

@@ -28,13 +28,35 @@ func Service() func(context.Context) error {
 				CacheEnabled:   config.ReferenceCacheEnabled,
 				CacheSize:      config.ReferenceCacheSize,
 				CacheTTLCheck:  config.ReferenceCacheTTLCheck,
-				ResourceStorage: storage.Config{
-					Directory: filepath.Join(
-						config.ServicesDataDirectory,
-						"reference",
-					),
-				},
+				ResourceStorage: resourceStorageConfig(
+					config.ServicesDataDirectory,
+					storage.Config{
+						Directory:    config.ReferenceStorageDirectory,
+						Endpoint:     config.ReferenceStorageEndpoint,
+						Bucket:       config.ReferenceStorageBucket,
+						AccessKey:    config.ReferenceStorageAccessKey,
+						SecretKey:    config.ReferenceStorageSecretKey,
+						SessionToken: config.ReferenceStorageSessionToken,
+						Region:       config.ReferenceStorageRegion,
+						Secure:       config.ReferenceStorageSecure,
+						UsePathStyle: config.ReferenceStorageUsePathStyle,
+					},
+				),
 			},
 		})
 	}
+}
+
+func resourceStorageConfig(
+	servicesDataDirectory string,
+	resourceStorage storage.Config,
+) storage.Config {
+	if resourceStorage.Directory == "" {
+		resourceStorage.Directory = filepath.Join(
+			servicesDataDirectory,
+			"reference",
+		)
+	}
+
+	return resourceStorage
 }
