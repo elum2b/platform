@@ -2,6 +2,7 @@ package promo
 
 import (
 	"context"
+	"path/filepath"
 
 	"github.com/elum2b/services/promo"
 
@@ -30,6 +31,10 @@ func Service() func(context.Context) error {
 				CacheEnabled:   config.PromoCacheEnabled,
 				CacheSize:      config.PromoCacheSize,
 				CacheTTLCheck:  config.PromoCacheTTLCheck,
+				ArchiveDirectory: filepath.Join(
+					config.ServicesDataDirectory,
+					"promo",
+				),
 			},
 		})
 	}

@@ -45,4 +45,10 @@ var (
 	ServicesCacheTTLCheck = env.GetEnvDuration(
 		"SERVICES_CACHE_TTL_CHECK", 0,
 	)
+
+	// ServicesDataDirectory contains the writable directory for service data.
+	// Env: SERVICES_DATA_DIRECTORY.
+	ServicesDataDirectory = env.GetEnvString(
+		"SERVICES_DATA_DIRECTORY", "data",
+	)
 )

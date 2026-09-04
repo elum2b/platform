@@ -2,6 +2,7 @@ package tasks
 
 import (
 	"context"
+	"path/filepath"
 
 	"github.com/elum2b/services/tasks"
 	taskruntime "github.com/elum2b/services/tasks/runtime"
@@ -31,6 +32,10 @@ func Service() func(context.Context) error {
 				CacheEnabled:   config.TasksCacheEnabled,
 				CacheSize:      config.TasksCacheSize,
 				CacheTTLCheck:  config.TasksCacheTTLCheck,
+				ArchiveDirectory: filepath.Join(
+					config.ServicesDataDirectory,
+					"tasks",
+				),
 
 				PartnerStartLeaseDuration: config.TasksPartnerStartLeaseDuration,
 				Runtime: taskruntime.Options{

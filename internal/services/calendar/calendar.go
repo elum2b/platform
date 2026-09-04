@@ -2,6 +2,7 @@ package calendar
 
 import (
 	"context"
+	"path/filepath"
 
 	"github.com/elum2b/services/calendar"
 
@@ -30,6 +31,10 @@ func Service() func(context.Context) error {
 				CacheEnabled:   config.CalendarCacheEnabled,
 				CacheSize:      config.CalendarCacheSize,
 				CacheTTLCheck:  config.CalendarCacheTTLCheck,
+				ArchiveDirectory: filepath.Join(
+					config.ServicesDataDirectory,
+					"calendar",
+				),
 			},
 		})
 	}

@@ -2,6 +2,7 @@ package cpa
 
 import (
 	"context"
+	"path/filepath"
 
 	"github.com/elum2b/services/cpa"
 
@@ -30,6 +31,10 @@ func Service() func(context.Context) error {
 				CacheEnabled:   config.CPACacheEnabled,
 				CacheSize:      config.CPACacheSize,
 				CacheTTLCheck:  config.CPACacheTTLCheck,
+				ArchiveDirectory: filepath.Join(
+					config.ServicesDataDirectory,
+					"cpa",
+				),
 			},
 		})
 	}

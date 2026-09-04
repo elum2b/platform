@@ -2,6 +2,7 @@ package payment
 
 import (
 	"context"
+	"path/filepath"
 
 	"github.com/elum2b/services/payment"
 
@@ -30,6 +31,10 @@ func Service() func(context.Context) error {
 				CacheEnabled:   config.PaymentCacheEnabled,
 				CacheSize:      config.PaymentCacheSize,
 				CacheTTLCheck:  config.PaymentCacheTTLCheck,
+				ArchiveDirectory: filepath.Join(
+					config.ServicesDataDirectory,
+					"payment",
+				),
 
 				PriceUpdateInterval: config.PaymentPriceUpdateInterval,
 				PriceUpdateBaseURL:  config.PaymentPriceUpdateBaseURL,

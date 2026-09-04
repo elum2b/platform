@@ -2,8 +2,10 @@ package reference
 
 import (
 	"context"
+	"path/filepath"
 
 	"github.com/elum2b/services/reference"
+	"github.com/elum2b/services/reference/storage"
 
 	"github.com/elum2b/platform/internal/config"
 	"github.com/elum2b/platform/internal/services"
@@ -26,6 +28,12 @@ func Service() func(context.Context) error {
 				CacheEnabled:   config.ReferenceCacheEnabled,
 				CacheSize:      config.ReferenceCacheSize,
 				CacheTTLCheck:  config.ReferenceCacheTTLCheck,
+				ResourceStorage: storage.Config{
+					Directory: filepath.Join(
+						config.ServicesDataDirectory,
+						"reference",
+					),
+				},
 			},
 		})
 	}

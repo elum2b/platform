@@ -17,6 +17,8 @@ RUN CGO_ENABLED=0 \
     -o /platform \
     .
 
+RUN mkdir /data
+
 FROM gcr.io/distroless/static-debian12:nonroot
 
 ARG VERSION=dev
@@ -24,6 +26,7 @@ ARG VERSION=dev
 LABEL io.elum2b.platform.version=$VERSION
 
 COPY --from=build /platform /platform
+COPY --from=build --chown=nonroot:nonroot /data /var/lib/platform
 
 USER nonroot:nonroot
 
