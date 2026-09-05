@@ -601,67 +601,53 @@
         "$id": "https://github.com/elum2b/platform/internal/api/methods/calendar/admin/export/response",
         "$ref": "#/$defs/Response",
         "$defs": {
-          "Job": {
+          "ArchiveJob": {
             "properties": {
-              "ID": {
+              "id": {
                 "type": "integer"
               },
-              "Service": {
+              "service": {
                 "type": "string"
               },
-              "WorkspaceID": {
+              "workspace_id": {
                 "type": "string"
               },
-              "Type": {
+              "type": {
                 "type": "string"
               },
-              "Status": {
+              "status": {
                 "type": "string"
               },
-              "FileName": {
+              "file_name": {
                 "type": "string"
               },
-              "Options": true,
-              "ArchiveKey": {
-                "type": "string"
-              },
-              "ArchiveExpires": {
+              "archive_expires": {
                 "type": "string",
                 "format": "date-time"
               },
-              "Error": {
+              "error": {
                 "type": "string"
               },
-              "LockedBy": {
-                "type": "string"
-              },
-              "LeaseToken": {
-                "type": "string"
-              },
-              "LockedUntil": {
+              "created_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "CreatedAt": {
+              "started_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "StartedAt": {
+              "finished_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "FinishedAt": {
+              "updated_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "UpdatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "Attempt": {
+              "attempt": {
                 "type": "integer"
               },
-              "NextAttemptAt": {
+              "next_attempt_at": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -669,31 +655,21 @@
             "additionalProperties": false,
             "type": "object",
             "required": [
-              "ID",
-              "Service",
-              "WorkspaceID",
-              "Type",
-              "Status",
-              "FileName",
-              "Options",
-              "ArchiveKey",
-              "ArchiveExpires",
-              "Error",
-              "LockedBy",
-              "LeaseToken",
-              "LockedUntil",
-              "CreatedAt",
-              "StartedAt",
-              "FinishedAt",
-              "UpdatedAt",
-              "Attempt",
-              "NextAttemptAt"
+              "id",
+              "service",
+              "workspace_id",
+              "type",
+              "status",
+              "file_name",
+              "created_at",
+              "updated_at",
+              "attempt"
             ]
           },
           "Response": {
             "properties": {
               "job": {
-                "$ref": "#/$defs/Job"
+                "$ref": "#/$defs/ArchiveJob"
               }
             },
             "additionalProperties": false,
@@ -969,67 +945,53 @@
         "$id": "https://github.com/elum2b/platform/internal/api/methods/calendar/admin/import/response",
         "$ref": "#/$defs/Response",
         "$defs": {
-          "Job": {
+          "ArchiveJob": {
             "properties": {
-              "ID": {
+              "id": {
                 "type": "integer"
               },
-              "Service": {
+              "service": {
                 "type": "string"
               },
-              "WorkspaceID": {
+              "workspace_id": {
                 "type": "string"
               },
-              "Type": {
+              "type": {
                 "type": "string"
               },
-              "Status": {
+              "status": {
                 "type": "string"
               },
-              "FileName": {
+              "file_name": {
                 "type": "string"
               },
-              "Options": true,
-              "ArchiveKey": {
-                "type": "string"
-              },
-              "ArchiveExpires": {
+              "archive_expires": {
                 "type": "string",
                 "format": "date-time"
               },
-              "Error": {
+              "error": {
                 "type": "string"
               },
-              "LockedBy": {
-                "type": "string"
-              },
-              "LeaseToken": {
-                "type": "string"
-              },
-              "LockedUntil": {
+              "created_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "CreatedAt": {
+              "started_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "StartedAt": {
+              "finished_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "FinishedAt": {
+              "updated_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "UpdatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "Attempt": {
+              "attempt": {
                 "type": "integer"
               },
-              "NextAttemptAt": {
+              "next_attempt_at": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -1037,31 +999,21 @@
             "additionalProperties": false,
             "type": "object",
             "required": [
-              "ID",
-              "Service",
-              "WorkspaceID",
-              "Type",
-              "Status",
-              "FileName",
-              "Options",
-              "ArchiveKey",
-              "ArchiveExpires",
-              "Error",
-              "LockedBy",
-              "LeaseToken",
-              "LockedUntil",
-              "CreatedAt",
-              "StartedAt",
-              "FinishedAt",
-              "UpdatedAt",
-              "Attempt",
-              "NextAttemptAt"
+              "id",
+              "service",
+              "workspace_id",
+              "type",
+              "status",
+              "file_name",
+              "created_at",
+              "updated_at",
+              "attempt"
             ]
           },
           "Response": {
             "properties": {
               "job": {
-                "$ref": "#/$defs/Job"
+                "$ref": "#/$defs/ArchiveJob"
               }
             },
             "additionalProperties": false,
@@ -10453,67 +10405,53 @@
         "$id": "https://github.com/elum2b/platform/internal/api/methods/cpa/admin/export/response",
         "$ref": "#/$defs/Response",
         "$defs": {
-          "Job": {
+          "ArchiveJob": {
             "properties": {
-              "ID": {
+              "id": {
                 "type": "integer"
               },
-              "Service": {
+              "service": {
                 "type": "string"
               },
-              "WorkspaceID": {
+              "workspace_id": {
                 "type": "string"
               },
-              "Type": {
+              "type": {
                 "type": "string"
               },
-              "Status": {
+              "status": {
                 "type": "string"
               },
-              "FileName": {
+              "file_name": {
                 "type": "string"
               },
-              "Options": true,
-              "ArchiveKey": {
-                "type": "string"
-              },
-              "ArchiveExpires": {
+              "archive_expires": {
                 "type": "string",
                 "format": "date-time"
               },
-              "Error": {
+              "error": {
                 "type": "string"
               },
-              "LockedBy": {
-                "type": "string"
-              },
-              "LeaseToken": {
-                "type": "string"
-              },
-              "LockedUntil": {
+              "created_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "CreatedAt": {
+              "started_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "StartedAt": {
+              "finished_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "FinishedAt": {
+              "updated_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "UpdatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "Attempt": {
+              "attempt": {
                 "type": "integer"
               },
-              "NextAttemptAt": {
+              "next_attempt_at": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -10521,31 +10459,21 @@
             "additionalProperties": false,
             "type": "object",
             "required": [
-              "ID",
-              "Service",
-              "WorkspaceID",
-              "Type",
-              "Status",
-              "FileName",
-              "Options",
-              "ArchiveKey",
-              "ArchiveExpires",
-              "Error",
-              "LockedBy",
-              "LeaseToken",
-              "LockedUntil",
-              "CreatedAt",
-              "StartedAt",
-              "FinishedAt",
-              "UpdatedAt",
-              "Attempt",
-              "NextAttemptAt"
+              "id",
+              "service",
+              "workspace_id",
+              "type",
+              "status",
+              "file_name",
+              "created_at",
+              "updated_at",
+              "attempt"
             ]
           },
           "Response": {
             "properties": {
               "job": {
-                "$ref": "#/$defs/Job"
+                "$ref": "#/$defs/ArchiveJob"
               }
             },
             "additionalProperties": false,
@@ -10604,67 +10532,53 @@
         "$id": "https://github.com/elum2b/platform/internal/api/methods/cpa/admin/import/response",
         "$ref": "#/$defs/Response",
         "$defs": {
-          "Job": {
+          "ArchiveJob": {
             "properties": {
-              "ID": {
+              "id": {
                 "type": "integer"
               },
-              "Service": {
+              "service": {
                 "type": "string"
               },
-              "WorkspaceID": {
+              "workspace_id": {
                 "type": "string"
               },
-              "Type": {
+              "type": {
                 "type": "string"
               },
-              "Status": {
+              "status": {
                 "type": "string"
               },
-              "FileName": {
+              "file_name": {
                 "type": "string"
               },
-              "Options": true,
-              "ArchiveKey": {
-                "type": "string"
-              },
-              "ArchiveExpires": {
+              "archive_expires": {
                 "type": "string",
                 "format": "date-time"
               },
-              "Error": {
+              "error": {
                 "type": "string"
               },
-              "LockedBy": {
-                "type": "string"
-              },
-              "LeaseToken": {
-                "type": "string"
-              },
-              "LockedUntil": {
+              "created_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "CreatedAt": {
+              "started_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "StartedAt": {
+              "finished_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "FinishedAt": {
+              "updated_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "UpdatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "Attempt": {
+              "attempt": {
                 "type": "integer"
               },
-              "NextAttemptAt": {
+              "next_attempt_at": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -10672,31 +10586,21 @@
             "additionalProperties": false,
             "type": "object",
             "required": [
-              "ID",
-              "Service",
-              "WorkspaceID",
-              "Type",
-              "Status",
-              "FileName",
-              "Options",
-              "ArchiveKey",
-              "ArchiveExpires",
-              "Error",
-              "LockedBy",
-              "LeaseToken",
-              "LockedUntil",
-              "CreatedAt",
-              "StartedAt",
-              "FinishedAt",
-              "UpdatedAt",
-              "Attempt",
-              "NextAttemptAt"
+              "id",
+              "service",
+              "workspace_id",
+              "type",
+              "status",
+              "file_name",
+              "created_at",
+              "updated_at",
+              "attempt"
             ]
           },
           "Response": {
             "properties": {
               "job": {
-                "$ref": "#/$defs/Job"
+                "$ref": "#/$defs/ArchiveJob"
               }
             },
             "additionalProperties": false,
@@ -14095,67 +13999,53 @@
         "$id": "https://github.com/elum2b/platform/internal/api/methods/payment/admin/export/response",
         "$ref": "#/$defs/Response",
         "$defs": {
-          "Job": {
+          "ArchiveJob": {
             "properties": {
-              "ID": {
+              "id": {
                 "type": "integer"
               },
-              "Service": {
+              "service": {
                 "type": "string"
               },
-              "WorkspaceID": {
+              "workspace_id": {
                 "type": "string"
               },
-              "Type": {
+              "type": {
                 "type": "string"
               },
-              "Status": {
+              "status": {
                 "type": "string"
               },
-              "FileName": {
+              "file_name": {
                 "type": "string"
               },
-              "Options": true,
-              "ArchiveKey": {
-                "type": "string"
-              },
-              "ArchiveExpires": {
+              "archive_expires": {
                 "type": "string",
                 "format": "date-time"
               },
-              "Error": {
+              "error": {
                 "type": "string"
               },
-              "LockedBy": {
-                "type": "string"
-              },
-              "LeaseToken": {
-                "type": "string"
-              },
-              "LockedUntil": {
+              "created_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "CreatedAt": {
+              "started_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "StartedAt": {
+              "finished_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "FinishedAt": {
+              "updated_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "UpdatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "Attempt": {
+              "attempt": {
                 "type": "integer"
               },
-              "NextAttemptAt": {
+              "next_attempt_at": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -14163,31 +14053,21 @@
             "additionalProperties": false,
             "type": "object",
             "required": [
-              "ID",
-              "Service",
-              "WorkspaceID",
-              "Type",
-              "Status",
-              "FileName",
-              "Options",
-              "ArchiveKey",
-              "ArchiveExpires",
-              "Error",
-              "LockedBy",
-              "LeaseToken",
-              "LockedUntil",
-              "CreatedAt",
-              "StartedAt",
-              "FinishedAt",
-              "UpdatedAt",
-              "Attempt",
-              "NextAttemptAt"
+              "id",
+              "service",
+              "workspace_id",
+              "type",
+              "status",
+              "file_name",
+              "created_at",
+              "updated_at",
+              "attempt"
             ]
           },
           "Response": {
             "properties": {
               "job": {
-                "$ref": "#/$defs/Job"
+                "$ref": "#/$defs/ArchiveJob"
               }
             },
             "additionalProperties": false,
@@ -14759,67 +14639,53 @@
         "$id": "https://github.com/elum2b/platform/internal/api/methods/payment/admin/import/response",
         "$ref": "#/$defs/Response",
         "$defs": {
-          "Job": {
+          "ArchiveJob": {
             "properties": {
-              "ID": {
+              "id": {
                 "type": "integer"
               },
-              "Service": {
+              "service": {
                 "type": "string"
               },
-              "WorkspaceID": {
+              "workspace_id": {
                 "type": "string"
               },
-              "Type": {
+              "type": {
                 "type": "string"
               },
-              "Status": {
+              "status": {
                 "type": "string"
               },
-              "FileName": {
+              "file_name": {
                 "type": "string"
               },
-              "Options": true,
-              "ArchiveKey": {
-                "type": "string"
-              },
-              "ArchiveExpires": {
+              "archive_expires": {
                 "type": "string",
                 "format": "date-time"
               },
-              "Error": {
+              "error": {
                 "type": "string"
               },
-              "LockedBy": {
-                "type": "string"
-              },
-              "LeaseToken": {
-                "type": "string"
-              },
-              "LockedUntil": {
+              "created_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "CreatedAt": {
+              "started_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "StartedAt": {
+              "finished_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "FinishedAt": {
+              "updated_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "UpdatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "Attempt": {
+              "attempt": {
                 "type": "integer"
               },
-              "NextAttemptAt": {
+              "next_attempt_at": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -14827,31 +14693,21 @@
             "additionalProperties": false,
             "type": "object",
             "required": [
-              "ID",
-              "Service",
-              "WorkspaceID",
-              "Type",
-              "Status",
-              "FileName",
-              "Options",
-              "ArchiveKey",
-              "ArchiveExpires",
-              "Error",
-              "LockedBy",
-              "LeaseToken",
-              "LockedUntil",
-              "CreatedAt",
-              "StartedAt",
-              "FinishedAt",
-              "UpdatedAt",
-              "Attempt",
-              "NextAttemptAt"
+              "id",
+              "service",
+              "workspace_id",
+              "type",
+              "status",
+              "file_name",
+              "created_at",
+              "updated_at",
+              "attempt"
             ]
           },
           "Response": {
             "properties": {
               "job": {
-                "$ref": "#/$defs/Job"
+                "$ref": "#/$defs/ArchiveJob"
               }
             },
             "additionalProperties": false,
@@ -25261,67 +25117,53 @@
         "$id": "https://github.com/elum2b/platform/internal/api/methods/promo/admin/export/response",
         "$ref": "#/$defs/Response",
         "$defs": {
-          "Job": {
+          "ArchiveJob": {
             "properties": {
-              "ID": {
+              "id": {
                 "type": "integer"
               },
-              "Service": {
+              "service": {
                 "type": "string"
               },
-              "WorkspaceID": {
+              "workspace_id": {
                 "type": "string"
               },
-              "Type": {
+              "type": {
                 "type": "string"
               },
-              "Status": {
+              "status": {
                 "type": "string"
               },
-              "FileName": {
+              "file_name": {
                 "type": "string"
               },
-              "Options": true,
-              "ArchiveKey": {
-                "type": "string"
-              },
-              "ArchiveExpires": {
+              "archive_expires": {
                 "type": "string",
                 "format": "date-time"
               },
-              "Error": {
+              "error": {
                 "type": "string"
               },
-              "LockedBy": {
-                "type": "string"
-              },
-              "LeaseToken": {
-                "type": "string"
-              },
-              "LockedUntil": {
+              "created_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "CreatedAt": {
+              "started_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "StartedAt": {
+              "finished_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "FinishedAt": {
+              "updated_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "UpdatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "Attempt": {
+              "attempt": {
                 "type": "integer"
               },
-              "NextAttemptAt": {
+              "next_attempt_at": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -25329,31 +25171,21 @@
             "additionalProperties": false,
             "type": "object",
             "required": [
-              "ID",
-              "Service",
-              "WorkspaceID",
-              "Type",
-              "Status",
-              "FileName",
-              "Options",
-              "ArchiveKey",
-              "ArchiveExpires",
-              "Error",
-              "LockedBy",
-              "LeaseToken",
-              "LockedUntil",
-              "CreatedAt",
-              "StartedAt",
-              "FinishedAt",
-              "UpdatedAt",
-              "Attempt",
-              "NextAttemptAt"
+              "id",
+              "service",
+              "workspace_id",
+              "type",
+              "status",
+              "file_name",
+              "created_at",
+              "updated_at",
+              "attempt"
             ]
           },
           "Response": {
             "properties": {
               "job": {
-                "$ref": "#/$defs/Job"
+                "$ref": "#/$defs/ArchiveJob"
               }
             },
             "additionalProperties": false,
@@ -25580,67 +25412,53 @@
         "$id": "https://github.com/elum2b/platform/internal/api/methods/promo/admin/import/response",
         "$ref": "#/$defs/Response",
         "$defs": {
-          "Job": {
+          "ArchiveJob": {
             "properties": {
-              "ID": {
+              "id": {
                 "type": "integer"
               },
-              "Service": {
+              "service": {
                 "type": "string"
               },
-              "WorkspaceID": {
+              "workspace_id": {
                 "type": "string"
               },
-              "Type": {
+              "type": {
                 "type": "string"
               },
-              "Status": {
+              "status": {
                 "type": "string"
               },
-              "FileName": {
+              "file_name": {
                 "type": "string"
               },
-              "Options": true,
-              "ArchiveKey": {
-                "type": "string"
-              },
-              "ArchiveExpires": {
+              "archive_expires": {
                 "type": "string",
                 "format": "date-time"
               },
-              "Error": {
+              "error": {
                 "type": "string"
               },
-              "LockedBy": {
-                "type": "string"
-              },
-              "LeaseToken": {
-                "type": "string"
-              },
-              "LockedUntil": {
+              "created_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "CreatedAt": {
+              "started_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "StartedAt": {
+              "finished_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "FinishedAt": {
+              "updated_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "UpdatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "Attempt": {
+              "attempt": {
                 "type": "integer"
               },
-              "NextAttemptAt": {
+              "next_attempt_at": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -25648,31 +25466,21 @@
             "additionalProperties": false,
             "type": "object",
             "required": [
-              "ID",
-              "Service",
-              "WorkspaceID",
-              "Type",
-              "Status",
-              "FileName",
-              "Options",
-              "ArchiveKey",
-              "ArchiveExpires",
-              "Error",
-              "LockedBy",
-              "LeaseToken",
-              "LockedUntil",
-              "CreatedAt",
-              "StartedAt",
-              "FinishedAt",
-              "UpdatedAt",
-              "Attempt",
-              "NextAttemptAt"
+              "id",
+              "service",
+              "workspace_id",
+              "type",
+              "status",
+              "file_name",
+              "created_at",
+              "updated_at",
+              "attempt"
             ]
           },
           "Response": {
             "properties": {
               "job": {
-                "$ref": "#/$defs/Job"
+                "$ref": "#/$defs/ArchiveJob"
               }
             },
             "additionalProperties": false,
@@ -27147,67 +26955,53 @@
         "$id": "https://github.com/elum2b/platform/internal/api/methods/reference/admin/export/response",
         "$ref": "#/$defs/Response",
         "$defs": {
-          "Job": {
+          "ArchiveJob": {
             "properties": {
-              "ID": {
+              "id": {
                 "type": "integer"
               },
-              "Service": {
+              "service": {
                 "type": "string"
               },
-              "WorkspaceID": {
+              "workspace_id": {
                 "type": "string"
               },
-              "Type": {
+              "type": {
                 "type": "string"
               },
-              "Status": {
+              "status": {
                 "type": "string"
               },
-              "FileName": {
+              "file_name": {
                 "type": "string"
               },
-              "Options": true,
-              "ArchiveKey": {
-                "type": "string"
-              },
-              "ArchiveExpires": {
+              "archive_expires": {
                 "type": "string",
                 "format": "date-time"
               },
-              "Error": {
+              "error": {
                 "type": "string"
               },
-              "LockedBy": {
-                "type": "string"
-              },
-              "LeaseToken": {
-                "type": "string"
-              },
-              "LockedUntil": {
+              "created_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "CreatedAt": {
+              "started_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "StartedAt": {
+              "finished_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "FinishedAt": {
+              "updated_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "UpdatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "Attempt": {
+              "attempt": {
                 "type": "integer"
               },
-              "NextAttemptAt": {
+              "next_attempt_at": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -27215,31 +27009,21 @@
             "additionalProperties": false,
             "type": "object",
             "required": [
-              "ID",
-              "Service",
-              "WorkspaceID",
-              "Type",
-              "Status",
-              "FileName",
-              "Options",
-              "ArchiveKey",
-              "ArchiveExpires",
-              "Error",
-              "LockedBy",
-              "LeaseToken",
-              "LockedUntil",
-              "CreatedAt",
-              "StartedAt",
-              "FinishedAt",
-              "UpdatedAt",
-              "Attempt",
-              "NextAttemptAt"
+              "id",
+              "service",
+              "workspace_id",
+              "type",
+              "status",
+              "file_name",
+              "created_at",
+              "updated_at",
+              "attempt"
             ]
           },
           "Response": {
             "properties": {
               "job": {
-                "$ref": "#/$defs/Job"
+                "$ref": "#/$defs/ArchiveJob"
               }
             },
             "additionalProperties": false,
@@ -27483,67 +27267,53 @@
         "$id": "https://github.com/elum2b/platform/internal/api/methods/reference/admin/import/response",
         "$ref": "#/$defs/Response",
         "$defs": {
-          "Job": {
+          "ArchiveJob": {
             "properties": {
-              "ID": {
+              "id": {
                 "type": "integer"
               },
-              "Service": {
+              "service": {
                 "type": "string"
               },
-              "WorkspaceID": {
+              "workspace_id": {
                 "type": "string"
               },
-              "Type": {
+              "type": {
                 "type": "string"
               },
-              "Status": {
+              "status": {
                 "type": "string"
               },
-              "FileName": {
+              "file_name": {
                 "type": "string"
               },
-              "Options": true,
-              "ArchiveKey": {
-                "type": "string"
-              },
-              "ArchiveExpires": {
+              "archive_expires": {
                 "type": "string",
                 "format": "date-time"
               },
-              "Error": {
+              "error": {
                 "type": "string"
               },
-              "LockedBy": {
-                "type": "string"
-              },
-              "LeaseToken": {
-                "type": "string"
-              },
-              "LockedUntil": {
+              "created_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "CreatedAt": {
+              "started_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "StartedAt": {
+              "finished_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "FinishedAt": {
+              "updated_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "UpdatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "Attempt": {
+              "attempt": {
                 "type": "integer"
               },
-              "NextAttemptAt": {
+              "next_attempt_at": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -27551,31 +27321,21 @@
             "additionalProperties": false,
             "type": "object",
             "required": [
-              "ID",
-              "Service",
-              "WorkspaceID",
-              "Type",
-              "Status",
-              "FileName",
-              "Options",
-              "ArchiveKey",
-              "ArchiveExpires",
-              "Error",
-              "LockedBy",
-              "LeaseToken",
-              "LockedUntil",
-              "CreatedAt",
-              "StartedAt",
-              "FinishedAt",
-              "UpdatedAt",
-              "Attempt",
-              "NextAttemptAt"
+              "id",
+              "service",
+              "workspace_id",
+              "type",
+              "status",
+              "file_name",
+              "created_at",
+              "updated_at",
+              "attempt"
             ]
           },
           "Response": {
             "properties": {
               "job": {
-                "$ref": "#/$defs/Job"
+                "$ref": "#/$defs/ArchiveJob"
               }
             },
             "additionalProperties": false,
@@ -29306,67 +29066,53 @@
         "$id": "https://github.com/elum2b/platform/internal/api/methods/tasks/admin/export/response",
         "$ref": "#/$defs/Response",
         "$defs": {
-          "Job": {
+          "ArchiveJob": {
             "properties": {
-              "ID": {
+              "id": {
                 "type": "integer"
               },
-              "Service": {
+              "service": {
                 "type": "string"
               },
-              "WorkspaceID": {
+              "workspace_id": {
                 "type": "string"
               },
-              "Type": {
+              "type": {
                 "type": "string"
               },
-              "Status": {
+              "status": {
                 "type": "string"
               },
-              "FileName": {
+              "file_name": {
                 "type": "string"
               },
-              "Options": true,
-              "ArchiveKey": {
-                "type": "string"
-              },
-              "ArchiveExpires": {
+              "archive_expires": {
                 "type": "string",
                 "format": "date-time"
               },
-              "Error": {
+              "error": {
                 "type": "string"
               },
-              "LockedBy": {
-                "type": "string"
-              },
-              "LeaseToken": {
-                "type": "string"
-              },
-              "LockedUntil": {
+              "created_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "CreatedAt": {
+              "started_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "StartedAt": {
+              "finished_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "FinishedAt": {
+              "updated_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "UpdatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "Attempt": {
+              "attempt": {
                 "type": "integer"
               },
-              "NextAttemptAt": {
+              "next_attempt_at": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -29374,31 +29120,21 @@
             "additionalProperties": false,
             "type": "object",
             "required": [
-              "ID",
-              "Service",
-              "WorkspaceID",
-              "Type",
-              "Status",
-              "FileName",
-              "Options",
-              "ArchiveKey",
-              "ArchiveExpires",
-              "Error",
-              "LockedBy",
-              "LeaseToken",
-              "LockedUntil",
-              "CreatedAt",
-              "StartedAt",
-              "FinishedAt",
-              "UpdatedAt",
-              "Attempt",
-              "NextAttemptAt"
+              "id",
+              "service",
+              "workspace_id",
+              "type",
+              "status",
+              "file_name",
+              "created_at",
+              "updated_at",
+              "attempt"
             ]
           },
           "Response": {
             "properties": {
               "job": {
-                "$ref": "#/$defs/Job"
+                "$ref": "#/$defs/ArchiveJob"
               }
             },
             "additionalProperties": false,
@@ -30073,67 +29809,53 @@
         "$id": "https://github.com/elum2b/platform/internal/api/methods/tasks/admin/import/response",
         "$ref": "#/$defs/Response",
         "$defs": {
-          "Job": {
+          "ArchiveJob": {
             "properties": {
-              "ID": {
+              "id": {
                 "type": "integer"
               },
-              "Service": {
+              "service": {
                 "type": "string"
               },
-              "WorkspaceID": {
+              "workspace_id": {
                 "type": "string"
               },
-              "Type": {
+              "type": {
                 "type": "string"
               },
-              "Status": {
+              "status": {
                 "type": "string"
               },
-              "FileName": {
+              "file_name": {
                 "type": "string"
               },
-              "Options": true,
-              "ArchiveKey": {
-                "type": "string"
-              },
-              "ArchiveExpires": {
+              "archive_expires": {
                 "type": "string",
                 "format": "date-time"
               },
-              "Error": {
+              "error": {
                 "type": "string"
               },
-              "LockedBy": {
-                "type": "string"
-              },
-              "LeaseToken": {
-                "type": "string"
-              },
-              "LockedUntil": {
+              "created_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "CreatedAt": {
+              "started_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "StartedAt": {
+              "finished_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "FinishedAt": {
+              "updated_at": {
                 "type": "string",
                 "format": "date-time"
               },
-              "UpdatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "Attempt": {
+              "attempt": {
                 "type": "integer"
               },
-              "NextAttemptAt": {
+              "next_attempt_at": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -30141,31 +29863,21 @@
             "additionalProperties": false,
             "type": "object",
             "required": [
-              "ID",
-              "Service",
-              "WorkspaceID",
-              "Type",
-              "Status",
-              "FileName",
-              "Options",
-              "ArchiveKey",
-              "ArchiveExpires",
-              "Error",
-              "LockedBy",
-              "LeaseToken",
-              "LockedUntil",
-              "CreatedAt",
-              "StartedAt",
-              "FinishedAt",
-              "UpdatedAt",
-              "Attempt",
-              "NextAttemptAt"
+              "id",
+              "service",
+              "workspace_id",
+              "type",
+              "status",
+              "file_name",
+              "created_at",
+              "updated_at",
+              "attempt"
             ]
           },
           "Response": {
             "properties": {
               "job": {
-                "$ref": "#/$defs/Job"
+                "$ref": "#/$defs/ArchiveJob"
               }
             },
             "additionalProperties": false,
