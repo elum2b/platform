@@ -5202,6 +5202,44 @@
         }
       }
     },
+    "control.auth.provider.list": {
+      "key": "control.auth.provider.list",
+      "description": "\nLists authentication providers configured for frontend use.",
+      "transports": [
+        "http"
+      ],
+      "http_method": "GET",
+      "input": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {},
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "output": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$defs": {
+          "Provider": {
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "client_id": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+              "key"
+            ]
+          }
+        },
+        "items": {
+          "$ref": "#/$defs/Provider"
+        },
+        "type": "array"
+      }
+    },
     "control.auth.telegram": {
       "key": "control.auth.telegram",
       "description": "\nAuthenticates an account through Telegram Mini Apps init data.",

@@ -31,6 +31,7 @@ import (
 // Register registers all Control API methods.
 func Register(registry adapter.Registry) {
 	controlauth.Check.Register(registry)
+	controlauth.ProviderList.Register(registry)
 	controlauth.VKID.Register(registry)
 	controlauth.Telegram.Register(registry)
 	controlauth.Discord.Register(registry)

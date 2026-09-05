@@ -25,6 +25,7 @@ func TestInitRegistersControlAuthenticationRoutes(t *testing.T) {
 
 	expected := map[string]string{
 		"/http/control.auth.check":         fiber.MethodGet,
+		"/http/control.auth.provider.list": fiber.MethodGet,
 		"/http/control.auth.vkid":          fiber.MethodPost,
 		"/http/control.auth.telegram":      fiber.MethodPost,
 		"/http/control.auth.discord":       fiber.MethodPost,
