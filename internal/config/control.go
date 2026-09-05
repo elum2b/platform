@@ -154,6 +154,20 @@ var (
 		"",
 	)
 
+	// ControlAuthDiscordClientSecret contains the Discord OAuth client secret.
+	// Env: CONTROL_AUTH_DISCORD_CLIENT_SECRET.
+	ControlAuthDiscordClientSecret = env.GetEnvString(
+		"CONTROL_AUTH_DISCORD_CLIENT_SECRET",
+		"",
+	)
+
+	// ControlAuthDiscordRedirectURI contains the Discord OAuth callback URI.
+	// Env: CONTROL_AUTH_DISCORD_REDIRECT_URI.
+	ControlAuthDiscordRedirectURI = env.GetEnvString(
+		"CONTROL_AUTH_DISCORD_REDIRECT_URI",
+		"",
+	)
+
 	// ControlAuthVKClientID contains the VK ID OAuth client ID.
 	// Env: CONTROL_AUTH_VK_CLIENT_ID.
 	ControlAuthVKClientID = env.GetEnvString(
@@ -165,6 +179,13 @@ var (
 	// Env: CONTROL_AUTH_VK_CLIENT_SECRET.
 	ControlAuthVKClientSecret = env.GetEnvString(
 		"CONTROL_AUTH_VK_CLIENT_SECRET",
+		"",
+	)
+
+	// ControlAuthVKRedirectURI contains the VK ID OAuth callback URI.
+	// Env: CONTROL_AUTH_VK_REDIRECT_URI.
+	ControlAuthVKRedirectURI = env.GetEnvString(
+		"CONTROL_AUTH_VK_REDIRECT_URI",
 		"",
 	)
 
@@ -196,6 +217,13 @@ var (
 		"",
 	)
 
+	// ControlAuthGitHubRedirectURI contains the GitHub OAuth callback URI.
+	// Env: CONTROL_AUTH_GITHUB_REDIRECT_URI.
+	ControlAuthGitHubRedirectURI = env.GetEnvString(
+		"CONTROL_AUTH_GITHUB_REDIRECT_URI",
+		"",
+	)
+
 	// ControlAuthGitHubTokenURL contains the optional GitHub OAuth token endpoint.
 	// Env: CONTROL_AUTH_GITHUB_TOKEN_URL.
 	ControlAuthGitHubTokenURL = env.GetEnvString(
@@ -221,6 +249,13 @@ var (
 	// Env: CONTROL_AUTH_GITLAB_CLIENT_SECRET.
 	ControlAuthGitLabClientSecret = env.GetEnvString(
 		"CONTROL_AUTH_GITLAB_CLIENT_SECRET",
+		"",
+	)
+
+	// ControlAuthGitLabRedirectURI contains the GitLab OAuth callback URI.
+	// Env: CONTROL_AUTH_GITLAB_REDIRECT_URI.
+	ControlAuthGitLabRedirectURI = env.GetEnvString(
+		"CONTROL_AUTH_GITLAB_REDIRECT_URI",
 		"",
 	)
 
@@ -252,6 +287,13 @@ var (
 		"",
 	)
 
+	// ControlAuthGoogleRedirectURI contains the Google OAuth callback URI.
+	// Env: CONTROL_AUTH_GOOGLE_REDIRECT_URI.
+	ControlAuthGoogleRedirectURI = env.GetEnvString(
+		"CONTROL_AUTH_GOOGLE_REDIRECT_URI",
+		"",
+	)
+
 	// ControlAuthGoogleTokenURL contains the optional Google OAuth token endpoint.
 	// Env: CONTROL_AUTH_GOOGLE_TOKEN_URL.
 	ControlAuthGoogleTokenURL = env.GetEnvString(
@@ -277,6 +319,13 @@ var (
 	// Env: CONTROL_AUTH_YANDEX_CLIENT_SECRET.
 	ControlAuthYandexClientSecret = env.GetEnvString(
 		"CONTROL_AUTH_YANDEX_CLIENT_SECRET",
+		"",
+	)
+
+	// ControlAuthYandexRedirectURI contains the Yandex OAuth callback URI.
+	// Env: CONTROL_AUTH_YANDEX_REDIRECT_URI.
+	ControlAuthYandexRedirectURI = env.GetEnvString(
+		"CONTROL_AUTH_YANDEX_REDIRECT_URI",
 		"",
 	)
 

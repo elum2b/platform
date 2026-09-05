@@ -8,13 +8,17 @@ import (
 var (
 	discordKey         = "control.auth.discord"
 	discordDescription = `
-Authenticates an account through a Discord OAuth access token.`
+Authenticates an account through a Discord OAuth authorization code.`
 )
 
-// Discord authenticates an account through a Discord OAuth access token.
+// Discord authenticates an account through a Discord OAuth authorization code.
 var Discord = oauthMethod(
 	discordKey,
 	discordDescription,
-	oauthConfig{ClientID: config.ControlAuthDiscordClientID},
+	oauthConfig{
+		ClientID:     config.ControlAuthDiscordClientID,
+		ClientSecret: config.ControlAuthDiscordClientSecret,
+		RedirectURI:  config.ControlAuthDiscordRedirectURI,
+	},
 	authutils.Discord,
 )

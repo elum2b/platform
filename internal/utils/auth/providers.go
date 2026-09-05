@@ -20,17 +20,44 @@ func Providers() []Provider {
 		&providers,
 		ProviderDiscord,
 		config.ControlAuthDiscordClientID,
+		config.ControlAuthDiscordClientSecret,
+		config.ControlAuthDiscordRedirectURI,
 	)
-	addOAuthProvider(&providers, "vk", config.ControlAuthVKClientID,
-		config.ControlAuthVKClientSecret)
-	addOAuthProvider(&providers, "github", config.ControlAuthGitHubClientID,
-		config.ControlAuthGitHubClientSecret)
-	addOAuthProvider(&providers, "gitlab", config.ControlAuthGitLabClientID,
-		config.ControlAuthGitLabClientSecret)
-	addOAuthProvider(&providers, "google", config.ControlAuthGoogleClientID,
-		config.ControlAuthGoogleClientSecret)
-	addOAuthProvider(&providers, "yandex", config.ControlAuthYandexClientID,
-		config.ControlAuthYandexClientSecret)
+	addOAuthProvider(
+		&providers,
+		"vk",
+		config.ControlAuthVKClientID,
+		config.ControlAuthVKClientSecret,
+		config.ControlAuthVKRedirectURI,
+	)
+	addOAuthProvider(
+		&providers,
+		"github",
+		config.ControlAuthGitHubClientID,
+		config.ControlAuthGitHubClientSecret,
+		config.ControlAuthGitHubRedirectURI,
+	)
+	addOAuthProvider(
+		&providers,
+		"gitlab",
+		config.ControlAuthGitLabClientID,
+		config.ControlAuthGitLabClientSecret,
+		config.ControlAuthGitLabRedirectURI,
+	)
+	addOAuthProvider(
+		&providers,
+		"google",
+		config.ControlAuthGoogleClientID,
+		config.ControlAuthGoogleClientSecret,
+		config.ControlAuthGoogleRedirectURI,
+	)
+	addOAuthProvider(
+		&providers,
+		"yandex",
+		config.ControlAuthYandexClientID,
+		config.ControlAuthYandexClientSecret,
+		config.ControlAuthYandexRedirectURI,
+	)
 
 	if configured(config.ControlAuthTelegramBotToken) {
 		providers = append(providers, Provider{Key: "telegram"})

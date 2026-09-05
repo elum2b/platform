@@ -19,6 +19,7 @@ var GitHub = oauthMethod(
 	oauthConfig{
 		ClientID:     config.ControlAuthGitHubClientID,
 		ClientSecret: config.ControlAuthGitHubClientSecret,
+		RedirectURI:  config.ControlAuthGitHubRedirectURI,
 		TokenURL:     config.ControlAuthGitHubTokenURL,
 		UserInfoURL:  config.ControlAuthGitHubUserInfoURL,
 	},

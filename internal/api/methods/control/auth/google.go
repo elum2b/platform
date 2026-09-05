@@ -19,6 +19,7 @@ var Google = oauthMethod(
 	oauthConfig{
 		ClientID:     config.ControlAuthGoogleClientID,
 		ClientSecret: config.ControlAuthGoogleClientSecret,
+		RedirectURI:  config.ControlAuthGoogleRedirectURI,
 		TokenURL:     config.ControlAuthGoogleTokenURL,
 		UserInfoURL:  config.ControlAuthGoogleUserInfoURL,
 	},

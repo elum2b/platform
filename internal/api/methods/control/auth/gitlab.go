@@ -19,6 +19,7 @@ var GitLab = oauthMethod(
 	oauthConfig{
 		ClientID:     config.ControlAuthGitLabClientID,
 		ClientSecret: config.ControlAuthGitLabClientSecret,
+		RedirectURI:  config.ControlAuthGitLabRedirectURI,
 		TokenURL:     config.ControlAuthGitLabTokenURL,
 		UserInfoURL:  config.ControlAuthGitLabUserInfoURL,
 	},

@@ -19,6 +19,7 @@ var Yandex = oauthMethod(
 	oauthConfig{
 		ClientID:     config.ControlAuthYandexClientID,
 		ClientSecret: config.ControlAuthYandexClientSecret,
+		RedirectURI:  config.ControlAuthYandexRedirectURI,
 		TokenURL:     config.ControlAuthYandexTokenURL,
 		UserInfoURL:  config.ControlAuthYandexUserInfoURL,
 	},

@@ -23,7 +23,7 @@ func TestDiscordResolvesTokenIdentity(t *testing.T) {
 			"username":"discord-user",
 			"global_name":"Discord User"
 		}`,
-	})}
+	}, "access-token")}
 
 	identity, err := Discord(context.Background(), controlauth.OAuth2AuthParams{
 		ClientID:    "application-1",
@@ -62,7 +62,7 @@ func TestDiscordRejectsTokenFromAnotherApplication(t *testing.T) {
 			"application":{"id":"another-application"},
 			"user":{"id":"user-1"}
 		}`,
-	})}
+	}, "access-token")}
 
 	_, err := Discord(context.Background(), controlauth.OAuth2AuthParams{
 		ClientID:    "application-1",
@@ -78,9 +78,35 @@ func TestDiscordRejectsTokenFromAnotherApplication(t *testing.T) {
 	}
 }
 
+func TestDiscordExchangesAuthorizationCode(t *testing.T) {
+	client := &http.Client{Transport: discordRoundTripper(t, map[string]string{
+		"/api/v10/oauth2/token": `{"access_token":"access-token"}`,
+		"/api/v10/oauth2/@me": `{
+			"application":{"id":"application-1"},
+			"user":{"id":"user-1"}
+		}`,
+		"/api/v10/users/@me": `{
+			"id":"user-1",
+			"username":"discord-user"
+		}`,
+	}, "access-token")}
+
+	_, err := Discord(context.Background(), controlauth.OAuth2AuthParams{
+		ClientID:     "application-1",
+		ClientSecret: "client-secret",
+		Code:         "authorization-code",
+		RedirectURI:  "https://app.example.com/auth/discord",
+		HTTPClient:   client,
+	})
+	if err != nil {
+		t.Fatalf("Discord() error = %v", err)
+	}
+}
+
 func discordRoundTripper(
 	t *testing.T,
 	bodies map[string]string,
+	accessToken string,
 ) http.RoundTripper {
 	t.Helper()
 
@@ -88,7 +114,15 @@ func discordRoundTripper(
 		func(request *http.Request) (*http.Response, error) {
 			t.Helper()
 
-			if request.Header.Get("Authorization") != "Bearer access-token" {
+			if request.URL.Path == "/api/v10/oauth2/token" {
+				if err := request.ParseForm(); err != nil {
+					t.Fatalf("ParseForm() error = %v", err)
+				}
+
+				if request.Form.Get("grant_type") != "authorization_code" {
+					t.Errorf("grant_type = %q", request.Form.Get("grant_type"))
+				}
+			} else if request.Header.Get("Authorization") != "Bearer "+accessToken {
 				t.Errorf(
 					"Authorization = %q",
 					request.Header.Get("Authorization"),

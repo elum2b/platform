@@ -4752,7 +4752,7 @@
     },
     "control.auth.discord": {
       "key": "control.auth.discord",
-      "description": "\nAuthenticates an account through a Discord OAuth access token.",
+      "description": "\nAuthenticates an account through a Discord OAuth authorization code.",
       "transports": [
         "http"
       ],
@@ -4765,13 +4765,8 @@
           "OAuthRequest": {
             "properties": {
               "code": {
-                "type": "string"
-              },
-              "access_token": {
-                "type": "string"
-              },
-              "redirect_uri": {
-                "type": "string"
+                "type": "string",
+                "minLength": 1
               },
               "invite_token": {
                 "type": "string"
@@ -4784,8 +4779,6 @@
             "type": "object",
             "required": [
               "code",
-              "access_token",
-              "redirect_uri",
               "invite_token",
               "bind_to_ip"
             ]
@@ -4878,13 +4871,8 @@
           "OAuthRequest": {
             "properties": {
               "code": {
-                "type": "string"
-              },
-              "access_token": {
-                "type": "string"
-              },
-              "redirect_uri": {
-                "type": "string"
+                "type": "string",
+                "minLength": 1
               },
               "invite_token": {
                 "type": "string"
@@ -4897,8 +4885,6 @@
             "type": "object",
             "required": [
               "code",
-              "access_token",
-              "redirect_uri",
               "invite_token",
               "bind_to_ip"
             ]
@@ -4991,13 +4977,8 @@
           "OAuthRequest": {
             "properties": {
               "code": {
-                "type": "string"
-              },
-              "access_token": {
-                "type": "string"
-              },
-              "redirect_uri": {
-                "type": "string"
+                "type": "string",
+                "minLength": 1
               },
               "invite_token": {
                 "type": "string"
@@ -5010,8 +4991,6 @@
             "type": "object",
             "required": [
               "code",
-              "access_token",
-              "redirect_uri",
               "invite_token",
               "bind_to_ip"
             ]
@@ -5104,13 +5083,8 @@
           "OAuthRequest": {
             "properties": {
               "code": {
-                "type": "string"
-              },
-              "access_token": {
-                "type": "string"
-              },
-              "redirect_uri": {
-                "type": "string"
+                "type": "string",
+                "minLength": 1
               },
               "invite_token": {
                 "type": "string"
@@ -5123,8 +5097,6 @@
             "type": "object",
             "required": [
               "code",
-              "access_token",
-              "redirect_uri",
               "invite_token",
               "bind_to_ip"
             ]
@@ -5654,13 +5626,8 @@
           "OAuthRequest": {
             "properties": {
               "code": {
-                "type": "string"
-              },
-              "access_token": {
-                "type": "string"
-              },
-              "redirect_uri": {
-                "type": "string"
+                "type": "string",
+                "minLength": 1
               },
               "invite_token": {
                 "type": "string"
@@ -5673,8 +5640,6 @@
             "type": "object",
             "required": [
               "code",
-              "access_token",
-              "redirect_uri",
               "invite_token",
               "bind_to_ip"
             ]
@@ -5767,13 +5732,8 @@
           "OAuthRequest": {
             "properties": {
               "code": {
-                "type": "string"
-              },
-              "access_token": {
-                "type": "string"
-              },
-              "redirect_uri": {
-                "type": "string"
+                "type": "string",
+                "minLength": 1
               },
               "invite_token": {
                 "type": "string"
@@ -5786,8 +5746,6 @@
             "type": "object",
             "required": [
               "code",
-              "access_token",
-              "redirect_uri",
               "invite_token",
               "bind_to_ip"
             ]

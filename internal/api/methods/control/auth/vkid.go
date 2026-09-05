@@ -19,6 +19,7 @@ var VKID = oauthMethod(
 	oauthConfig{
 		ClientID:     config.ControlAuthVKClientID,
 		ClientSecret: config.ControlAuthVKClientSecret,
+		RedirectURI:  config.ControlAuthVKRedirectURI,
 		TokenURL:     config.ControlAuthVKTokenURL,
 		UserInfoURL:  config.ControlAuthVKUserInfoURL,
 	},

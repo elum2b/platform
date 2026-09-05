@@ -12,9 +12,7 @@ import (
 )
 
 type OAuthRequest struct {
-	Code        string `json:"code"         query:"code"`
-	AccessToken string `json:"access_token" query:"access_token"`
-	RedirectURI string `json:"redirect_uri" query:"redirect_uri"`
+	Code        string `json:"code"         query:"code"         validate:"required"`
 	InviteToken string `json:"invite_token" query:"invite_token"`
 	BindToIP    bool   `json:"bind_to_ip"   query:"bind_to_ip"`
 }
@@ -22,6 +20,7 @@ type OAuthRequest struct {
 type oauthConfig struct {
 	ClientID     string
 	ClientSecret string
+	RedirectURI  string
 	TokenURL     string
 	UserInfoURL  string
 }
@@ -55,8 +54,7 @@ func oauthMethod(
 					ClientSecret: provider.ClientSecret,
 					InviteToken:  metadata.InviteToken,
 					Code:         data.Code,
-					AccessToken:  data.AccessToken,
-					RedirectURI:  data.RedirectURI,
+					RedirectURI:  provider.RedirectURI,
 					IP:           metadata.IP,
 					UserAgent:    metadata.UserAgent,
 					BindToIP:     metadata.BindToIP,
