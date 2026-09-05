@@ -59,6 +59,8 @@ github.com/elum2b/services v0.0.50 h1:9XD9Twiy6Gw4jseG+D/oC6ja6Fjltm8JdcVb8MUI8h
 github.com/elum2b/services v0.0.50/go.mod h1:ua18mlzbpBsZxiz9i4Z5OttBlmSTHRxaL5qNHdeAkb4=
 github.com/elum2b/services v0.0.52 h1:8H1WySbQLb+kaT/W9UG648M9rlQC5weHZULYHyq3+sM=
 github.com/elum2b/services v0.0.52/go.mod h1:ua18mlzbpBsZxiz9i4Z5OttBlmSTHRxaL5qNHdeAkb4=
+github.com/elum2b/services v0.0.53 h1:gHpmzvR1fcIpZkzre17J8P6OnGMCk+5yrwqmctZXkEM=
+github.com/elum2b/services v0.0.53/go.mod h1:ua18mlzbpBsZxiz9i4Z5OttBlmSTHRxaL5qNHdeAkb4=
 github.com/fasthttp/websocket v1.5.8 h1:k5DpirKkftIF/w1R8ZzjSgARJrs54Je9YJK37DL/Ah8=
 github.com/fasthttp/websocket v1.5.8/go.mod h1:d08g8WaT6nnyvg9uMm8K9zMYyDjfKyj3170AtPRuVU0=
 github.com/fxamacker/cbor/v2 v2.9.2 h1:X4Ksno9+x3cz0TZv69ec1hxP/+tymuR8PXQJyDwfh78=
